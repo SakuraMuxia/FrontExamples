@@ -56,6 +56,7 @@
     };
 
     // 监听离开窗口和再次回调本窗口的事件
+    // 页面离开和回来 浏览器渲染和JS代码不同步，
     document.onvisibilitychange = function() {
         if (document.hidden) {
             // 正在离开本窗口 停止定制器
@@ -71,13 +72,14 @@
         // 索引减一
         index --;
         imgIndex --;
-        //判断不能超出有效范围
+        //判断不能超出有效范围 (按钮)
         if (index <0){
             index = btnItems.length-1;
         };
+        // 判断不能超出有效范围(图片)
         if (imgIndex < 0){
             imgIndex = imgItems.length - 3;
-            //瞬间切换图片 切换成真正的第一张图片
+            // 取消过渡 瞬间显示真正最后一张
             imgWrapper.style.transition = 'none';
             imgWrapper.style.left = -(imgItems.length-2) * imgWidth + 'px';
         }
@@ -91,19 +93,22 @@
         // 索引加一
         index ++;
         imgIndex ++;
-        //判断不能超出有效范围
+        //判断不能超出有效范围 (按钮)
         if (index > btnItems.length-1){
             index = 0;
         };
-        // 判断不能超出有效范围（图片索引）
+        // 判断不能超出有效范围(图片)
         if (imgIndex > imgItems.length -1){
             imgIndex = 2;
-            //瞬间切换图片 切换成真正的第一张图片
+            //瞬间切换图片 切换成真正的第一张图片 挪动图片整体位置,
             imgWrapper.style.transition = 'none';
             imgWrapper.style.left = -imgWidth + 'px';
         }
-        //调用函数 控制图片和按钮选中
-        setTimeout(setActive);
+        //调用函数 控制图片和按钮选中，
+        //原因：1、去除过渡，设置位置，setActive也是去除过渡，设置位置，浏览器会合并代码
+        //解决方法：设置单次定时器去除浏览器自动合并代码，变成两个步骤，而不是连续的
+        //注意：setTimeout()本身是异步处理，不会和上边的代码同时运行;
+        setTimeout(setActive,1);
     };
 
     //定义函数 显示当前图片并选中当前的按钮
@@ -114,7 +119,7 @@
         });
         // 当前点击按钮选中，添加active类名
         btnItems[index].classList.add('active');
-        // 当前点击按钮对应的图片显示 修改图片包裹的位置
+        // 当前点击按钮对应的图片显示 修改图片包裹的位置 挪动图片显示位置
         imgWrapper.style.transition = 'left 600ms';
         imgWrapper.style.left = -imgWidth * imgIndex + 'px';
     };

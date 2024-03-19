@@ -28,9 +28,6 @@ img{
     height: 350px;
 }
 
-.images li.active{
-    display: block;
-}
 
 .btns{
     position: absolute;
