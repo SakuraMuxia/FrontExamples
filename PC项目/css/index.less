@@ -189,4 +189,123 @@
             }
         }
     }
+    // 侧边栏选项卡、商品搭配、商品详情选项卡
+    .product-section {
+        margin-top: 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        // 侧边栏选项卡
+        .product-siderbar {
+            width: 210px;
+            border: 1px solid #ccc;
+            // 侧边栏选项卡 导航
+            .tab-nav {
+                display: flex;
+                height: 40px;
+                .tab-nav-item {
+                    width: 105px;
+                    text-align: center;
+                    line-height: 37px;
+                    border-top: 2px solid #fff;
+                    border-bottom: 1px solid #ccc;
+                    &.active {
+                        border-top-color: @btn-red;
+                        border-bottom-color: #fff;
+                    }
+                }
+            }
+            .tab-panel {
+                .tab-panel-item {
+                    display: none;
+                    padding: 10px;
+                    &.active {
+                        display: block;
+                    }
+                    &:first-child {
+                        .cates {
+                            display: flex;
+                            flex-wrap: wrap;
+                            li {
+                                width: 50%;
+                                line-height: 28px;
+                                border-bottom: 1px dashed #ededed;
+                            }
+                        }
+                        .products {
+                            li {
+                                margin: 5px 0 15px;
+                                display: flex;
+                                flex-direction: column;
+                                align-items: center;
+                                border-bottom: 1px solid #ededed;
+                                img {
+                                    width: 152px;
+                                }
+                                p {
+                                    width: 100%;
+                                    &.price {
+                                        font-size: 16px;
+                                        color: #c81623;
+                                    }
+                                }
+                                a {
+                                    margin: 5px 0;
+                                    padding: 2px 14px;
+                                    line-height: 18px;
+                                    border: 1px solid #8c8c8c;
+                                    color: #8c8c8c;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        // 商品搭配、商品详情选项卡
+        .product-intro {
+            width: 980px;
+            // 商品搭配
+
+            // 商品详情选项卡
+            .product-intro-tab {
+                .tab-nav {
+                    display: flex;
+                    height: 40px;
+                    background: #ededed;
+                    border-left: 1px solid #ddd;
+                    .tab-nav-item {
+                        padding: 0 11px;
+                        text-align: center;
+                        line-height: 38px;
+                        background: #fff;
+                        border: 1px solid #ddd;
+                        border-left: none;
+
+                        &.active {
+                            color: #fff;
+                            background: @btn-red;
+                        }
+                    }
+                }
+                .tab-panel {
+                    .tab-panel-item {
+                        display: none;
+                       
+                        &:first-child {
+                            ul {
+                                li {
+                                    margin: 10px 0;
+                                }
+                            }
+                        }
+
+                        &.active {
+                            display: block;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
