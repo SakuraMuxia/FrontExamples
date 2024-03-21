@@ -1,21 +1,10 @@
-/*
- * @Author: yuluo 2216847528@qq.com
- * @Date: 2024-03-19 17:09:58
- * @LastEditors: yuluo 2216847528@qq.com
- * @LastEditTime: 2024-03-20 17:03:32
- * @FilePath: \FrontExamples\PC项目\js\function.js
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- */
-// 函数库
-
-/**
+/** 
  * 获取元素的计算属性
  * @param Elment ele 元素
  * @param String attr css属性名
  * @param String 计算属性值
- */
-
-
+ * 
+*/
 
 function getStyle(ele, attr) {
     if (window.getComputedStyle) {
