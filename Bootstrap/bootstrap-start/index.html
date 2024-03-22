@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <!-- bootstrap样式 -->
+    <link rel="stylesheet" href="./dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./dist/css/hanser.css" />
+    
+  </head>
+  <body>
+
+    <!-- 页面导航条 -->
+    <nav class="navbar navbar-inverse navbar-static-top">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button
+            type="button"
+            class="navbar-toggle collapsed"
+            data-toggle="collapse"
+            data-target="#bs-example-navbar-collapse-1"
+            aria-expanded="false"
+          >
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">
+            <img alt="Brand" src="./images/tubiao.ico" />
+          </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class="active">
+              <a href="#">首页 <span class="sr-only">(current)</span></a>
+            </li>
+            <li><a href="#">课程</a></li>
+            <li class="dropdown">
+              <a
+                href="#"
+                class="dropdown-toggle"
+                data-toggle="dropdown"
+                role="button"
+                aria-haspopup="true"
+                aria-expanded="false"
+                >视频 <span class="caret"></span
+              ></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">HTML5</a></li>
+                <li><a href="#">CSS3</a></li>
+                <li><a href="#">JavaScript</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">Vue</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">React</a></li>
+              </ul>
+            </li>
+          </ul>
+          <form class="navbar-form navbar-left">
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Search for..."
+              />
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button">
+                  <i class="glyphicon glyphicon-search"></i>
+                </button>
+              </span>
+            </div>
+          </form>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">登陆</a></li>
+            <li><a href="#">注册</a></li>
+          </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container-fluid -->
+    </nav>
+
+    <!-- 轮播图 -->
+    <div id="carousel-example-generic" class="carousel slide aqua-carousel" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+      </ol>
+    
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner" role="listbox">
+        <div class="item active">
+          <picture>
+            <source srcset="./images/play01.jpg" media="(min-width:992px)">
+            <source srcset="./images/play01-sm.jpg" media="(min-width:768px)">
+            <img src="./images/play01-xs.jpg" alt="">
+          </picture>
+          <div class="carousel-caption">
+            <p>中答程宋赠太罪又投让妄向，愿读斯牙，让。</p>
+          </div>
+        </div>
+        <div class="item">
+          <picture>
+            <source srcset="./images/play02.jpg" media="(min-width:992px)">
+            <source srcset="./images/play02-sm.jpg" media="(min-width:768px)">
+            <img src="./images/play02-xs.jpg" alt="">
+          </picture>
+          <div class="carousel-caption">
+            <p>下牙慨书皇明亲，未他葬蒲的国量变，的在。</p>
+          </div>
+        </div>
+        <div class="item">
+          <picture>
+            <source srcset="./images/play03.jpg" media="(min-width:992px)">
+            <source srcset="./images/play03-sm.jpg" media="(min-width:768px)">
+            <img src="./images/play03-xs.jpg" alt="">
+          </picture>
+          <div class="carousel-caption">
+            <p>下牙慨书皇明亲，未他葬蒲的国量变，的在。</p>
+          </div>
+        </div>
+      </div>
+    
+      <!-- Controls -->
+      <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+    
+    <!-- 主要内容区域 -->
+      <div class="container">
+        <!-- 路径导航 -->
+        <ol class="breadcrumb aqua-breadcrumb">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Library</a></li>
+          <li class="active">Data</li>
+        </ol>
+      
+        <!-- 缩略图 -->
+        <div class="row aqua-thumbnail">
+          <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+              <img src="./images/html5.jpg" alt="...">
+              <div class="caption">
+                <h3>Thumbnail label</h3>
+                <p>.了土卅，娘乏了松姑呼上皇畴不法，夫人台.</p>
+                <p>
+                  <a href="#" class="btn btn-primary" role="button">Button</a> 
+                  <a href="#" class="btn btn-default" role="button">Button</a>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+              <img src="./images/html5.jpg" alt="...">
+              <div class="caption">
+                <h3>Thumbnail label</h3>
+                <p>.了土卅，娘乏了松姑呼上皇畴不法，夫人台.</p>
+                <p>
+                  <a href="#" class="btn btn-primary" role="button">Button</a> 
+                  <a href="#" class="btn btn-default" role="button">Button</a>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+              <img src="./images/html5.jpg" alt="...">
+              <div class="caption">
+                <h3>Thumbnail label</h3>
+                <p>.了土卅，娘乏了松姑呼上皇畴不法，夫人台.</p>
+                <p>
+                  <a href="#" class="btn btn-primary" role="button">Button</a> 
+                  <a href="#" class="btn btn-default" role="button">Button</a>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+              <img src="./images/html5.jpg" alt="...">
+              <div class="caption">
+                <h3>Thumbnail label</h3>
+                <p>.了土卅，娘乏了松姑呼上皇畴不法，夫人台.</p>
+                <p>
+                  <a href="#" class="btn btn-primary" role="button">Button</a> 
+                  <a href="#" class="btn btn-default" role="button">Button</a>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+              <img src="./images/html5.jpg" alt="...">
+              <div class="caption">
+                <h3>Thumbnail label</h3>
+                <p>.了土卅，娘乏了松姑呼上皇畴不法，夫人台.</p>
+                <p>
+                  <a href="#" class="btn btn-primary" role="button">Button</a> 
+                  <a href="#" class="btn btn-default" role="button">Button</a>
+                </p>
+              </div>
+            </div>
+          </div>
+
+
+        </div>  
+
+         <!-- 页码 -->
+        <nav aria-label="Page navigation">
+          <ul class="pagination">
+            <li>
+              <a href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li>
+              <a href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+    <!-- 页脚 -->
+    <footer class="page-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-md-3">
+                    <h4>用户</h4>
+                    <ul>
+                        <li><a href="#">帐户个人资料</a></li>
+                        <li><a href="#">下载中心</a></li>
+                        <li><a href="#">帐户个人资料</a></li>
+                        <li><a href="#">帐户个人资料</a></li>
+                        <li><a href="#">帐户个人资料</a></li>
+                        <li><a href="#">下载中心</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <h4>用户</h4>
+                    <ul>
+                        <li><a href="#">帐户个人资料</a></li>
+                        <li><a href="#">下载中心</a></li>
+                        <li><a href="#">帐户个人资料</a></li>
+                        <li><a href="#">下载中心</a></li>
+                        <li><a href="#">帐户个人资料</a></li>
+
+                    </ul>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <h4>用户</h4>
+                    <ul>
+                        <li><a href="#">帐户个人资料</a></li>
+                        <li><a href="#">下载中心</a></li>
+                        <li><a href="#">帐户个人资料</a></li>
+                        <li><a href="#">下载中心</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <h4>用户</h4>
+                    <ul>
+                        <li><a href="#">帐户个人资料</a></li>
+                        <li><a href="#">下载中心</a></li>
+                        <li><a href="#">帐户个人资料</a></li>
+                        <li><a href="#">下载中心</a></li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="copyright">
+                ©2010~2021 版权所有
+            </div>
+        </div>
+    </footer>
+
+    <!-- bootstrap脚本 -->
+    <script src="./dist/jquery/jquery-1.12.3.min.js"></script>
+    <script src="./dist/js/bootstrap.min.js"></script>
+
+  </body>
+</html>

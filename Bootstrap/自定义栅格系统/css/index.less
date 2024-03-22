@@ -1,0 +1,16 @@
+.grid(@type: xs) {
+    .make-col(@num) when (@num <=12) {
+        .col-@{type}-@{num} {
+            width: percentage((@num/12))
+        }
+
+        .make-col(@num+1);
+    }
+
+    .make-col(1);
+}
+
+
+.grid();
+.grid(md);
+.grid(lg);

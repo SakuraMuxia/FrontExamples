@@ -1,0 +1,12 @@
+// 生成栅格系统
+.grid(@type: xs) {
+    .make-col(1);
+
+    .make-col(@num) when (@num <=@columns) {
+        .col-@{type}-@{num} {
+            width: percentage((@num/@columns))
+        }
+
+        .make-col(@num+1);
+    }
+}

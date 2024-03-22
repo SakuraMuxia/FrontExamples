@@ -1,0 +1,27 @@
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+[class*="col-"] {
+    flex: 0 0 auto;
+    padding: 10px;
+}
+
+// 默认最小尺寸 移动优先显示 应用到全部
+.grid(xs);
+
+// 当尺寸大于小尺寸屏幕显示
+@media (min-width: @sm-width) {
+    .grid(sm);
+}
+
+// 当尺寸大于中尺寸屏幕显示
+@media (min-width: @md-width) {
+    .grid(md);
+}
+
+// 当尺寸大于大尺寸屏幕显示
+@media (min-width: @lg-width) {
+    .grid(lg);
+}

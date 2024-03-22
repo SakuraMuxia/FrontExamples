@@ -1,0 +1,25 @@
+* {
+    box-sizing: border-box;
+}
+
+.container {
+    width: @container-xs;
+
+    @media (min-width:@sm-width) {
+        margin-left: auto;
+        margin-right: auto;
+        width: @container-sm;
+    }
+
+    @media (min-width:@md-width) {
+        margin-left: auto;
+        margin-right: auto;
+        width: @container-md;
+    }
+
+    @media (min-width:@lg-width) {
+        margin-left: auto;
+        margin-right: auto;
+        width: @container-lg;
+    }
+}
