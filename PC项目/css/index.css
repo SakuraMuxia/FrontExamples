@@ -765,7 +765,7 @@ html {
 }
 .page-siderbar .siderbar-content {
   position: relative;
-  z-index: 200;
+  z-index: 1;
   width: 294px;
   background: bisque;
 }
