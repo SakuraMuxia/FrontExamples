@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<!-- saved from url=(0070)https://example.fuming.site/js_demo/%E8%BD%AE%E6%92%AD%E5%9B%BE01.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>轮播图</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        ul,ol {
+            list-style: none;
+        }
+        .play-box {
+            position: relative;
+            margin: 100px auto;
+            width: 900px;
+            height: 350px;
+            border: 1px solid #ccc;
+        }
+        .image-list li{
+            display: none;
+        }
+        .play-box img {
+            display: block;
+            width: 900px;
+            height: 350px;
+        }
+        .play-box li.active {
+            display: block;
+        }
+
+        .icon-list {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+        }
+
+        .icon-list li {
+            float: left;
+            margin-left: 10px;
+            width: 20px;
+            height: 20px;
+            color: #fff;
+            text-align:center;
+            line-height: 20px;
+            background-color: #333;
+            border: 1px solid #fff;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .icon-list li.active {
+            color: #f60;
+            border-color: #f60;
+        }
+
+        .next-btn,.prev-btn {
+            position: absolute;
+            top: 50%;
+            margin-top: -50px;
+            width: 40px;
+            height: 100px;
+            background-image: url('img/index.png');
+            background-repeat: no-repeat;
+            cursor: pointer;
+        }
+        .prev-btn {
+            left: 0;
+            background-position: 0 0;
+        }
+        .next-btn {
+            right: 0;
+            background-position: -50px 0;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="play-box">
+        <ul class="image-list">
+            <li class="active"><img src="./轮播图_files/01.jpg"></li>
+            <li class=""><img src="./轮播图_files/02.jpg"></li>
+            <li class=""><img src="./轮播图_files/03.jpg"></li>
+            <li class=""><img src="./轮播图_files/04.jpg"></li>
+            <li class=""><img src="./轮播图_files/05.jpg"></li>
+        </ul>
+        <ol class="icon-list">
+            <li class="active">1</li>
+            <li class="">2</li>
+            <li class="">3</li>
+            <li class="">4</li>
+            <li class="">5</li>
+        </ol>
+        <span class="prev-btn"></span>
+        <span class="next-btn"></span>
+    </div>
+
+    <script>
+        (function () {
+            // 获取相关元素
+            var playBox = document.querySelector('.play-box');  // 包裹元素
+            var imageLiNodes = playBox.querySelectorAll('.image-list li');  // 轮播项目列表
+            var iconLiNodes = playBox.querySelectorAll('.icon-list li');  // 按钮的列表
+            var prevBtn = playBox.querySelector('.prev-btn');  //上一个按钮
+            var nextBtn = playBox.querySelector('.next-btn');  // 下一个按钮
+            var index = 0;  // 当前的索引
+            var intervalId = null;   // 定时器标记
+            var duration = 5000;  // 自动播放的事件间隔
+
+
+            // 给所有的按钮监听 单击事件
+            for (var i = 0; i < iconLiNodes.length; i ++) {
+                iconLiNodes[i].index = i;
+                iconLiNodes[i].onclick = function(){
+                    index = this.index; // 设置索引值
+                    setPlay(this.index);
+                }
+            }
+
+            // 点击上一张
+            prevBtn.onclick = function () {
+                //索引变化
+                index --;
+
+                setPlay();
+
+            };
+
+            // 点击下一张
+            nextBtn.onclick = function () {
+                // 索引变化
+                index ++;
+
+                setPlay();
+            };
+
+            // 鼠标滑过轮播图包裹元素
+            playBox.onmouseenter = function() {
+                clearInterval(intervalId);
+            };
+
+            // 鼠标离开轮播图包裹元素 定时继续
+            playBox.onmouseleave = function() {
+                intervalId = setInterval(runPlay, duration)
+            };
+
+            // 定时自动播放
+            intervalId = setInterval(runPlay, duration);
+
+            /**
+             * 定时函数
+             */
+            function runPlay() {
+                index ++; // 索引变化
+                // 设置轮播
+                setPlay();
+            }
+
+            /**
+             * 指定轮播图片显示和按钮高亮
+             * @param m 指定要显示的索引
+             */
+            function setPlay() {
+                console.log(index);
+                // 极限值判断
+                if (index > imageLiNodes.length - 1) {
+                    index = 0;
+                } else if (index < 0) {
+                    index = imageLiNodes.length - 1;
+                }
+
+                // 按钮排他， 当前高亮
+                for (var j = 0; j < iconLiNodes.length; j ++) {
+                    iconLiNodes[j].className = '';
+                }
+                iconLiNodes[index].className = 'active';
+
+                // 对应图片显示 排他
+                for (var j = 0; j < imageLiNodes.length; j ++) {
+                    imageLiNodes[j].className = '';
+                }
+                imageLiNodes[index].className = 'active';
+            }
+
+        })();
+    </script>
+
+</body></html>
