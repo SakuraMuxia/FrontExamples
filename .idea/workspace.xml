@@ -1,7 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="99f2db86-970a-4ac3-b0a2-682975c25944" name="Changes" comment="" />
+    <list default="true" id="99f2db86-970a-4ac3-b0a2-682975c25944" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/dist/css/bootstrap-theme.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/dist/css/bootstrap-theme.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/dist/css/bootstrap-theme.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/dist/css/bootstrap-theme.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/dist/css/bootstrap.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/dist/css/bootstrap.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/dist/css/bootstrap.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/dist/css/bootstrap.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/dist/css/hanser.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/dist/css/hanser.less" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/dist/fonts/glyphicons-halflings-regular.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/dist/fonts/glyphicons-halflings-regular.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/dist/fonts/glyphicons-halflings-regular.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/dist/fonts/glyphicons-halflings-regular.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/dist/fonts/glyphicons-halflings-regular.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/dist/jquery/jquery-1.12.3.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/dist/jquery/jquery-1.12.3.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/dist/js/bootstrap.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/dist/js/bootstrap.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/dist/js/npm.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/images/1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/images/2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/images/3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/images/4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/images/5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/images/6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/images/7.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/images/8.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/images/9.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/images/Ajax.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/images/BootStrap.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/images/Less.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/images/React.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/images/React项目.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/images/css.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/images/db02.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/images/db03.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/images/db04.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/images/db05.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/images/db06.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/images/db07.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/images/db08.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/images/db09.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/images/db10.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/images/html5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/images/jQuery.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/images/js.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/images/js高级.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/images/npm.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/images/off.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/images/open.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/images/play01-sm.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/images/play01-xs.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/images/play01.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/images/play02-sm.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/images/play02-xs.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/images/play02.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/images/play03-sm.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/images/play03-xs.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/images/play03.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/images/tubiao.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/bootstrap-start/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bootstrap/自定义栅格系统/css/index.less" beforeDir="false" afterPath="$PROJECT_DIR$/Bootstrap/自定义栅格系统/css/index.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSS3案例/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSS3案例/function-test/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSS3案例/function-test/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PC项目2/README.md" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -18,14 +91,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "master",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -36,6 +114,7 @@
       <updated>1710552662448</updated>
       <workItem from="1710552663941" duration="8000" />
       <workItem from="1710661468931" duration="13000" />
+      <workItem from="1713144348326" duration="726000" />
     </task>
     <servers />
   </component>

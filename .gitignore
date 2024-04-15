@@ -1,2 +1,4 @@
 .idea/
+.vscode/
 node/npm/**/node_modules/
+node/http/**/node_modules/
