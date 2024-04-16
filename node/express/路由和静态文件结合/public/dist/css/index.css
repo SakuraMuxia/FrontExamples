@@ -1,0 +1,36 @@
+.navbar-atguigu .form-control:focus {
+    box-shadow: none;
+    border-color: #ccc;
+}
+.navbar-atguigu .btn:focus {
+    outline: none;
+}
+.carousel-atguigu {
+    margin-top: 51px;
+}
+.breadcrumb-atguigu {
+    margin: 20px 0;
+}
+.course-list img {
+    display: block;
+    width: 100%;
+}
+.page-footer {
+    padding: 40px 0;
+    color: #fff;
+    background: #333;
+}
+.footer-nav-item h3 {
+    font-size: 1.2em;
+}
+.footer-nav-item ul {
+    list-style: none;
+    padding: 0;
+}
+.footer-nav-item a {
+    color: #fff;
+}
+.footer-copyright {
+    margin-top: 20px;
+    text-align: center;
+}

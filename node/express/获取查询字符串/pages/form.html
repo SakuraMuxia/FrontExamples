@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表单</title>
+    <link href="http://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .form-box {
+            margin-top: 60px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-box">
+        <div class="row">
+            <div class="col-sm-4 col-sm-offset-4">
+                <form action="/form" method="post">
+                    <div class="form-group">
+                        <label for="example01">您的名字：</label>
+                        <input name="name" type="text" class="form-control" id="example01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="example02">您的邮箱：</label>
+                        <input name="email" type="email" class="form-control" id="example02" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="example03">您的电话：</label>
+                        <input name="phone" type="tel" class="form-control" id="example03" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="example04">您的生日：</label>
+                        <input name="birthday" type="date" class="form-control" id="example04" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="example05">您的留言：</label>
+                        <textarea name="message" class="form-control" rows="6" id="example05" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">提交</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

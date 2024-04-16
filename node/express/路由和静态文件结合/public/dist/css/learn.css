@@ -1,0 +1,41 @@
+.navbar-atguigu .form-control:focus {
+    box-shadow: none;
+    border-color: #ccc;
+}
+.navbar-atguigu .btn:focus {
+    outline: none;
+}
+.jumbotron-atguigu {
+    margin-top: 51px;
+}
+.panel-atguigu .panel-body{
+    font-size: 2em;
+    padding: 40px 30px;
+}
+.panel-atguigu .panel-footer {
+    font-size: 1.1em;
+    text-align: right;
+    font-style: italic;
+
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.page-footer {
+    padding: 40px 0;
+    color: #fff;
+    background: #333;
+}
+.footer-nav-item h3 {
+    font-size: 1.2em;
+}
+.footer-nav-item ul {
+    list-style: none;
+    padding: 0;
+}
+.footer-nav-item a {
+    color: #fff;
+}
+.footer-copyright {
+    margin-top: 20px;
+    text-align: center;
+}

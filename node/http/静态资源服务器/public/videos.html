@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视频</title>
+    <!-- 引入boostrap 样式 -->
+    <link rel="stylesheet" href="dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="dist/css/videos.css">
+</head>
+<body>
+    <!-- 页面导航条 -->
+    <nav class="navbar navbar-inverse navbar-fixed-top navbar-atguigu">
+        <div class="container">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"></a>
+          </div>
+      
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li><a href="index.html">首页</a></li>
+              <li class="active"><a href="videos.html">视频</a></li>
+              <li><a href="learn.html">教程</a></li>
+            </ul>
+            <form class="navbar-form navbar-left">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search for...">
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" type="button">
+                          <i class="glyphicon glyphicon-search"></i>
+                      </button>
+                    </span>
+                </div><!-- /input-group -->
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="#" data-toggle="modal" data-target="#loginModal">登录</a></li>
+              <li><a href="#"data-toggle="modal"data-target="#regisiterModal">注册</a></li>
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <!-- 巨幕 -->
+    <div class="jumbotron jumbotron-atguigu">
+        <div class="container">
+            <h1>全部视频</h1>
+            <p>一虽非派道召自生别，的仆其王才即说当他到生前，话览统的怒郭此三音二为小人的玉者，发看光说作，支藏子游使新洋张自生是有密徒可，逝却应，极釜气年人望落的所洪为不他极人药此样到，区有春在谓因要订六逃，应洪畴举你韩，锐的落遗招予拾，言少后者起落升张土司太事面台屯。</p>
+        </div>
+    </div>
+
+    <!-- 页面主要内容 -->
+    <div class="main-content">
+        <div class="container">
+            <!-- 路径导航 -->
+            <ol class="breadcrumb breadcrumb-atguigu">
+                <li><a href="#">首页</a></li>
+                <li class="active">视频</li>
+            </ol>
+
+            <!-- 课程列表 -->
+            <div class="row course-list">
+                <div class="col-md-6">
+                    <div class="thumbnail">
+                        <video src="dist/videos/v01.mp4" controls></video>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="thumbnail">
+                        <video src="dist/videos/v02.mp4" controls></video>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="thumbnail">
+                        <video src="dist/videos/v03.mp4" controls></video>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="thumbnail">
+                        <video src="dist/videos/v04.mp4" controls></video>
+                    </div>
+                </div>
+               
+            </div>
+
+            <!-- 分页 -->
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                  <li>
+                    <a href="#" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  <li><a href="#">1</a></li>
+                  <li><a href="#">2</a></li>
+                  <li><a href="#">3</a></li>
+                  <li><a href="#">4</a></li>
+                  <li><a href="#">5</a></li>
+                  <li>
+                    <a href="#" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+            </nav>
+
+
+        </div>
+    </div>    
+
+    <!-- 页脚 -->
+    <footer class="page-footer">
+        <div class="container">
+            <div class="footer-nav">
+                <div class="row">
+                    <div class="col-sm-6 col-md-3 footer-nav-item">
+                        <h3>用户</h3>
+                        <ul>
+                            <li><a href="#">帐户个人资料</a></li>
+                            <li><a href="#">下载中心</a></li>
+                            <li><a href="#">订单跟踪</a></li>
+                            <li><a href="#">用户评价</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-6 col-md-3 footer-nav-item">
+                        <h3>教育</h3>
+                        <ul>
+                            <li><a href="#">帐户个人资料</a></li>
+                            <li><a href="#">下载中心</a></li>
+                            <li><a href="#">订单跟踪</a></li>
+                            <li><a href="#">用户评价</a></li>
+                            <li><a href="#">用户评价</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-6 col-md-3 footer-nav-item">
+                        <h3>公司</h3>
+                        <ul>
+                            <li><a href="#">帐户个人资料</a></li>
+                            <li><a href="#">下载中心</a></li>
+                            <li><a href="#">订单跟踪</a></li>
+                            <li><a href="#">用户评价</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-6 col-md-3 footer-nav-item">
+                        <h3>开发人员</h3>
+                        <ul>
+                            <li><a href="#">帐户个人资料</a></li>
+                            <li><a href="#">下载中心</a></li>
+                            <li><a href="#">订单跟踪</a></li>
+                            <li><a href="#">用户评价</a></li>
+                            <li><a href="#">用户评价</a></li>
+                            <li><a href="#">用户评价</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-copyright">©2010~2021 版权所有</div>
+        </div>
+    </footer>
+
+    <!-- 登录的模态框 -->
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">登录</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">邮箱</label>
+                      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">密码</label>
+                      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    </div>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox"> 记住密码
+                      </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+              <button type="button" class="btn btn-primary">登录</button>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!-- 注册的模态框 -->
+    <div class="modal fade" id="regisiterModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">免费注册</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">邮箱</label>
+                      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">密码</label>
+                      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">确认密码</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                      </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+              <button type="button" class="btn btn-primary">注册</button>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    
+
+    <!-- 引入jQuery -->
+    <script src="dist/jquery/jquery-3.6.0.min.js"></script>
+    <!-- 引入 bootstrap -->
+    <script src="dist/js/bootstrap.min.js"></script>
+    <script>
+
+    </script>
+</body>
+</html>
