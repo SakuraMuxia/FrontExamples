@@ -1,0 +1,42 @@
+.navbar-brand {
+  padding: 2px;
+}
+.navbar-brand img {
+  width: 45px;
+  height: 45px;
+}
+.input-group-btn .btn {
+  outline: none;
+}
+.navbar {
+  margin-bottom: 0;
+}
+.aqua-carousel img {
+  width: 100%;
+}
+.aqua-breadcrumb {
+  margin-top: 20px;
+}
+.aqua-thumbnail img {
+  width: 100%;
+}
+.page-footer {
+  padding: 40px 0;
+  color: #fff;
+  background: #333;
+}
+.page-footer ul {
+  padding: 0;
+  list-style: none;
+}
+.page-footer li {
+  margin-top: 4px;
+}
+.page-footer a {
+  color: #fff;
+  text-decoration: none;
+}
+.page-footer .copyright {
+  padding-top: 40px;
+  text-align: center;
+}
