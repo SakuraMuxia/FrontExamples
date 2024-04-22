@@ -1,0 +1,15 @@
+127.0.0.1 2024-04-22 15:47:44 POST /login 
+ ReferenceError: post is not defined
+    at D:\devSpace\FrontExamples\node\express\中间件\index.js:23:5
+    at Layer.handle [as handle_request] (D:\devSpace\FrontExamples\node\express\中间件\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\devSpace\FrontExamples\node\express\中间件\node_modules\express\lib\router\index.js:328:13)
+    at D:\devSpace\FrontExamples\node\express\中间件\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (D:\devSpace\FrontExamples\node\express\中间件\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\devSpace\FrontExamples\node\express\中间件\node_modules\express\lib\router\index.js:280:10)
+    at D:\devSpace\FrontExamples\node\express\中间件\index.js:18:5
+    at Layer.handle [as handle_request] (D:\devSpace\FrontExamples\node\express\中间件\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\devSpace\FrontExamples\node\express\中间件\node_modules\express\lib\router\index.js:328:13)
+    at D:\devSpace\FrontExamples\node\express\中间件\node_modules\express\lib\router\index.js:286:9 
+
+
+

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="page-header">
+            <h1>
+                <%= title %>
+                <small>
+                    <%= desction %>
+                </small>
+            </h1>
+        </div>
+
+        <p class="alert alert-info">
+           <%- message %>
+        </p>
+
+        <p class="alert alert-warning">
+            <%= Date.now() %> <br>
+            <%= Math.random() %> <br>
+            <%= 10 * 7 + 8 %> <br>
+         </p>
+
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>排名</th>
+                            <th>姓名</th>
+                            <th>资产</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% top.forEach(item => { %>
+                            <tr>
+                                <td><%= item.id %></td>
+                                <td><%= item.name %></td>
+                                <td><%= item.money %> 亿美元</td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

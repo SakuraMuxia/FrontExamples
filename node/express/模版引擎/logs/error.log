@@ -1,0 +1,30 @@
+127.0.0.1 2024-04-22 16:52:25 GET / 
+ ReferenceError: data is not defined
+    at D:\devSpace\FrontExamples\node\express\模版引擎\index.js:25:25
+    at Layer.handle [as handle_request] (D:\devSpace\FrontExamples\node\express\模版引擎\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\devSpace\FrontExamples\node\express\模版引擎\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (D:\devSpace\FrontExamples\node\express\模版引擎\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (D:\devSpace\FrontExamples\node\express\模版引擎\node_modules\express\lib\router\layer.js:95:5)
+    at D:\devSpace\FrontExamples\node\express\模版引擎\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\devSpace\FrontExamples\node\express\模版引擎\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\devSpace\FrontExamples\node\express\模版引擎\node_modules\express\lib\router\index.js:280:10)
+    at D:\devSpace\FrontExamples\node\express\模版引擎\middleware\accesslog.js:24:9
+    at FSReqCallback.oncomplete (node:fs:193:23) 
+
+
+
+127.0.0.1 2024-04-22 16:52:26 GET / 
+ ReferenceError: data is not defined
+    at D:\devSpace\FrontExamples\node\express\模版引擎\index.js:25:25
+    at Layer.handle [as handle_request] (D:\devSpace\FrontExamples\node\express\模版引擎\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\devSpace\FrontExamples\node\express\模版引擎\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (D:\devSpace\FrontExamples\node\express\模版引擎\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (D:\devSpace\FrontExamples\node\express\模版引擎\node_modules\express\lib\router\layer.js:95:5)
+    at D:\devSpace\FrontExamples\node\express\模版引擎\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\devSpace\FrontExamples\node\express\模版引擎\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\devSpace\FrontExamples\node\express\模版引擎\node_modules\express\lib\router\index.js:280:10)
+    at D:\devSpace\FrontExamples\node\express\模版引擎\middleware\accesslog.js:24:9
+    at FSReqCallback.oncomplete (node:fs:193:23) 
+
+
+

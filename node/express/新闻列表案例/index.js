@@ -3,6 +3,8 @@ const express = require('express');
 // 导入数据模块
 const newsData = require('./data.json');
 
+console.log(newsData);
+
 // 拼接html li标签结构
 const res = newsData.map(item => '<li><a href="#">' + item.newsTitle + '</a></li>').join('');
 console.log(res);
@@ -31,6 +33,7 @@ app.get('/news',(req,res)=>{
         <h1>新闻列表</h1>
         <hr>
         <ul>
+            ${newsData.map(item => '<li><a href="/news/'+item.id+'.html">'+item.newsTitle+'</a></li>').join('')}
             ${newsData.map(item => '<li><a href="/news/details?id='+item.id+'">'+item.newsTitle+'</a></li>').join('')}
         </ul>
     </body>
@@ -40,9 +43,12 @@ app.get('/news',(req,res)=>{
     res.send(resBody);
 });
 // 新闻详情页
-app.get('/news/details', (req, res) => {
+// app.get('/news/details', (req, res) => {
+app.get('/news/:id.html', (req, res) => {
     // 从查询字符串中获取id信息
-    const id = req.query.id;
+    // const id = req.query.id;
+    // 从查询url中获取id信息
+    const id = req.params.id;
     // 根据id从数组中获取对应的新闻
     // 使用数组es6 find方法 得到第一个满足条件的元素
     const newsItem = newsData.find(item => item.id === id);
