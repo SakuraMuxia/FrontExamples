@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>记账本</title>
+    <link
+      href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css"
+      rel="stylesheet"
+    />
+    <style>
+      label {
+        font-weight: normal;
+      }
+      .panel-body .glyphicon-remove{
+        display: none;
+      }
+      .panel-body:hover .glyphicon-remove{
+        display: inline-block
+      }
+      .page-title {
+        padding-top: 30px;
+        padding-bottom: 10px;
+      }
+      .page-title h2 {
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-lg-8 col-lg-offset-2 page-title">
+            <h2 class="pull-left">记账本</h2>  
+            <a class="pull-right btn btn-success" href="/account/create">添加记录</a>  
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12 col-lg-8 col-lg-offset-2">
+           <hr>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12 col-lg-8 col-lg-offset-2">
+          <div class="accounts">
+            <% data.forEach(item => { %>
+            <div class="panel <%= item.type > 0 ? 'panel-success' : 'panel-danger' %>">
+              <div class="panel-heading"><%= item.time %></div>
+              <div class="panel-body">
+                <div class="col-xs-2"><%= item.title %></div>
+                <div class="col-xs-4"><%= item.remarks %></div>
+                <div class="col-xs-2 text-center">
+                  <% if (item.type > 0) { %>
+                    <span class="label label-success">收入</span>
+                  <% } else { %>
+                    <span class="label label-danger">支出</span>
+                  <% } %>
+                </div>
+                <div class="col-xs-2 text-right"><%= item.account %> 元</div>
+                <div class="col-xs-2 text-right">
+                  <a href="/account/delete/<%= item.id %>">
+                    <span class="glyphicon glyphicon-remove"></span>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <% })%>
+
+           
+            <!-- <div class="panel panel-danger">
+              <div class="panel-heading">2023-04-16</div>
+              <div class="panel-body">
+                <div class="col-xs-2">请雪丽吃小龙呀</div>
+                <div class="col-xs-4">小龙虾好吃得很</div>
+                <div class="col-xs-2 text-center">
+                  <span class="label label-danger">支出</span>
+                </div>
+                <div class="col-xs-2 text-right">396 元</div>
+                <div class="col-xs-2 text-right">
+                  <span
+                    class="glyphicon glyphicon-remove"
+                    aria-hidden="true"
+                  ></span>
+                </div>
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -3,3 +3,4 @@
 node/npm/**/node_modules/
 node/http/**/node_modules/
 node/express/**/node_modules/
+mongoDB/**/node_modules/

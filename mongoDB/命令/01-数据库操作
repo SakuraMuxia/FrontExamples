@@ -1,0 +1,13 @@
+# 查看所有的数据库
+show dbs
+show databases
+
+# 切换或创建数据库， 如果数据库中是空的，show dbs 不显示
+use 数据库名字
+
+# 显示当前在哪个数据库  
+db
+
+# 删除当前所在的数据库
+use 要删除的数据库
+db.dropDatabase()

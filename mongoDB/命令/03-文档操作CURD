@@ -1,0 +1,21 @@
+# 创建文档并插入到集合中
+db.集合名.insert({name:'高小乐', age: 14, address:'上海'})
+db.集合名.insert({name:'高小乐', age: 14, address:'上海', message:'喜欢借给别人钱'})
+db.集合名.insert({_id: 1001, name:'高大乐', age: 14, address:'上海'})
+
+
+# 查看集合中的文档
+db.集合名.find()
+db.集合名.findOne()
+
+# 更新文档
+# 用新文档替换掉原来的文档
+db.集合名.update({name:'高小乐'}, {address:'北京'})
+# 在文档中修改或添加某个属性
+db.集合名.update({_id:ObjectId("647aa87097c580a4cc6587ef")}, {$set: {address:'乌鲁木齐'}})
+db.集合名.update({_id:ObjectId("647aa87097c580a4cc6587ef")}, {$set: {job:'CURD仔'}})
+
+# 删除文档
+db.集合名.remove({name:'高小乐'})
+
+

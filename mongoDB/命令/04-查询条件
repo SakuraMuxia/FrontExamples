@@ -1,0 +1,50 @@
+# 查询作者是谭维维的歌曲
+db.songs.find({author:'谭维维'})
+
+# 查询国语演唱歌曲 并且歌手是林飞如
+db.songs.find({author:'林飞如', language:'国语'})
+
+# 查询播放时长小于 150 秒的歌曲
+db.songs.find({duration: {$lt: 150}})
+
+# 查询播放时长大于300 秒的歌曲
+db.songs.find({duration: {$gt: 300}})
+
+# 查询播放时长大于等于350 秒的歌曲
+db.songs.find({duration: {$gte: 350}})
+
+# 查询歌手不是林飞如的歌曲
+db.songs.find({author: {$ne: '林飞如'}})
+
+# 查询蔡徐坤或者林飞如的歌曲 $in
+db.songs.find({author: {$in:['蔡徐坤', '林飞如']}})
+
+# 查询蔡徐坤或者林飞如的歌曲（另一种写法）$or
+db.songs.find({$or: [{author:'蔡徐坤'}, {author:'林飞如'}]})
+
+# 查询热度 5000 以上并且时长 200 以上
+db.songs.find({hot:{$gte:5000}, duration:{$gte: 200}})
+
+# 查询author里面包含蔡徐坤,使用正则
+db.songs.find({author: /蔡徐坤/})
+
+# 统计查询结果的数量
+db.songs.find().count()
+
+# 显示查询结果中的前十条
+db.songs.find().limit(10)
+
+# 显示查询结果中第15个开始，显示3条
+db.songs.find().skip(15).limit(3)
+
+
+# 将第一个热度是 5000 以上的歌曲，修改时长为 100
+db.songs.findOne({hot: {$gt:5000}})
+db.songs.update({hot: {$gt:5000}}, {$set: {duration:100}})
+
+# 将所有热度是 5000 以上的歌曲，修改时长为 100
+db.songs.find({hot: {$gt:5000}})
+db.songs.updateMany({hot: {$gt:5000}}, {$set: {duration:100}})
+
+# 删除时长 100以及以下 或者 300以及以上
+db.songs.remove({$or: [{duration: {$lte: 100}}, {duration: {$gte:300}}]})

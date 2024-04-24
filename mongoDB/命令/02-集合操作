@@ -1,0 +1,11 @@
+# 创建集合
+db.createCollection('集合名')
+
+# 如何查看所在数据库中所有的集合
+show collections
+
+# 如何重命名集合
+db.集合名.renameCollection('新名字')
+
+# 如何删除集合
+db.集合名.drop()
