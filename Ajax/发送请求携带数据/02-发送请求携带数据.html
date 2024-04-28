@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>发送请求携带数据</title>
+</head>
+<body>
+    <h1>发送请求携带数据</h1>
+    <hr>
+   
+    <table>
+        <tr>
+            <td>用户名：</td>
+            <td><input type="text" name="username" id="username"></td>
+        </tr>
+        <tr>
+            <td>密码：</td>
+            <td><input type="password" name="pwd" id="pwd"></td>
+            
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <button id="btn1">GET方式提交</button>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <br>
+                <button id="btn2">POST方式提交 - /plain</button> <br>
+                <button id="btn3">POST方式提交 - urlencoded</button> <br>
+                <button id="btn4">POST方式提交 - json</button> <br>
+                <br>
+                <button id="btn5">PUT方式提交</button> <br>
+            </td>
+        </tr>
+    
+    </form>
+
+    <script>
+        // 获取表单元素
+        const nameInp = document.querySelector('#username');
+        const pwdInp = document.querySelector('#pwd');
+        
+        // 创建 xhr 对象
+        const xhr = new XMLHttpRequest();
+        // 监听成功接收响应的事件
+        xhr.onload = () => {
+            alert(xhr.responseText);
+        };
+
+        // 点击按钮向后端发送 GET 请求
+        const btn1 = document.querySelector('#btn1');
+        btn1.onclick = () => {
+            // 定义查询字符串
+            const qs = `username=${nameInp.value}&userpwd=${pwdInp.value}`;
+            // 请求初始化
+            xhr.open('GET', '/addData?'+qs)
+            // 发送请求
+            xhr.send();
+        };
+
+        // 点击按钮向后端发送 POST 请求
+        const btn2 = document.querySelector('#btn2');
+        btn2.onclick = () => {
+            // 定义查询字符串
+            const qs = `username=${nameInp.value}&userpwd=${pwdInp.value}`;
+            // 初始化
+            xhr.open('POST', '/addData?type=10');
+            // 发送请求  请求体是字符串， 使用querystring 格式
+            xhr.send(qs)
+        }
+
+
+        // 点击按钮向后端发送 POST 请求, 设置请求头 指定请求体的 Content-type  x-www-form-urlencoded
+        const btn3 = document.querySelector('#btn3');
+        btn3.onclick = () => {
+            // 定义查询字符串
+            const qs = `username=${nameInp.value}&userpwd=${pwdInp.value}`;
+            // 初始化
+            xhr.open('POST', '/addData?type=20');
+
+            // 设置请求头  请求头一定要在 open() 之后，send() 之前设置
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+            // 发送请求  请求体是字符串， 使用querystring 格式
+            xhr.send(qs)
+        }
+
+        // 点击按钮向后端发送 POST 请求, 设置请求头 指定请求体的 Content-type  json
+        const btn4 = document.querySelector('#btn4');
+        btn4.onclick = () => {
+            // 将表单数据放在对象中
+            const data = {username: nameInp.value, userpwd: pwdInp.value};
+            // 初始化
+            xhr.open('POST', '/addData?type=20');
+
+            // 设置请求头  请求头一定要在 open() 之后，send() 之前设置
+            // xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhr.setRequestHeader('Content-type', 'application/json');
+
+            // 发送请求  请求体是字符串， 使用querystring 格式
+            xhr.send(JSON.stringify(data));
+            // xhr.send(data)
+        }
+
+
+        // 点击按钮向后端发送 PUT 请求,
+        const btn5 = document.querySelector('#btn5');
+        btn5.onclick = () => {
+            // 将表单数据放在对象中
+            const data = {username: nameInp.value, userpwd: pwdInp.value};
+            // 初始化
+            xhr.open('PUT', '/addData?type=30');
+
+            // 设置请求头  请求头一定要在 open() 之后，send() 之前设置
+            // xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhr.setRequestHeader('Content-type', 'application/json');
+
+            // 发送请求  请求体是字符串， 使用querystring 格式
+            xhr.send(JSON.stringify(data));
+            // xhr.send(data)
+        }
+
+
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Ajax 请求体是 FormData</h1>
+    <hr>
+    <!--return false 阻止form表单默认行为  -->
+    <form onsubmit="return false">
+        <table>
+            <tr>
+                <td>用户名：</td>
+                <td><input type="text" name="username" id="username"></td>
+            </tr>
+            <tr>
+                <td>密码：</td>
+                <td><input type="password" name="pwd" id="pwd"></td>
+                
+            </tr>
+            <tr>
+                <td>用户头像：</td>
+                <td>
+                    <input type="file" name="avator" id="avator">
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <button id="btn1">提交1</button>
+                    <button id="btn2">提交2</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <hr>
+    <h1>非Ajax 表单上传文件</h1>
+    <!-- 这里使用type指定请求体的类型为multipart/form-data-->
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="avator">
+        <button>上传</button>
+    </form>
+    <script>
+        // 获取表单元素
+        const nameInp = document.querySelector('#username');
+        const pwdInp = document.querySelector('#pwd');
+        const avatorInp = document.querySelector('#avator');
+
+
+        // 创建 xhr 对象
+        const xhr = new XMLHttpRequest();
+        // 监听响应成功的事件
+        xhr.onload = () => {
+            alert(xhr.responseText);
+        };
+
+        // 点击按钮1 发送请求 第一种formData的处理方式
+        const btn1 = document.querySelector('#btn1');
+        btn1.onclick = () => {
+            // 创建FormData
+            const fd = new FormData();
+            // 向fd对象添加数据
+            fd.append('username', nameInp.value);
+            fd.append('userpwd', pwdInp.value);
+            fd.append('mssage', 'hello 高小乐');
+            // avatorInp.value只能拿到图片的地址
+            fd.append('avator', avatorInp.files[0])
+
+            // 请求初始化
+            xhr.open('POST', '/upload');
+            // 发送请求 fd对象作为参数, 会自动设置请求头字段 Content-type
+            xhr.send(fd);
+        };
+
+
+         // 点击按钮2 发送请求 第二种formData的处理方式
+        const btn2 = document.querySelector('#btn2');
+        btn2.onclick = () => {
+            const formBox = document.querySelector('form');
+            // 创建FormData 参数是form元素
+            // 自动将form元素中的表单控件添加到 formData中
+            const fd = new FormData(formBox);
+            
+            // 请求初始化
+            xhr.open('POST', '/upload');
+            // 发送请求 fd对象作为参数, 会自动设置请求头字段 Content-type
+            xhr.send(fd);
+        };
+
+    </script>
+</body>
+</html>
