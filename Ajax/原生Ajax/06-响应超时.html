@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box {
+            margin-top: 20px;
+            width: 600px;
+            padding: 20px;
+            min-height: 200px;
+            border: 1px solid #999;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ajax 响应超时</h1>
+    <hr>
+    <button id="btn">点击请求</button>
+    <div id="box"></div>
+
+    <script>
+        const box = document.querySelector('#box');
+
+        // 创建 XMLHttpRequest 对象
+        const xhr = new XMLHttpRequest();
+
+        // 监听响应成功的事件
+        xhr.onload = () => {
+            console.log('响应成功！', xhr.response);
+            box.innerHTML = '响应成功：' + xhr.response;
+        }
+
+        // 监听响应超时的事件
+        xhr.ontimeout = () => {
+            console.log('响应超时！');
+            box.innerHTML = '响应超时！';
+        }
+
+        // 设置超时时间 5s
+        xhr.timeout = 5000;
+
+        // 点击按钮发送请求
+        const btn = document.querySelector('#btn');
+        btn.onclick = () => {
+            // 请求初始化
+            xhr.open('GET', '/getInfo');
+            // 发送请求
+            xhr.send();
+        }
+
+        
+    </script>
+</body>
+</html>

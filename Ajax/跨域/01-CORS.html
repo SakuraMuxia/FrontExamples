@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box {
+            margin-top: 20px;
+            width: 600px;
+            min-height: 200px;
+            padding: 20px;
+            border: 2px dashed #999;
+        }
+    </style>
+
+</head>
+<body>
+    <h1>Ajax</h1>
+    <hr>
+    <button id="btn">发送请求</button>
+    <div id="box"></div>
+    <script>
+        // 获取元素
+        const btn = document.querySelector('#btn');
+        const box = document.querySelector('#box');
+        // 创建 XMLHttpRequest 对象
+        const xhr = new XMLHttpRequest();
+        // 监听响应成功的事件
+        xhr.onload = () => {
+            box.innerHTML += xhr.response + '<br>';
+        }
+        xhr.onerror = () => {
+            console.log('请求失败！');
+        }
+        // 点击按钮 发送请求
+        btn.onclick = () => {
+            // 请求初始化
+            xhr.open('GET', 'http://127.0.0.1:8080/getdata01')
+            // 发送请求
+            xhr.send();
+        }
+
+    </script>
+</body>
+</html>

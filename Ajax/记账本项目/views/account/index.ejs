@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>记账本</title>
+    <link
+      href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css"
+      rel="stylesheet"
+    />
+    <style>
+      label {
+        font-weight: normal;
+      }
+      .panel-body .glyphicon-remove{
+        display: none;
+      }
+      .panel-body:hover .glyphicon-remove{
+        display: inline-block
+      }
+      .page-title {
+        padding-top: 30px;
+        padding-bottom: 10px;
+      }
+      .page-title h2 {
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+
+      <div class="row">
+        <div class="col-xs-12 col-lg-8 col-lg-offset-2 page-title">
+            <div class="userinfo clearfix">
+              <div class="pull-left">
+                您好，<%= username %>
+              </div>
+              <div class="pull-right">
+                <a href="/users/logout">退出登录</a>
+              </div>
+            </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12 col-lg-8 col-lg-offset-2 page-title">
+          <h2 class="pull-left">记账本</h2>
+          <button class="pull-right btn btn-success" data-toggle="modal" data-target="#myModal">添加记录</button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12 col-lg-8 col-lg-offset-2">
+          <div class="accounts" id="accountBox">
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 模态框 -->
+    <div class="modal fade" id="myModal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">添加账单</h4>
+          </div>
+          <div class="modal-body">
+            <form id="addForm">
+              <div class="form-group">
+                <label for="item">事项</label>
+                <input type="text" class="form-control" id="item" name="title" />
+              </div>
+              <div class="form-group">
+                <label for="time">发生时间</label>
+                <input type="date" class="form-control" id="time" name="time" />
+              </div>
+              <div class="form-group">
+                <label for="type">类型</label>
+                <select class="form-control" id="type" name="type">
+                  <option value="-1">支出</option>
+                  <option value="1">收入</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="account">金额</label>
+                <input type="text" class="form-control" id="account" name="account" />
+              </div>
+
+              <div class="form-group">
+                <label for="remarks">备注</label>
+                <textarea class="form-control" id="remarks" name="remarks"></textarea>
+              </div>
+              <hr>
+              <button type="submit" class="btn btn-primary btn-block">添加</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/bootbox.js/6.0.0/bootbox.min.js"></script>
+    <!-- 导入ajax函数 -->
+    <script src="/js/ajax.js"></script>
+    <script>
+
+      // 弹框全局选项设置
+      bootbox.setDefaults({
+        size: 'small'
+      });
+
+      // 获取元素
+      const addForm = document.querySelector('#addForm');  // 添加表单元素
+      const accountBox = document.querySelector('#accountBox');   // 账单列表的包裹元素
+
+      // 发送请求 获取该用户的账单信息
+      loadAccount();
+
+      // 添加添加表单的提交按钮 给表单监听提交事件
+      addForm.onsubmit = () => {
+        // 创建 FormData 对象
+        const fd = new FormData(addForm); //相当于一个iterator 遍历器对象
+        
+        // 发送请求
+        ajax({
+          url: '/api/account/<%= userid%>',
+          method: 'POST',
+          // 发送请求体 fd 对象作为参数, 会自动设置请求头字段 Content-type
+          body:fd,
+          dataType: 'json',
+          success: res => {
+            console.log(res);
+              if (res.code === '0000') {
+                bootbox.alert('添加成功！');
+                // 重新加载数据
+                loadAccount();
+              } else {
+                bootbox.alert('添加失败！');
+              }
+          },
+          error: () => {
+            bootbox.alert('添加失败！');
+          }
+        });
+        // 关闭模态框jQuery语法
+        $('#myModal').modal('hide');
+        // 阻止默认行为
+        return false;
+      };
+
+      // 事件委托的方式 给删除按钮 监听事件
+      accountBox.onclick = event => {
+        if (event.target.classList.contains('remove-btn')) {
+            // 向后端发送请求 删除指定ID的账单
+            ajax({
+              url: '/api/account/' + event.target.dataset.id,
+              method: 'DELETE',
+              dataType: 'json',
+              success: res => {
+                console.log(res);
+                if (res.code === '0000') {
+                  // 删除元素
+                  accountBox.removeChild(event.target.parentElement.parentElement.parentElement);
+                  bootbox.alert('删除成功！');
+                } else {
+                  bootbox.alert('删除失败！');
+                }
+              },
+              error: () => {
+                bootbox.alert('删除失败！');
+              }
+            })
+        }
+      }
+       
+      
+      // 封装函数 请求最新的并将账单列表显示在页面上
+      function loadAccount() {
+        ajax({
+          url: '/api/account/<%= userid %>',
+          dataType: 'json',
+          success: res => {
+            if (res.code === '0000') {
+              // 清空包裹元素
+              accountBox.innerHTML = '';
+              // 遍历数据
+              res.data.forEach(item => {
+                accountBox.innerHTML += `
+                <div class="panel ${item.type > 0 ? 'panel-success' : 'panel-danger'}">
+                  <div class="panel-heading">${item.time}</div>
+                  <div class="panel-body">
+                    <div class="col-xs-2">${item.title}</div>
+                    <div class="col-xs-4">${item.remarks}</div>
+                    <div class="col-xs-2 text-center">
+                      ${item.type > 0 ? '<span class="label label-success">收入</span>' : ' <span class="label label-danger">支出</span>'}
+                    </div>
+                    <div class="col-xs-2 text-right">${item.account} 元</div>
+                    <div class="col-xs-2 text-right">
+                      <span
+                        class="glyphicon glyphicon-remove remove-btn"
+                        data-id="${item._id}"
+                        aria-hidden="true"
+                      ></span>
+                    </div>
+                  </div>
+                </div>
+                `
+              });
+            } else {
+              bootbox.alert('数据获取失败！'); 
+            }
+          },
+          error: () => {
+            bootbox.alert('数据获取失败！'); 
+          }
+        })
+      }
+    </script>
+  </body>
+</html>

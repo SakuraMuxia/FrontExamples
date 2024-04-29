@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .search-box {
+            margin: 200px auto;
+            width: 400px;
+            text-align: center;
+        }
+        .search-box input {
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            width: 400px;
+            height: 40px;
+            padding: 10px;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="search-box">
+        <form action="http://www.baidu.com/s">
+            <input type="text" name="wd" id="wd" placeholder="请输入要搜索的内容..." autocomplete="off" list="searchDataList">
+            <datalist id="searchDataList">
+                
+            </datalist>
+        </form>
+    </div>
+    <script>
+        // 获取元素
+        const inputBox = document.querySelector('#wd');
+        const datalistBox = document.querySelector('#searchDataList');
+
+        // 当输入框内容改变 触发事件
+        inputBox.oninput = () => {
+            // 创建 script 元素
+            const script = document.createElement('script');
+            // 设置 src 属性
+            script.src = `https://www.baidu.com/sugrec?prod=pc&wd=${inputBox.value}&cb=parseSearch`;
+            // 将 script 元素添加到 body
+            document.body.appendChild(script);
+            // 将 script 删除删除
+            document.body.removeChild(script);
+        }
+        // 定义函数 处理返回结果
+        function parseSearch(res) {
+            // 清空 dataList
+            datalistBox.innerHTML = '';
+            // 根据响应结果 创建 option 元素，添加到 datalist
+            res.g.forEach(item => {
+                datalistBox.appendChild(new Option('', item.q));
+            });
+        }
+
+    </script>
+</body>
+</html>

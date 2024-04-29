@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>同步和异步</h1>
+    <hr>
+    <button id="btn1">异步请求</button>
+    <button id="btn2">同步请求</button>
+
+    <script>
+        // 创建 XMLHttpRequest 对象
+        const xhr = new XMLHttpRequest();
+
+        // 监听响应成功的事件
+        xhr.onload = () => {
+            console.log('响应结束！');
+        };
+
+        // 点击按钮发送异步请求
+        const btn1 = document.querySelector('#btn1');
+        btn1.onclick = () => {
+            // 请求初始化 默认异步
+            xhr.open('GET', '/getMoreData');
+            // 发送请求
+            xhr.send();
+
+            console.log('异步请求发出！');
+        }
+
+        // 点击按钮发送同步请求
+        const btn2 = document.querySelector('#btn2');
+        btn2.onclick = () => {
+            // 请求初始化 open的第三个参数设置为false,发起同步请求
+            xhr.open('GET', '/getMoreData', false);
+            // 发送请求
+            xhr.send();
+
+            console.log('同步请求发出！');
+
+        }
+    </script>
+</body>
+</html>

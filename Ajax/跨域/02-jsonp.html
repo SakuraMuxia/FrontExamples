@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box {
+            margin-top: 20px;
+            width: 600px;
+            min-height: 200px;
+            padding: 20px;
+            border: 2px dashed #999;
+        }
+    </style>
+</head>
+<body>
+    <h1>jsonp</h1>
+    <hr>
+    <button id="btn">发送请求</button>
+    <div id="box"></div>
+
+    <script>
+        // 获取元素
+        const btn = document.querySelector('#btn');
+        const box = document.querySelector('#box');
+        // 点击按钮 发送请求
+        btn.onclick = () => {
+            // 创建 script 标签
+            const scriptBox = document.createElement('script');
+            // 给 script 标签设置 src 属性
+            scriptBox.src = 'http://127.0.0.1:8080/getdata02?cb=parseData';
+            // 将 script 标签添加到body中
+            document.body.appendChild(scriptBox);
+            // 将 script 标签从文档结构移除
+            document.body.removeChild(scriptBox);
+        }
+        // 定义函数
+        function parseData(data) {
+            console.log('我是函数parseData，我被调用了！获取数据：');
+            var hanStr = data.map(item => item.name + ':' + item.age + ':' + item.address).join('<br>');// 返回一个字符串，每个元素间的分隔符是<br>
+            // console.log(hanStr); 
+            box.innerHTML = hanStr;
+        }
+
+    </script>
+</body>
+</html>

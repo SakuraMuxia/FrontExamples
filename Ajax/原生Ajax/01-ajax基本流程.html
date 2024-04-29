@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box {
+            margin-top: 20px;
+            width: 600px;
+            padding: 20px;
+            min-height: 200px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <h1>ajax 基本流程</h1>
+    <hr>
+    <button id="btn">加载</button>
+
+    <div id="box"></div>
+
+    <script>
+        const btn = document.querySelector('#btn');
+        const box = document.querySelector('#box');
+        btn.onclick = () => {
+            // 第一步 创建 XMLHttpRequest 对象
+            const xhr = new XMLHttpRequest();
+
+            // 第二步 监听接响应成功的事件
+            xhr.onload = () => {
+                console.log('成功接收到后端的响应！');
+                box.innerHTML += xhr.responseText + '<br>';
+            };
+
+
+            // 第三步 请求初始化
+            /*
+                第一个参数 请求方式
+                第二个参数 请求URL
+                第三个参数 是否异步，默认异步
+            */
+            xhr.open('GET', 'http://127.0.0.1:8080/getData');
+
+            // 第四步 发送请求
+            /*
+                参数可以设置请求体，没有请求可以不设置参数
+            */
+            xhr.send();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box {
+            margin-top: 20px;
+            width: 600px;
+            padding: 20px;
+            min-height: 200px;
+            border: 1px solid #999;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ajax HTTP 进度事件</h1>
+    <hr>
+    <button id="btn">点击请求</button>
+    <div id="box"></div>
+
+    <script>
+        const box = document.querySelector('#box');
+
+        // 创建 XMLHttpRequest 对象
+        const xhr = new XMLHttpRequest();
+
+        // readystatechange readyState 请求状态变化
+        /*
+            0   初始值
+            1   请求初始化完成 执行 open()
+            2   发送请求 执行 send()
+            3   开始接收响应 可能触发多次
+            4.  响应接收完毕
+        */
+        xhr.onreadystatechange = () => {
+            console.log('readyState：', xhr.readyState);
+            if (xhr.readyState === 4) {
+                // 早期过时处理响应体方式
+            }
+        }
+
+        // 开始发送请求 readyState:1
+        xhr.onloadstart = () => {
+            console.log('loadstat');
+        };
+
+        // 不论请求成功还是失败，都会触发
+        xhr.onloadend = () => {
+            console.log('loadend');
+        };
+
+        // 请求失败触发， 只有网络错误才算请求失败（请求不能发出），404算请求成功
+        xhr.onerror = () => {
+            console.log('error，请求失败！');
+        }
+
+        // 响应成功，响应体接收完毕 readyState:4
+        xhr.onload = () => {
+            console.log('load,响应成功！');
+            box.innerHTML = '下载完毕！';
+        };
+
+        // 开始接收响应的时候 不停的触发多次，直到接收响应体完毕
+        xhr.onprogress = event => {
+            console.log('progress：', event.loaded, event.total);
+            box.innerHTML = '已下载：' + (event.loaded / event.total * 100).toFixed(2) + '%';
+        }
+        // 点击按钮发送请求
+        const btn = document.querySelector('#btn');
+        btn.onclick = () => {
+            // 请求初始化
+            // xhr.open('GET', '/getMoreDa');
+            xhr.open('GET', '/getMoreData');
+            // xhr.open('GET', 'http://192.168.23.23/getMoreData');
+            // 发送请求
+            xhr.send();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Ajax 解析响应报文</h1>
+    <hr>
+    <button id="btn">点击请求</button>
+    <script>
+        // 创建 XMLHttpRequest 对象
+        const xhr = new XMLHttpRequest();
+        // 监听响应成功的事件
+        xhr.onload = () => {
+            console.log('响应行：');
+            console.log('响应状态码：', xhr.status);
+            console.log('响应状态描述：', xhr.statusText);
+            console.log('');
+        }
+        // 点击按钮发送请求
+        const btn = document.querySelector('#btn');
+        btn.onclick = () => {
+            // 请求初始化
+            xhr.open('GET', '/getData');
+            // 发送请求
+            xhr.send();
+        }
+
+    </script>
+</body>
+</html>

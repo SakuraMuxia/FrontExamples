@@ -98,7 +98,7 @@ app.get('/getUsers', (req, res) => {
         {name:'安妮3', age:96, address:'上海'},
         {name:'安妮4', age:88, address:'上海'}
     ];
-
+    // 对象转为json字符串
     const usersStr = JSON.stringify(users);
 
     // 设置响应头 告知浏览器响应体的内容类型
@@ -114,7 +114,7 @@ app.get('/page06', (req, res) => {
 });
 // 接收 ajax 请求的
 app.get('/getInfo', (req, res) => {
-    // 后端设置响应超时时间为一个随机数
+    // 后端设置响应超时时间为一个随机数 0-9
     const timeout = Math.floor(Math.random() * 10) * 1000;
 
     setTimeout(function(){
@@ -129,7 +129,7 @@ app.get('/page07', (req, res) => {
 });
 // 接收 ajax 请求
 app.get('/getMoreData', (req, res) => {
-    res.send('你好，Ajax\n'.repeat(100000));
+    res.send('你好，Ajax\n'.repeat(1000000));
 });
 
 
