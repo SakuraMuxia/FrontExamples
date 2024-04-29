@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="box"></h1>
+
+    <script>
+        // 1. 实例化 Promise 类，需要传一个回调函数作为参数
+        const p1 = new Promise(() => {});
+        console.log(p1);
+        console.log('');
+
+        // 2. Promise 类的回调函数（参数），在实例化 Promise 的时候会自动调用，是同步任务
+        const p2 = new Promise(() => {
+            console.log('我执行了！');
+        });
+        console.log(p2);
+        console.log('');
+
+         // 3. Promise 类的回调函数（参数），在被调用的时候，会接收两个参数，两个参数都是函数
+        const p3 = new Promise((res, rej) => {
+            console.log('第一个参数：', res);
+            console.log('第二个参数：', rej);
+        });
+        console.log(p3);
+        console.log('');
+
+        // 4 调用第一个参数 该promise对象的状态改为 resolved（fulfilled） 调用第二个参数， 该promise对象的状态改为 rejected
+        const p4 = new Promise((resolve, reject) => {
+            // 调用第一个参数 该promise对象的状态改为 resolved（fulfilled）
+            // 可以传个参数作为 PromiseResult
+            // resolve('hello');
+            resolve({status:'OK', msg: 'success'});
+            
+            // 调用第二个参数， 该promise对象的状态改为 rejected
+            // 可以传个参数作为 PromiseResult
+            // reject();
+            //reject([10,20,30,40]);
+        });
+        console.log('p4：', p4);
+        console.log('');
+
+        // 5 promise 对象的状态一旦改变， 就无法再修改
+        const p5 = new Promise((resolve, reject) => {
+            // 修改为失败状态
+            // reject('error');
+            // 修改为成功状态
+            resolve('OK');
+            
+        });
+        console.log('p5：', p5);
+        console.log('');
+
+        // 6 为promise对象设置回调函数
+        const box = document.querySelector('#box');
+        // 创建 Promise 对象
+        const p6 = new Promise((resolve, reject) => {
+            const randNum = Math.random();
+            if ( randNum>= .5) {
+                // 设置为成功状态
+                resolve(randNum); //设置成功时 promiseResult 的值为 randNum
+            } else {
+                // 设置为失败的状态
+                reject(randNum);  ////设置失败时 promiseResult 的值为 randNum
+            }
+        });
+        console.log('p6：', p6);
+        console.log('');
+
+        // 给 promise 对象设置回调函数，处理 promise 对象的状态，
+        p6.then(res => {
+            console.log('p6的状态是成功状态！', res);
+            box.innerHTML = '恭喜您，抽中了一套房子，您的中奖码：' + res;
+        }, err => {
+            console.log('p6的状态是失败状态！', err);
+            box.innerHTML = '很遗憾，没有抽中，您的失败码：' + err;
+        });
+
+        console.log('Hello 高小乐，你狠同步！');
+        console.log('');
+
+
+        // 7 封装定时器Promise函数
+        // 使用原本定时器
+        setTimeout(() => {
+            console.log('原版定时器执行了');
+        }, 4000);
+
+        // 使用Promise版定时器
+        const p7 = setTimeoutPromise(3000);
+        p7.then(()=>{
+            console.log('Promise版定时器执行了');
+        });
+
+        /**
+         * @params number 时间，单位毫秒
+         * @returns Promise对象 
+        */
+        function setTimeoutPromise(delay) {
+            return new Promise((resolve,reject) => {
+                setTimeout(resolve, delay);
+            });
+        }
+        
+    </script>
+</body>
+</html>
