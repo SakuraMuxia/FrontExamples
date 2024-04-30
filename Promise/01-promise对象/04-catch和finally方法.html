@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 创建 promise 对象
+        const p = new Promise((resolve, reject) => {
+            const randNum = Math.random();
+            if (randNum >= .5) {
+                resolve(randNum);
+            } else {
+                reject(randNum);
+            }
+        });
+
+        /*
+        // 调用 then() 方法，只设置一个回调函数, 当是成功状态的时候执行该回调函数
+        p.then(value => {
+            console.log('成功！', value);
+        });
+
+        // 调用 catch() 方法， 参数是一个回调函数，当是失败状态的时候执行该回调函数
+        p.catch(reason => {
+            console.log('失败！', reason);
+        });
+        */
+
+        // then 和 catch 链式调用
+        p
+        .then(value => {
+            console.log('成功！', value);
+        })
+        .catch(reason => {
+            console.log('失败！', reason);
+        })
+        .finally( () => {
+            console.log('finally');
+        });
+        
+    </script>
+</body>
+</html>

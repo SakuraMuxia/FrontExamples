@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="./js/ajax.js"></script>
+    <script>
+        /*
+            1. 获取所有的榜单，取出榜单中第一个的 id  /toplist
+            2. 根据榜单ID获取到该榜单下所有的歌曲  /playlist/detail?id=   取出第一首歌曲的 id
+            3. 根据 ID获取该歌曲的详细信息  /song/detail?ids=
+        */
+        ajax({
+                url: 'http://api.fuming.site:54255/toplist',
+                dataType: 'json',
+                success: res => {
+                    // 找到第一个榜单的榜单ID
+                    const id = res.list[0].id;
+                    // 第二步 根据该榜单id，获取到该榜单下所有歌曲
+                    ajax({
+                        url: 'http://api.fuming.site:54255/playlist/detail?id='+id,
+                        dataType: 'json',
+                        success: res => {
+                            // 获取该榜单歌曲列表中的第一首歌曲的id
+                            const sid = res.privileges[0].id;
+                            // 第三步，根据歌曲id，获取歌曲详细信息
+                            ajax({
+                                url: 'http://api.fuming.site:54255/song/detail?ids=' + sid,
+                                dataType: 'json',
+                                success: res => {
+                                    console.log(res);
+                                },
+                                error: () => {
+                                    console.log('获取歌曲信息失败！');
+                                }
+                            })
+                        },
+                        error: () => {
+                            console.log('获取歌曲列表失败！')
+                        }
+                    })
+                },
+                error: () => {
+                    console.log('获取榜单列表失败！');
+                }
+            });
+    </script>
+</body>
+</html>

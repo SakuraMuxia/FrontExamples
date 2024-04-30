@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 创建 Promise 对象
+        const p1 = new Promise((resolve, reject) => {
+            const randNum = Math.random();
+            if ( randNum>= .5) {
+                // 设置为成功状态
+                resolve(randNum);
+            } else {
+                // 设置为失败的状态
+                reject(randNum);
+            }
+        });
+        p1.then(data=>{
+            console.log("p1状态成功：promiseResult的值为",data);
+        })
+        .catch(err =>{
+            console.log("p1状态失败：promiseResult的值为",err);
+        })
+
+        // 创建一个 thenable 对象
+        /*
+        const obj = {
+            then(res, rej) {
+                const randNum = Math.floor(Math.random() * 10);
+                if ( randNum>= 5) {
+                    // 设置为成功状态
+                    res(randNum);
+                } else {
+                    // 设置为失败的状态
+                    rej(randNum);
+                }
+            }
+        }
+        */
+        const obj = {
+            then:function(res,rej){
+                const randNum = Math.floor(Math.random() * 10);
+                if ( randNum>= 5) {
+                    // 设置为成功状态
+                    res(randNum);
+                } else {
+                    // 设置为失败的状态
+                    rej(randNum);
+                }
+            }
+        }
+        // 情况一： 没有参数，返回的 promise 对象状态会变为成功，PromiseResult 是 undefined
+        // const p = Promise.resolve();
+        
+        // 情况二： 参数是除了 Promise 对象和 thenable 对象以外的其他对象或原始类型数据 ，返回的 promise 对象状态会变为成功，PromiseResult 是参数
+        // const p2 = Promise.resolve(100);
+        // const p = Promise.resolve([10,20,30,40,50]);
+
+        // 情况三：参数是一个 promise 对象，该参数直接作为 resolve() 方法的返回值
+        // const p2 = Promise.resolve(p1);  // 等价于 const p = p1;
+
+        // 情况四：参数是一个 thenable 对象, 
+        // thenable 对象只指有 then 方法的对象
+        const p2 = Promise.resolve(obj);
+
+        p2
+        .then(data=>{console.log("p2状态成功：promiseResult的值为",data)})
+        .catch(err=>{console.log("p2状态失败：promiseResult的值为",err)});
+    </script>
+</body>
+</html>

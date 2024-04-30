@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>MV 排行榜</h1>
+    <div id="box"></div>
+    <script src="./js/ajax.js"></script>
+    <script src="./js/ajaxPromise.js"></script>
+    <script>
+        /*
+            获取mv榜单
+            接口地址： http://api.fuming.site:54255/top/mv
+        */
+       // 非 Promise 写法
+       /*
+        ajax({
+            url: 'http://api.fuming.site:54255/top/mv',
+            dataType: 'json',
+            success: res => {
+                box.innerHTML = res.data.map(item => `《${item.name}》  ${item.artistName}`).join('<br>');
+            },
+            error: () => {
+                console.log('获取失败！');
+            }
+        });
+        */
+        
+        // Promise 写法
+        ajaxPromise({
+            url: 'http://api.fuming.site:54255/top/mv',
+            dataType: 'json',
+        }).then(res => {
+            box.innerHTML = res.data.map(item => `《${item.name}》  ${item.artistName}`).join('<br>');
+        },() => {
+            box.innerHTML = '获取失败！';
+        });
+
+    </script>
+</body>
+</html>

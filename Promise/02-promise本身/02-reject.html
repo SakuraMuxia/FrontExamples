@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 创建失败状态的promise对象
+        // const p = Promise.reject();
+        // const p = Promise.reject(100);
+        const p = Promise.reject(Promise.resolve());
+
+        p
+        .then(val => {
+            console.log('成功！', val);
+        })
+        .catch (reason => {
+            console.log('失败！', reason);
+        })
+    </script>
+</body>
+</html>

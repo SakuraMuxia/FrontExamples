@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 创建 Promise 对象
+        const p1 = new Promise((resolve, reject) => {
+            // 设置成功状态
+            // resolve('Success');
+            // 设置失败状态
+            reject('Danger');
+        });
+
+
+        // 调用 p1 的 then 方法, 获取到 then 方法返回值 赋值给变量 p2
+        // 回调函数的返回值决定 p2 的状态
+        const p2 = p1.then(res => {
+            // 1. 情况一，回调函数没有返回值, then()返回的Promise对象改为成功状态，PromiseResult是undefined
+
+            // 2. 情况二：返回非 Promise 类型的对象或原始类型数据，then()返回的Promise对象改为成功状态，PromiseResult是该回调的返回值
+            // return 100;
+            // return [10,20,30,40,50];
+            // return null;
+
+            // 3. 情况三： 返回 Promise 对象， then()返回的Promise对象与该回调函数返回的Promise对象，状态和PromiseResult保持一致
+            // return new Promise((res, rej) => {
+            //     // res('success！');
+            //     rej('error!');
+            // });
+
+            // 4. 情况四：出现代码运行错误,  then()返回的Promise对象,状态改为失败，PromiseResult是错误对象
+            // ajaxPromise();
+        }, () => {
+            return "sb";// 返回非 Promise 类型的对象或原始类型数据，then()返回的Promise对象改为成功状态 PromiseResult是该回调的返回值
+        });
+
+
+        // console.log(p2);
+        // 给 p2 设置回调函数
+        p2.then(res => {
+            console.log('成功！', res);
+        }, err => {
+            console.log('失败！', err);
+        });
+    </script>
+</body>
+</html>
