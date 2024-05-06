@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 任何形式的函数，声明的时候，添加 async 关键字就可以变为 async 函数
+
+        // 1. function 关键字方式
+        async function fn01() {}
+
+        // 2. 表示式方式
+        const fn02 = async function() {};
+
+        // 3. 箭头函数
+        const fn03 = async () => {};
+
+        // 4. 立即执行的函数
+        (async () => {
+
+        })();
+
+        // 5. 对象中的方法
+        const user = {
+            async say() {}
+        }
+    </script>
+</body>
+</html>

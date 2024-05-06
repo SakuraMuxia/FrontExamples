@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        获取新歌榜中前十首歌曲的名称和演唱者
+        ```
+        新歌榜API： http://api.fuming.site:54255/playlist/detail?id=3779629
+        歌曲详情API：http://api.fuming.site:54255/song/detail?ids=歌曲ID
+        ```
+     -->
+     <div id="box"></div>
+
+     <script src="./ajaxPromise.js"></script>
+     <script>
+        const box = document.querySelector('#box');
+        (async () => {
+            try {
+                // 第一步 获取新歌榜的歌曲列表
+                const res = await ajaxPromise({
+                    url: 'http://api.fuming.site:54255/playlist/detail?id=3779629',
+                    dataType: 'json'
+                });
+
+                // 第二步 获取前十首歌曲的详细信息
+                const data = [];
+                for (let i = 0; i < 10; i ++) {
+                    data.push(await ajaxPromise({
+                        url: 'http://api.fuming.site:54255/song/detail?ids='+res.privileges[i].id,
+                        dataType: 'json'
+                    }));
+                }
+                
+                box.innerHTML = data.map((item, index) => `
+                    ${index+1}
+                    《${item.songs[0].name}》
+                    ${item.songs[0].ar.map(item => item.name).join()}
+                    <br>
+                `).join('');
+
+            } catch (error) {
+                console.log('数据请求失败！', error);
+            }
+        })();
+
+
+
+      
+     </script>
+</body>
+</html>

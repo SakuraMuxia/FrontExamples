@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        1. 参数
+           1 要求传入一个可遍历对象（如：数组、Set、Map、字符串等）
+           2 作为参数的可遍历对象，要求每个成员都是 promise 对象； 如果存在非 promise 对象的成员，会使用 Promise.resolve() 将其转为 promise 对象
+
+        2. 返回值
+           Promise.all() 返回一个 promise 对象， 状态和PromiseResult的规则如下：
+           1. 如果参数的每个成员的状态都是成功的，当所有成员状态都改变返回值的状态才改变, 返回的 promise 对象状态是成功，PromiseResult 是一个数组，数组中是参数的每个成员的 PromiseResult， 顺序是按照成员传入的顺序,不是完成的顺序。
+           2. 如果参数的成员一旦有失败状态的，会立即得到返回值，返回的 promise 对象是失败状态，PromiseResult 是失败的成员的 PromiseResult
+           3. 如果参数不是可遍历对象，返回失败状态的 promise 对象      
+     -->
+
+
+     <!-- 
+        获取新歌榜中前十首歌曲的名称和演唱者
+        ```
+        新歌榜API： http://api.fuming.site:54255/playlist/detail?id=3779629
+        歌曲详情API：http://api.fuming.site:54255/song/detail?ids=歌曲ID
+        ```
+     -->
+
+     <div id="box"></div>
+     <script src="./js/ajaxPromise.js"></script>
+     <script>
+        const box = document.querySelector('#box');
+        ajaxPromise({
+            url: 'http://api.fuming.site:54255/playlist/detail?id=3779629',
+            dataType: 'json'
+        })
+        .then(res => {
+            return Promise.all(res.privileges.slice(0, 10).map(item => ajaxPromise({
+                url: 'http://api.fuming.site:54255/song/detail?ids='+item.id,
+                dataType: 'json'
+            })));
+        })
+        .then(res => {
+            box.innerHTML = res.map((item, index) => `
+                 ${index+1}
+                《${item.songs[0].name}》
+                 ${item.songs[0].ar.map(item => item.name).join()}
+                 <br>
+            `).join('');
+        });
+
+     </script>
+</body>
+</html>

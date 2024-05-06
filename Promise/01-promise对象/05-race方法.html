@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        返回值
+           Promise.race() 返回一个 promise 对象， 状态和PromiseResult的规则如下：
+         
+     -->
+    <script>
+        // 创建几个promsie对象
+        // const p1 = Promise.resolve(100);
+        const p1 = Promise.reject(100);
+        const p2 = Promise.resolve(200);
+        const p3 = Promise.resolve(300);
+        const p4 = new Promise((res, rej) => {
+            setTimeout(() => {
+                res(400);
+            }, 3000)
+        });
+        const p5 = Promise.resolve(500);
+        const p6 = new Promise((res, rej) => {
+            const rand = Math.random();
+            if (rand >= .5) {
+                res(rand)
+            } else {
+                rej(rand);
+            }
+        });
+
+        // 创建数组
+        const arr = [p1, p2, p3, p4, p5, 'hello world', p6];
+     
+
+        const p = Promise.race(arr);
+        // const p = Promise.race(250);
+        
+        // 使用回调函数处理 p
+        p
+        .then(res => {
+            console.log('成功！', res);
+        })
+        .catch(reason => {
+            console.log('失败！', reason);
+        })
+        
+    </script>
+</body>
+</html>

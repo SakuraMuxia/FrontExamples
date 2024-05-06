@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    async function fn1() {
+        console.log(1);
+        await fn2();
+        console.log(2);  // 相当于在promise对象的then的回调里  微任务
+    }
+
+    async function fn2() {
+        console.log(3);
+    }
+
+    console.log(4);
+    
+    setTimeout(function () {
+        console.log(5);
+    }, 0)
+    
+    fn1();
+    
+    new Promise(function (resolve) {
+        console.log(6);
+        resolve();
+    }).then(function () {
+        console.log(7);
+    });
+    
+    console.log(8);
+</script>
+
+<!-- 
+    同步任务： 4   1   3  6  8
+    微任务 2 7
+    宏任务 5
+
+ -->
+</html>

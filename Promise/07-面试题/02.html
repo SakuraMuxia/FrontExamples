@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<!-- 
+    同步任务： 输出2 输出5
+    微任务： 输出3  输出4
+    宏任务：输出1
+
+
+ -->
+
+<script>
+    setTimeout(() => {
+        console.log(1)
+    }, 0)
+    new Promise((resolve) => {
+        console.log(2)
+        resolve()
+    }).then(() => {
+        console.log(3)
+    }).then(() => {
+        console.log(4)
+    })
+    console.log(5)
+</script>
+</html>

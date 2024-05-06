@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const p = new Promise((res, rej) => {
+            setTimeout(() => {
+                res(600);
+            }, 3000)
+        })
+
+
+        // 定义 async 函数
+        async function main() {
+            
+            // // 1. await 右侧的表达式是 非Promsie, 右侧表达式的值就是 await 表达式的值
+            // const res1 = await 100;
+            // console.log(res1);
+
+
+            // const res2 = await 100 + 200;
+            // console.log(res2);
+
+
+            // // 2. await 右侧的表达式是成功状态 Promise 对象，状态改变之后，await 表达式才能取到值，值是 Promise 对象的 PromiseResult
+            const res3 = await Promise.resolve(400);
+            console.log(res3);
+
+            // const res4 = await p;
+            // console.log(res4);
+
+            // const res5 = await Promise.resolve(800);
+            // console.log(res5);
+
+
+            // 3. await 右侧的表达式是失败状态的 Promise 对象, 抛出异常
+            try {
+                const res6 = await Promise.reject('error');
+             console.log(res6);
+            } catch (err) {
+                console.log('失败：', err);
+            }
+
+
+        } 
+
+        main()
+        .catch(reason => {
+            console.log('失败！！', reason);
+        })
+
+    </script>
+</body>
+</html>

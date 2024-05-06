@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!-- 
+        同步任务： 输出1 输出7
+        微任务： 输出2 输出3 输出8 输出4 输出6 输出5
+        宏任务：输出 0
+     -->
+
+   
+
+
+
+
+</body>
+<script>   
+    setTimeout(() => {
+        console.log("0")
+    }, 0)
+
+    new Promise((resolve, reject) => {
+        console.log("1")
+        resolve()
+    }).then(() => {      // 前面的promise对象22行改变状态  输出2 输出3
+        console.log("2")
+        new Promise((resolve, reject) => {
+            console.log("3")
+            resolve()
+        }).then(() => {
+            console.log("4")
+        }).then(() => {
+            console.log("5")
+        })
+    }).then(() => {
+        console.log("6")
+    })
+
+    new Promise((resolve, reject) => {
+        console.log("7")
+        resolve()
+    }).then(() => {
+        console.log("8")
+    })
+</script>
+
+  <!-- 
+        第一轮进入队列： 28~38的函数（2 3）、45~47行的函数（8）
+        第二轮进入队列： 34~36的函数（4）、 38~40的函数（6）
+        第二轮进入队列： 35~37的函数（5）
+
+
+-->
+</html>

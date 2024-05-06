@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+
+<!-- 
+    同步任务：输出3 输出7  输出4
+    微任务：输出1 输出2
+    宏任务：输出5
+
+ -->
+<script>
+    const first = () => (new Promise((resolve, reject) => {
+        console.log(3)
+        let p = new Promise((resolve, reject) => {
+            console.log(7)
+            setTimeout(() => {
+                console.log(5)
+                resolve(6);
+            }, 0)
+            resolve(1);
+        })
+        resolve(2);
+        // p的状态 26 行就改变了
+        p.then((arg) => {
+            console.log(arg)   // 1
+        })
+    }));
+
+
+    // first()返回的promise对象 28行才改变状态
+    first().then((arg) => {
+        console.log(arg)  // 2
+    })
+
+    console.log(4)
+</script>
+</html>
