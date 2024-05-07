@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="./promise.js"></script>
+    <script>
+        // 实例化 Promise
+        const p1 = new Promise((resolve, reject) => {
+           // 状态直接改变成功状态
+           resolve('OK');
+           
+           // 修改为失败状态
+           // reject('Error');
+
+           // 执行器函数中抛出异常
+           // address();
+        });
+
+
+        // 调用then() 方法，传入回调函数
+        p1.then(val => {
+            console.log('成功！', val);
+        }, reason => {
+            console.log('失败！', reason);
+        });
+
+       console.log('Hello xiaole');
+       
+    </script>
+</body>
+</html>
