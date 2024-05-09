@@ -76,7 +76,7 @@
                     try {
                         // 执行 then() 传入的回调函数并获取到返回值
                         const res = cb(this.#result); // 这里的this是then中的this，谁调用指向谁，因为是箭头函数，箭头函数中没有this向上找
-                        console.log(res);
+                        
                         // 判断返回值res是否是Promise的实例
                         if (res instanceof Promise) {
                             // then()返回值的状态与res一致 情况三
@@ -113,7 +113,6 @@
                             handler(onRejected);
                         }
                     });
-                    console.log(this.#callbackList);
                 }
             })
             return promise;
@@ -122,7 +121,7 @@
          * 给实例传递失败的回调函数,该方法会添加到实例的原型上
          * @param {Function} onRejected 实例状态失败执行的回调
          */
-        catch() {
+        catch(onRejected) {
             return this.then(undefined,onRejected);
         }
 

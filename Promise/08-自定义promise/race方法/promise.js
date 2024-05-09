@@ -76,7 +76,7 @@
                     try {
                         // 执行 then() 传入的回调函数并获取到返回值
                         const res = cb(this.#result); // 这里的this是then中的this，谁调用指向谁，因为是箭头函数，箭头函数中没有this向上找
-                        console.log(res);
+                        
                         // 判断返回值res是否是Promise的实例
                         if (res instanceof Promise) {
                             // then()返回值的状态与res一致 情况三
@@ -113,7 +113,6 @@
                             handler(onRejected);
                         }
                     });
-                    console.log(this.#callbackList);
                 }
             })
             return promise;
@@ -122,37 +121,97 @@
          * 给实例传递失败的回调函数,该方法会添加到实例的原型上
          * @param {Function} onRejected 实例状态失败执行的回调
          */
-        catch() {
+        catch(onRejected) {
             return this.then(undefined,onRejected);
         }
 
 
         /**
          * 根据参数返回新的Promise实例，该方法添加到类本身(静态方法)
+         * {Mixed} value 该参数影响返回的Promise
          */
-        static resolve() {
-
+        static resolve(value) {
+            if(value instanceof Promise){
+                // 情况三 参数就是Promise对象
+                return value;
+            }else if (typeof value?.then === 'function'){
+                // 情况四 将resolve, reject传递给 value.then方法,由该 thenable 对象决定改为什么状态
+                return new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        value.then(resolve, reject);
+                    })
+                });
+            }else {
+                // 情况一 情况二 返回成功状态的Promise对象 value作为result
+                return new Promise((resolve, reject) => {
+                    resolve(value);
+                })
+            }
         }
 
         /**
          * 返回新的失败状态的Promise实例，该方法添加到类本身(静态方法)
+         * @param {Mixed} value 该参数作为返回值的result
          */
-        static reject() {
-
+        static reject(value) {
+            return new Promise((resolve, reject) => {
+                reject(value);
+            })
         }
 
         /**
          * 当传入的所有Promise实例都完成才返回一个Promise实例,该方法添加到类本身(静态方法)
+         * @param {Iterable} items 里面的成员都是Promise对象,不是Promise也会用Promise.resolve()变为Promise对象 
+         * @return {Promise} 所有成员都成功状态成功
          */
-        static all() {
-
+        static all(items) {
+            return new Promise((resolve, reject) => {
+                if (typeof items[Symbol.iterator] === 'function') {
+                    // 将参数 items 转为数组
+                    const itemsArr = Array.from(items);
+                   
+                    // 创建一个长度为遍历器长度的数组
+                    const resArr = Array(itemsArr.length); 
+                    // 遍历所有成员
+                    itemsArr.forEach((item, index) => {
+                        const p = Promise.resolve(item);  // 处理每个成员返回Promise对象，并且执行
+                        p
+                        .then(res => {
+                            resArr[index] = res;
+                            console.log(res);
+                            // 如果resArr填充满了，说明所有的成员都完成了
+                            if ((resArr.filter(()=>true)).length === itemsArr.length) {
+                                resolve(resArr);
+                            }
+                        })
+                        .catch(reason => {
+                            reject(reason);
+                        });
+                    })
+                }else{
+                    // 说明参数items不是可遍历对象
+                    reject('argument must is a iterable');
+                }
+            })
         }
 
         /**
          * 传入的多个Promise实例只要一个先完成就返回一个Promise实例，该方法添加到类本身(静态方法)
+         * @param {Iterable} items 里面的成员都是Promise对象,不是Promise也会用Promise.resolve()变为Promise对象 
+         * @return {Promsie}
          */
-        static race() {
-
+        static race(items) {
+            return new Promise((resolve, reject) => {
+                if (typeof items[Symbol.iterator] === 'function') {
+                    // 遍历 items
+                    for (let item of items) {
+                        const p = Promise.resolve(item);
+                        p.then(resolve, reject);
+                    }
+                }else{
+                    reject('argument must is a iterable');
+                }
+            })
         }
 
 
