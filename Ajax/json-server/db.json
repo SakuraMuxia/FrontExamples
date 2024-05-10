@@ -1,0 +1,30 @@
+{
+  "posts": [
+    {
+      "id": "2",
+      "title": "another title",
+      "views": 200
+    },
+    {
+      "title": "MinatoAqua is my angle",
+      "id": "f336",
+      "views": 105,
+      "description": "this is my description"
+    }
+  ],
+  "comments": [
+    {
+      "id": "1",
+      "text": "a comment about post 1",
+      "postId": null
+    },
+    {
+      "id": "2",
+      "text": "another comment about post 1",
+      "postId": null
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
