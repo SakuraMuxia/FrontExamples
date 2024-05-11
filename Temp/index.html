@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 创建一个对象
+        const user = {
+            name: '高小乐',
+            age: 45,
+            address: '上海',
+            say() {},
+            drink() {}
+        };
+        const arr1 = ['id',2];
+        let arr2 = arr1.map(item => item);
+
+        const user01 = Object.entries(user);
+        console.log(user01);
+        console.log(arr2);   
+        
+        console.log(Object.prototype.toString.call(JSON));
+  
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>发送请求</button>
+    <button>取消请求</button>
+
+    <script type="module">
+        // 引入 axios 模块
+        import axios from './axios.js';
+
+        // 获取元素
+        const btns = document.querySelectorAll('button');  
+
+        // 设置全局配置项
+        axios.defaults.baseURL = 'http://127.0.0.1:8080';
+
+        // 定义变量 存储取消函数
+        let cancel = null;
+
+        // 创建promise对象，将能改变状态的函数赋值给了cancle
+        const cancelToken = new axios.CancelToken(resolve=> {
+            cancel = resolve;
+        });
+
+        // 点击发送请求
+        btns[0].onclick = () => {
+            axios({
+                method: 'get',
+                url: '/hololive/1',
+                cancelToken
+            })
+            .then(val => {
+                console.log('成功：', val);
+            })
+            .catch(err => {
+                console.log('失败：', err);
+                console.log(axios.isCancel(err))
+            })
+        };
+
+        // 点击取消请求
+        btns[1].onclick = () => {
+            cancel();
+        }
+
+    </script>
+</body>
+</html>

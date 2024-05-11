@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>发送请求1</button>
+    <button>发送请求2</button>
+    <button>发送请求3</button>
+
+    <script type="module">
+        // 引入 axios 模块
+        import axios from './axios.js';
+
+        // 获取元素
+        const btn = document.querySelectorAll('button');
+
+        // 设置全局配置项
+        axios.defaults.baseURL = 'http://127.0.0.1:8080';
+
+        // 监听事件
+        btn[0].onclick = () => {
+            axios({
+                url: '/hololive'
+            })
+            .then(val => {
+                console.log('成功：', val);
+            })
+            .catch(err => {
+                console.log('失败：', err);
+            })
+        }
+        
+        btn[1].onclick = () => {
+            axios({
+                url: '/hololive',
+                params:{id:2}
+            })
+            .then(val => {
+                console.log('成功：', val);
+            })
+            .catch(err => {
+                console.log('失败：', err);
+            })
+        }
+        btn[2].onclick = () => {
+            axios({
+                url: '/hololive',
+                method: 'post',
+                // data:'id=11&name=xiamiko&view=20'
+                data:{
+                    "id":10,
+                    "name": "kobo",
+                    "view":19
+                }
+            })
+            .then(val => {
+                console.log('成功：', val);
+            })
+            .catch(err => {
+                console.log('失败：', err);
+            })
+        }
+    </script>
+</body>
+</html>
