@@ -24,16 +24,20 @@
             axios({
                 url: '/hololive',
                 method: 'post',
-                
+                // data:'id=10&name=sakura&view=12',
                 data:{
-                    "id":10,
-                    "name": "kobo",
+                    "id":205,
+                    "name": "百鬼铃木",
                     "view":19
                 },
-                // params:{
-                //     id:1
-                // },
-                timeout: 1000
+                params:{
+                    id:1
+                },
+                headers:{
+                    t1:1,
+                    t2:2
+                },
+                timeout: 3000
             })
             .then(val => {
                 console.log('成功：', val);

@@ -11,7 +11,7 @@
 
     <script type="module">
         // 引入 axios 模块
-        import axios from './axios.js';
+        import axios from './axios_bak.js';
 
         // 获取元素
         const btns = document.querySelectorAll('button');  
@@ -26,9 +26,10 @@
         const cancelToken = new axios.CancelToken(resolve=> {
             cancel = resolve;
         });
-
+        
         // 点击发送请求
         btns[0].onclick = () => {
+            console.log();
             axios({
                 method: 'get',
                 url: '/hololive/1',
@@ -41,6 +42,7 @@
                 console.log('失败：', err);
                 console.log(axios.isCancel(err))
             })
+            
         };
 
         // 点击取消请求

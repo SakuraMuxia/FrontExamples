@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+
+</head>
+
+<body>
+    <button>点击发送请求</button>
+    <button>删除拦截器</button>
+    <script type="module">
+        // 引入 axios 模块
+        import axios from './axios.js';
+
+        const btns = document.querySelectorAll('button');
+        // 设置全局配置项
+        axios.defaults.baseURL = 'http://127.0.0.1:8080';
+
+        /*
+            promise对象
+            .then(请求拦截器成功2, 请求拦截器失败2)
+            .then(请求拦截器成功1, 请求拦截器成功2)
+            .then(发ajax请求)
+            .then(响应拦截器1)
+            .then(响应拦截器2)
+            .then(获取响应结果)
+        
+        */
+        
+        // 添加请求拦截器1
+        const r1 = axios.interceptors.request.use(config => {
+            console.log('成功拦截请求1');
+            return config;
+        }, err => {
+            console.log('请求拦截失败1', err)
+        });
+     
+        // 添加请求拦截器2
+        const r2 = axios.interceptors.request.use(config => {
+            console.log('成功拦截请求2');
+            return config;
+            // return 100;
+            // return new Promise((res, rej) => {rej('失败！！！')})
+        },err => {
+            console.log('请求拦截失败2')
+        });
+
+        // 添加响应拦截器1
+        axios.interceptors.response.use(res => {
+            console.log('成功拦截响应1');
+            return res;
+        });
+
+        // 添加响应拦截器2
+        axios.interceptors.response.use(res => {
+            console.log('成功拦截响应2');
+            return res;
+        }, err => {
+            console.log('响应拦截失败1');
+
+        });
+
+        console.log(axios.interceptors.response.handlers);
+  
+        // 点击发送请求
+        btns[0].onclick = () => {
+            axios.get('/hololive/1')
+            .then(val => {
+                console.log('GET请求成功：', val);
+            })
+            .catch(err => {
+                console.log('GET请求失败：', err);
+            })
+        };
+
+
+        // 点击取消请求
+        btns[1].onclick = () => {
+          
+        }
+
+
+    </script>
+</body>
+
+</html>

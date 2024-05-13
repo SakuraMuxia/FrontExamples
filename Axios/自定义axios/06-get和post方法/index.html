@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <button>点击发送GET请求</button>
+    <button>点击发送POST请求</button>
+    <script type="module">
+        // 引入 axios 模块
+        import axios from './axios.js';
+
+        const btns = document.querySelectorAll('button');
+
+        // 设置全局配置项
+        axios.defaults.baseURL = 'http://127.0.0.1:8080';
+
+
+        // 点击发送GET请求
+        btns[0].onclick = () => {
+            axios.get('/hololive/1')
+            .then(val => {
+                console.log('GET请求成功：', val);
+            })
+            .catch(err => {
+                console.log('GET请求失败：', err);
+            })
+        };
+
+
+        // 点击发送POST请求
+        btns[1].onclick = () => {
+            axios.post('/hololive', {id:208,name:'陶玲茵茵',age:20}, {})
+            .then(val => {
+                console.log('POST请求成功：', val);
+            })
+            .catch(err => {
+                console.log('POST请求失败：', err);
+            })
+        }
+
+
+    </script>
+</body>
+
+</html>
