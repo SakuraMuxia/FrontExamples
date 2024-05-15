@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "start": "npx webpack ./src/app.js --output-path dist --output-filename index.js --mode development",
+    "build": "npx webpack ./src/app.js --output-path dist --output-filename index.js --mode production"
+  },
+  "devDependencies": {
+    "webpack-cli": "^5.1.4"
+  }
+}

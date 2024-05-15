@@ -1,0 +1,39 @@
+@len: 1000px;
+@color: #f90;
+
+.box {
+    width: @len;
+    height: (@len/5);
+    background: @color;
+    padding: 20px;
+    font-family: FZSJ;
+}
+
+@font-face {
+    font-family: "FZSJ";
+    src: url("../fonts/FZSJ-WSMQSJW.woff2") format("woff2"),
+        url("../fonts/FZSJ-WSMQSJW.woff") format("woff"),
+        url("../fonts/FZSJ-WSMQSJW.ttf") format("truetype"),
+        url("../fonts/FZSJ-WSMQSJW.eot") format("embedded-opentype"),
+        url("../fonts/FZSJ-WSMQSJW.svg") format("svg");
+    font-weight: normal;
+    font-style: normal;
+}
+
+p {
+    width: 400px;
+    height: 200px;
+}
+
+.p1 {
+    background: url(../images/bg01.jpg?name=sky)
+}
+
+.p2 {
+    background: url(../images/bg02.jpg)
+}
+
+.p3 {
+    background: url(../images/bg03.webp)
+}
+
