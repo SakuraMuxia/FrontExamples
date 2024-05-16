@@ -1,242 +1,144 @@
-<div class="wrapper">
 
-  <!-- 顶部导航 -->
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-    <!-- Left navbar links -->
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-      </li>
-    </ul>
-    <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-          <button type="button" class="btn btn-block btn-danger btn-sm">退出登陆</button>
-        </a>
-      </li>
-    </ul>
-  </nav>
-
-
-  <!-- 侧边栏 -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-      <img src="img/logo.png" alt="广告管理LOGO" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">硅谷后台管理系统</span>
-    </a>
-
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="info">
-          <a href="#" class="d-block">欢迎您：xxxxx</a>
+<div id="__sub-route-view">
+  <div class="card">
+    <div class="card-header">
+      <button type="button" id="addAdvBtn" class="btn btn-primary" data-toggle="modal"
+        data-target="#advModal">添加广告</button>
+      <div class="card-tools">
+        <div class="input-group input-group-md">
+          <input type="text" class="form-control" id="keyword" placeholder="搜索关键字">
+          <div class="input-group-append">
+            <div class="btn btn-primary" id="searchAdv">
+              <i class="fas fa-search"></i>
+            </div>
+          </div>
         </div>
       </div>
+    </div>
+    <!-- /.card-header -->
+    <div id="advTable" class="card-body">
+      <table id="" class="table table-bordered">
+        <thead>
+          <tr>
+            <th>id</th>
+            <th>标题</th>
+            <th>图片</th>
+            <th>类别</th>
+            <th>链接</th>
+            <th>排序</th>
+            <th>添加时间</th>
+            <th>修改时间</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
 
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- 菜单列表 -->
-          <li class="nav-item menu-open">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>控制台</p>
-            </a>
+          <tr>
+
+            <td>648d1fcd73eabdb6ee308067</td>
+            <td>小米13广告</td>
+            <td><img height="80" src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-shopapi-pms/pms_1698304477.56836008.png"
+                alt=""></td>
+            <td>轮播图</td>
+            <td>http://learn.fuming.site</td>
+            <td>1</td>
+            <td>2023-06-17 10:51:57</td>
+            <td>2023-06-17 10:51:57</td>
+            <td>
+              <button type="button" class="btn btn-danger btn-sm">删除</button>
+              <button type="button" data-id="648d1fcd73eabdb6ee308067"
+                class="btn btn-success btn-sm btn-edit">修改</button>
+            </td>
+          </tr>
+
+
+
+
+        </tbody>
+      </table>
+
+      <!-- /.card-body -->
+      <div class="card-footer clearfix" id="pageDiv">
+        <ul class="pagination pagination-sm m-0 float-right">
+          <li class="page-item"><a href="javascript:;" data-i="0" class="page-link">«</a></li>
+
+          <li class="page-item active">
+            <a class="page-link" data-i="1" href="javascript:;">1</a>
           </li>
-          <li class="nav-item menu-open">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-user"></i>
-              <p>管理员列表页</p>
-            </a>
-          </li>
-          <li class="nav-item menu-open">
-            <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-audio-description"></i>
-              <p>广告管理列表</p>
-            </a>
-          </li>
+
+
+          <li class="page-item"><a href="javascript:;" data-i="2" class="page-link">»</a></li>
         </ul>
-      </nav>
-      <!-- /.sidebar-menu -->
+      </div>
     </div>
-    <!-- /.sidebar -->
-  </aside>
-
-  <!-- 主要内容 -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0">页面标题</h1>
-          </div>
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
-
-    <!-- Main content -->
-    <div class="content">
-      <div class="container-fluid">
-        <div id="__sub-route-view">
-          <div class="card">
-            <div class="card-header">
-              <button type="button" id="addAdvBtn" class="btn btn-primary" data-toggle="modal"
-                data-target="#advModal">添加广告</button>
-              <div class="card-tools">
-                <div class="input-group input-group-md">
-                  <input type="text" class="form-control" id="keyword" placeholder="搜索关键字">
-                  <div class="input-group-append">
-                    <div class="btn btn-primary" id="searchAdv">
-                      <i class="fas fa-search"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- /.card-header -->
-            <div id="advTable" class="card-body">
-              <table id="" class="table table-bordered">
-                <thead>
-                  <tr>
-                    <th>id</th>
-                    <th>标题</th>
-                    <th>图片</th>
-                    <th>类别</th>
-                    <th>链接</th>
-                    <th>排序</th>
-                    <th>添加时间</th>
-                    <th>修改时间</th>
-                    <th>操作</th>
-                  </tr>
-                </thead>
-                <tbody>
-
-                  <tr>
-
-                    <td>648d1fcd73eabdb6ee308067</td>
-                    <td>小米13广告</td>
-                    <td><img height="80" src="http://api.fuming.site:54254/2023/06/17/db0e9ef8b55471c83cbcbcc01.jpg"
-                        alt=""></td>
-                    <td>轮播图</td>
-                    <td>http://learn.fuming.site</td>
-                    <td>1</td>
-                    <td>2023-06-17 10:51:57</td>
-                    <td>2023-06-17 10:51:57</td>
-                    <td>
-                      <button type="button" class="btn btn-danger btn-sm">删除</button>
-                      <button type="button" data-id="648d1fcd73eabdb6ee308067"
-                        class="btn btn-success btn-sm btn-edit">修改</button>
-                    </td>
-                  </tr>
-
-
-
-
-                </tbody>
-              </table>
-
-              <!-- /.card-body -->
-              <div class="card-footer clearfix" id="pageDiv">
-                <ul class="pagination pagination-sm m-0 float-right">
-                  <li class="page-item"><a href="javascript:;" data-i="0" class="page-link">«</a></li>
-
-                  <li class="page-item active">
-                    <a class="page-link" data-i="1" href="javascript:;">1</a>
-                  </li>
-
-
-                  <li class="page-item"><a href="javascript:;" data-i="2" class="page-link">»</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <div class="modal fade show" id="advModal" style="padding-right: 17px;" aria-modal="true"
-            role="dialog">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h4 class="modal-title">添加广告</h4>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                  </button>
-                </div>
-                <form name="addAdvForm" class="form-horizontal" id="addAdvForm">
-                  <div class="card-body">
-                    <div class="form-group row">
-                      <label class="col-sm-2 col-form-label" for="advTitle">标题：</label>
-                      <div class="col-sm-10">
-                        <input id="advTitle" name="" type="text" class="form-control" placeholder="请输入广告标题">
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label class="col-sm-2 col-form-label" for="advType">类别:</label>
-                      <div class="col-sm-10">
-                        <select name="" id="advType" class="form-control">
-                          <option value="1">轮播图广告</option>
-                          <option value="2">轮播图底部广告</option>
-                          <option value="3">热门回收广告</option>
-                          <option value="4">优品精选广告</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label class="col-sm-2 col-form-label" for="advHref">链接：</label>
-                      <div class="col-sm-10">
-                        <input id="advHref" name="" type="text" class="form-control" placeholder="请输入广告链接">
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label class="col-sm-2 col-form-label" for="orderNum">排序：</label>
-                      <div class="col-sm-10">
-                        <input id="orderNum" name="" type="text" class="form-control"
-                          placeholder="请输入广告排序，数字越大越靠前">
-                      </div>
-                    </div>
-
-
-                    <div class="form-group row">
-                      <label class="col-sm-2 col-form-label" for="advPic">图片：</label>
-                      <div class="col-sm-10 custom-file">
-                        <!--  可以选择多个文件上传                          -->
-                        <!--                            <input multiple type="file" class="form-control" name="advPic" id="advPic">-->
-                        <!--  可以选择一个文件上传                          -->
-                        <input type="file" class="form-control" name="advPic" id="advPic">
-                      </div>
-                    </div>
-                    <div>
-                      <img style="display: none;" id="preImg" height="100">
-                    </div>
-
-                  </div>
-                </form>
-                <div class="modal-footer justify-content-between">
-                  <button type="button" class="btn btn-default" id="adv-cancel" data-dismiss="modal">取消</button>
-                  <button type="submit" class="btn btn-primary" id="adv-save" form="addAdvForm">提交</button>
-                </div>
-              </div>
-              <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content -->
   </div>
 
-  <!-- Main Footer -->
-  <footer class="main-footer">
-    <!-- To the right -->
-    <div class="float-right d-none d-sm-inline">
-      Anything you want
+  <div class="modal fade show" id="advModal" style="padding-right: 17px;" aria-modal="true"
+    role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">添加广告</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <form name="addAdvForm" class="form-horizontal" id="addAdvForm">
+          <div class="card-body">
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label" for="advTitle">标题：</label>
+              <div class="col-sm-10">
+                <input id="advTitle" name="" type="text" class="form-control" placeholder="请输入广告标题">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label" for="advType">类别:</label>
+              <div class="col-sm-10">
+                <select name="" id="advType" class="form-control">
+                  <option value="1">轮播图广告</option>
+                  <option value="2">轮播图底部广告</option>
+                  <option value="3">热门回收广告</option>
+                  <option value="4">优品精选广告</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label" for="advHref">链接：</label>
+              <div class="col-sm-10">
+                <input id="advHref" name="" type="text" class="form-control" placeholder="请输入广告链接">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label" for="orderNum">排序：</label>
+              <div class="col-sm-10">
+                <input id="orderNum" name="" type="text" class="form-control"
+                  placeholder="请输入广告排序，数字越大越靠前">
+              </div>
+            </div>
+
+
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label" for="advPic">图片：</label>
+              <div class="col-sm-10 custom-file">
+                <!--  可以选择多个文件上传                          -->
+                <!--                            <input multiple type="file" class="form-control" name="advPic" id="advPic">-->
+                <!--  可以选择一个文件上传                          -->
+                <input type="file" class="form-control" name="advPic" id="advPic">
+              </div>
+            </div>
+            <div>
+              <img style="display: none;" id="preImg" height="100">
+            </div>
+
+          </div>
+        </form>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-default" id="adv-cancel" data-dismiss="modal">取消</button>
+          <button type="submit" class="btn btn-primary" id="adv-save" form="addAdvForm">提交</button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
     </div>
-    <!-- Default to the left -->
-    <strong>Copyright © 2023-2024 <a href="http://learn.fuming.site">尚硅谷</a>.</strong> All rights reserved.
-  </footer>
+    <!-- /.modal-dialog -->
+  </div>
 </div>

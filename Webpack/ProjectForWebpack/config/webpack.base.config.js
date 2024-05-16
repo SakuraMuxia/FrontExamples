@@ -67,5 +67,15 @@ module.exports = {
                 },
             ],
         }),
-    ]
+
+    ],
+    // 解析
+    resolve: {
+        // 设置可以省略的扩展名
+        extensions: ['.js', '.json', '.ejs'],
+        // 设置路径别名
+        alias: {
+            '@': path.resolve(__dirname, '../src')
+        }
+    }
 }
