@@ -8,3 +8,5 @@ mongoDB/**/node_modules/
 Ajax/**/node_modules/
 Webpack/**/node_modules/
 Webpack/**/dist/
+Webpack/ProjectBack/_git/
+Webpack/ProjectBack/node_modules/

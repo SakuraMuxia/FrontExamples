@@ -31,7 +31,16 @@ module.exports = {
                     // 自定义定界符 替代 <%= %>  原样显示 
                     //evaluate : '\\[\\[(.+?)\\]\\]'
                 }
+            },
+            {
+                test: /\.less$/,
+                use: ['style-loader', 'css-loader', 'less-loader']
+            },
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
             }
+
         ]
     },
     // 插件

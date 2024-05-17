@@ -1,6 +1,7 @@
 
 <div id="__sub-route-view">
   <div class="card">
+
     <div class="card-header">
       <button type="button" id="addAdvBtn" class="btn btn-primary" data-toggle="modal"
         data-target="#advModal">添加广告</button>
@@ -15,8 +16,9 @@
         </div>
       </div>
     </div>
+
     <!-- /.card-header -->
-    <div id="advTable" class="card-body">
+    <div id="advTable" class="card-body table-responsive">
       <table id="" class="table table-bordered">
         <thead>
           <tr>
@@ -56,21 +58,18 @@
 
         </tbody>
       </table>
+    </div>
 
-      <!-- /.card-body -->
-      <div class="card-footer clearfix" id="pageDiv">
+    <!-- /.card-body -->
+    <div class="card-footer clearfix" id="pageDiv">
         <ul class="pagination pagination-sm m-0 float-right">
           <li class="page-item"><a href="javascript:;" data-i="0" class="page-link">«</a></li>
-
           <li class="page-item active">
             <a class="page-link" data-i="1" href="javascript:;">1</a>
           </li>
-
-
           <li class="page-item"><a href="javascript:;" data-i="2" class="page-link">»</a></li>
         </ul>
       </div>
-    </div>
   </div>
 
   <div class="modal fade show" id="advModal" style="padding-right: 17px;" aria-modal="true"

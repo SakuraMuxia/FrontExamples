@@ -11,14 +11,20 @@
   "license": "ISC",
   "devDependencies": {
     "copy-webpack-plugin": "^12.0.2",
+    "css-loader": "^7.1.1",
     "ejs-loader": "^0.5.0",
     "html-webpack-plugin": "^5.6.0",
+    "less": "^4.2.0",
+    "less-loader": "^12.2.0",
+    "style-loader": "^4.0.0",
     "webpack": "^5.91.0",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.0.4",
     "webpack-merge": "^5.10.0"
   },
   "dependencies": {
-    "sme-router": "^0.12.8"
+    "axios": "^1.6.8",
+    "sme-router": "^0.12.8",
+    "toastr": "^2.1.4"
   }
 }
