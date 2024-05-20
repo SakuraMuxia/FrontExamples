@@ -16,3 +16,8 @@ export const getAdv = (pageNo, pageSize, keyword) => {
         }
     })
 }
+// 根据id获取广告信息
+export const getAdvById = id => {
+    return advServer.get('/adv/'+id);
+}
+

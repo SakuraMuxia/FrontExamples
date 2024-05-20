@@ -3,7 +3,7 @@ import toastr from 'toastr';
 // 导入组件
 import AdvTableComponent from '../components/AdvTable';
 // 导入api函数
-import {postAdv,getAdv} from '../api/adv';
+import {postAdv,getAdv,getAdvById} from '../api/adv';
 
 // 创建变量 记录预览图元素
 let preImgEle;
@@ -42,6 +42,45 @@ const setPageExec = event => {
         getAdvExec(event.target.dataset.i);
     }
 }
+
+// 打开添加广告的模态框
+const openAddModalExec = () => {
+    // 清空表单
+    document.addAdvForm.reset();
+    // 隐藏预览图
+    preImgEle.style.display = 'none';
+    // 修改标题
+    document.querySelector('#advModal .modal-title').innerHTML = '添加广告';
+    // 打开模态框
+    $('#advModal').modal('show');
+}
+
+// 打开修改广告的模态框 获取当前广告的详细信息，
+const openEditModalExec = async event => {
+    // 判断点击是修改按钮
+    if (event.target.classList.contains('btn-edit')) {
+        // 获取该条广告的信息
+        const {data} = await getAdvById(event.target.dataset.id);
+
+        // 将广告信息显示在表单里，作为表单控件的默认值
+        document.addAdvForm.advTitle.value = data.advTitle;
+        document.addAdvForm.advType.value = data.advType;
+        document.addAdvForm.advHref.value = data.advHref;
+        document.addAdvForm.orderNum.value = data.orderNum;
+        // 显示预览图
+        preImgEle.style.display = 'block';
+        preImgEle.src = '/api/' + data.advPic;
+        // 修改模态框标题
+        document.querySelector('#advModal .modal-title').innerHTML = '修改广告';
+
+        // 打开模态框
+        $('#advModal').modal('show');
+    }   
+
+  
+
+}
+
 
 // 执行图片预览
 const prevImgExec = function() {
@@ -112,6 +151,12 @@ export default (req, res) => {
     document.querySelector('#searchAdvBtn').addEventListener('click', () => {
         getAdvExec();
     });
+
+    // 点击添加广告的按钮
+    document.querySelector('#addAdvBtn').addEventListener('click', openAddModalExec);
+
+    // 点击表格中的修改按钮 事件委托
+    document.querySelector('#advTable').addEventListener('click', openEditModalExec);
 
     // 获取预览图元素
     preImgEle = document.querySelector('#preImg');
