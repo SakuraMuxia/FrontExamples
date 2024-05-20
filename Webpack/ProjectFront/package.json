@@ -25,6 +25,7 @@
   "dependencies": {
     "axios": "^1.6.8",
     "sme-router": "^0.12.8",
+    "sweetalert2": "^11.11.0",
     "toastr": "^2.1.4"
   }
 }

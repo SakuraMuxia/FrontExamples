@@ -1,143 +1,90 @@
-
 <div id="__sub-route-view">
-  <div class="card">
-
-    <div class="card-header">
-      <button type="button" id="addAdvBtn" class="btn btn-primary" data-toggle="modal"
-        data-target="#advModal">添加广告</button>
-      <div class="card-tools">
-        <div class="input-group input-group-md">
-          <input type="text" class="form-control" id="keyword" placeholder="搜索关键字">
-          <div class="input-group-append">
-            <div class="btn btn-primary" id="searchAdv">
-              <i class="fas fa-search"></i>
+    <div class="card">
+        <div class="card-header">
+            <button type="button" id="addAdvBtn" class="btn btn-primary" data-toggle="modal"
+                data-target="#advModal">添加广告</button>
+            <div class="card-tools">
+                <div class="input-group input-group-md">
+                    <input type="text" class="form-control" id="keyword" placeholder="搜索关键字">
+                    <div class="input-group-append">
+                        <div class="btn btn-primary" id="searchAdvBtn">
+                            <i class="fas fa-search"></i>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
+        
+        <div id="advTable"></div>
+
+        
     </div>
 
-    <!-- /.card-header -->
-    <div id="advTable" class="card-body table-responsive">
-      <table id="" class="table table-bordered">
-        <thead>
-          <tr>
-            <th>id</th>
-            <th>标题</th>
-            <th>图片</th>
-            <th>类别</th>
-            <th>链接</th>
-            <th>排序</th>
-            <th>添加时间</th>
-            <th>修改时间</th>
-            <th>操作</th>
-          </tr>
-        </thead>
-        <tbody>
+    <div class="modal fade show" id="advModal" style="padding-right: 17px;" aria-modal="true" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">添加广告</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <form name="addAdvForm" class="form-horizontal" id="addAdvForm">
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="advTitle">标题：</label>
+                            <div class="col-sm-10">
+                                <input id="advTitle" name="advTitle" type="text" class="form-control" placeholder="请输入广告标题">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="advType">类别:</label>
+                            <div class="col-sm-10">
+                                <select name="advType" id="advType" class="form-control">
+                                    <option value="1">轮播图广告</option>
+                                    <option value="2">轮播图底部广告</option>
+                                    <option value="3">热门回收广告</option>
+                                    <option value="4">优品精选广告</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="advHref">链接：</label>
+                            <div class="col-sm-10">
+                                <input id="advHref" name="advHref" type="text" class="form-control" placeholder="请输入广告链接">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="orderNum">排序：</label>
+                            <div class="col-sm-10">
+                                <input id="orderNum" name="orderNum" type="text" class="form-control"
+                                    placeholder="请输入广告排序，数字越大越靠前">
+                            </div>
+                        </div>
 
-          <tr>
 
-            <td>648d1fcd73eabdb6ee308067</td>
-            <td>小米13广告</td>
-            <td><img height="80" src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-shopapi-pms/pms_1698304477.56836008.png"
-                alt=""></td>
-            <td>轮播图</td>
-            <td>http://learn.fuming.site</td>
-            <td>1</td>
-            <td>2023-06-17 10:51:57</td>
-            <td>2023-06-17 10:51:57</td>
-            <td>
-              <button type="button" class="btn btn-danger btn-sm">删除</button>
-              <button type="button" data-id="648d1fcd73eabdb6ee308067"
-                class="btn btn-success btn-sm btn-edit">修改</button>
-            </td>
-          </tr>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="advPic">图片：</label>
+                            <div class="col-sm-10 custom-file">
+                                <!--  可以选择多个文件上传                          -->
+                                <!--  <input multiple type="file" class="form-control" name="advPic" id="advPic">-->
+                                <!--  可以选择一个文件上传                          -->
+                                <input type="file" class="form-control" name="advPic" id="advPic">
+                            </div>
+                        </div>
+                        <div>
+                            <img style="display: none;" id="preImg" height="100">
+                        </div>
 
-
-
-
-        </tbody>
-      </table>
-    </div>
-
-    <!-- /.card-body -->
-    <div class="card-footer clearfix" id="pageDiv">
-        <ul class="pagination pagination-sm m-0 float-right">
-          <li class="page-item"><a href="javascript:;" data-i="0" class="page-link">«</a></li>
-          <li class="page-item active">
-            <a class="page-link" data-i="1" href="javascript:;">1</a>
-          </li>
-          <li class="page-item"><a href="javascript:;" data-i="2" class="page-link">»</a></li>
-        </ul>
-      </div>
-  </div>
-
-  <div class="modal fade show" id="advModal" style="padding-right: 17px;" aria-modal="true"
-    role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">添加广告</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
+                    </div>
+                </form>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" id="adv-cancel" data-dismiss="modal">取消</button>
+                    <button type="submit" class="btn btn-primary" id="adv-save" form="addAdvForm">提交</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
         </div>
-        <form name="addAdvForm" class="form-horizontal" id="addAdvForm">
-          <div class="card-body">
-            <div class="form-group row">
-              <label class="col-sm-2 col-form-label" for="advTitle">标题：</label>
-              <div class="col-sm-10">
-                <input id="advTitle" name="" type="text" class="form-control" placeholder="请输入广告标题">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-2 col-form-label" for="advType">类别:</label>
-              <div class="col-sm-10">
-                <select name="" id="advType" class="form-control">
-                  <option value="1">轮播图广告</option>
-                  <option value="2">轮播图底部广告</option>
-                  <option value="3">热门回收广告</option>
-                  <option value="4">优品精选广告</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-2 col-form-label" for="advHref">链接：</label>
-              <div class="col-sm-10">
-                <input id="advHref" name="" type="text" class="form-control" placeholder="请输入广告链接">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-2 col-form-label" for="orderNum">排序：</label>
-              <div class="col-sm-10">
-                <input id="orderNum" name="" type="text" class="form-control"
-                  placeholder="请输入广告排序，数字越大越靠前">
-              </div>
-            </div>
-
-
-            <div class="form-group row">
-              <label class="col-sm-2 col-form-label" for="advPic">图片：</label>
-              <div class="col-sm-10 custom-file">
-                <!--  可以选择多个文件上传                          -->
-                <!--                            <input multiple type="file" class="form-control" name="advPic" id="advPic">-->
-                <!--  可以选择一个文件上传                          -->
-                <input type="file" class="form-control" name="advPic" id="advPic">
-              </div>
-            </div>
-            <div>
-              <img style="display: none;" id="preImg" height="100">
-            </div>
-
-          </div>
-        </form>
-        <div class="modal-footer justify-content-between">
-          <button type="button" class="btn btn-default" id="adv-cancel" data-dismiss="modal">取消</button>
-          <button type="submit" class="btn btn-primary" id="adv-save" form="addAdvForm">提交</button>
-        </div>
-      </div>
-      <!-- /.modal-content -->
+        <!-- /.modal-dialog -->
     </div>
-    <!-- /.modal-dialog -->
-  </div>
 </div>

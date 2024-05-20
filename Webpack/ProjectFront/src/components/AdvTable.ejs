@@ -1,0 +1,52 @@
+<div class="card-body table-responsive">
+    <table id="" class="table table-bordered">
+        <thead>
+            <tr>
+                <th>标题</th>
+                <th>图片</th>
+                <th>类别</th>
+                <th>链接</th>
+                <th>排序</th>
+                <th>添加时间</th>
+                <th>修改时间</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% data.advList.forEach(advItem => { %>
+                <tr>
+                    <td><%= advItem.advTitle %></td>
+                    <td><img height="80" src="/api/<%= advItem.advPic %>" alt="">
+                    </td>
+                    <td><%= data.advTypeDes[advItem.advType] %></td>
+                    <td><%= advItem.advHref %></td>
+                    <td><%= advItem.orderNum %></td>
+                    <td><%= advItem.addTime %></td>
+                    <td><%= advItem.upTime %></td>
+                    <td>
+                        <button type="button" class="btn btn-danger btn-sm">删除</button>
+                        <button type="button" data-id="<%= advItem._id %>" class="btn btn-success btn-sm btn-edit">修改</button>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>
+<div class="card-footer clearfix" id="pageDiv">
+    <ul class="pagination pagination-sm m-0 float-right">
+        <li class="page-item"><a href="javascript:;" data-i="<%= data.pageNo - 1 %>" class="page-link">«</a></li>
+
+        <!-- <li class="page-item active">
+            <a class="page-link" data-i="1" href="javascript:;">1</a>
+        </li> -->
+
+        <% for (let i = 1; i <= data.pageSum; i ++) { %> 
+            <li class="page-item <%= data.pageNo === i ? 'active' : '' %>">
+                <a class="page-link" data-i="<%= i %>" href="javascript:;"><%= i %></a>
+            </li>
+        <% } %>
+
+
+        <li class="page-item"><a href="javascript:;" data-i="<%= data.pageNo + 1 %>" class="page-link">»</a></li>
+    </ul>
+</div>

@@ -17,6 +17,7 @@ import routes from '@/routes';
 // 这里使用 req.url 方法得到路由，使用结构赋值简写为{url}
 export default ({url}, res, next) => {
     // res.render(indexV({title:'Shirly', message:'锄禾日当午'}));
+    // next函数可以 让二级路由的页面内容 呈现该该路由页面内容的内部
     next(indexV({
         // 页头组件
         Header:HeaderComponent(),
@@ -36,4 +37,12 @@ export default ({url}, res, next) => {
             subRouteContent: res.subRoute()
         }),
     }));
+
+    // 点击退出登录按钮
+    document.querySelector('#logoutBtn').addEventListener('click', () => {
+        // 清空 localStorage
+        localStorage.clear();
+        // 跳转到登录页面
+        router.go('/login');
+    })
 }

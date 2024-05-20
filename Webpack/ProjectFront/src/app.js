@@ -13,6 +13,12 @@ import './assets/less/app.less'
 
 const router = new SMERouter('app',"html5");
 
+// 如果没有登录 跳转到登录页
+if (!localStorage.getItem('adminName')) {
+    router.go('/login');
+}
+
+
 // 遍历路由配置 设置路由
 routes.forEach(routeItem => {
     router.route(routeItem.path,routeItem.element)
