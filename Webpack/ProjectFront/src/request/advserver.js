@@ -5,7 +5,7 @@ import toastr from 'toastr';
 
 // 创建 axios 实例
 const advServer = axios.create({
-    baseURL: '/api',
+    baseURL: SERVICE_URL,
     timeout: 5000
 })
 

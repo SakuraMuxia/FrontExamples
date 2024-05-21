@@ -21,3 +21,7 @@ export const getAdvById = id => {
     return advServer.get('/adv/'+id);
 }
 
+// 修改广告
+export const putAdv = formdata => {
+    return advServer.put('/adv', formdata);
+}

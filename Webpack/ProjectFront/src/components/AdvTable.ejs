@@ -16,8 +16,7 @@
             <% data.advList.forEach(advItem => { %>
                 <tr>
                     <td><%= advItem.advTitle %></td>
-                    <td><img height="80" src="/api/<%= advItem.advPic %>" alt="">
-                    </td>
+                    <td><img height="80" src="<%= SERVICE_URL + '/' + advItem.advPic %>" alt=""></td>
                     <td><%= data.advTypeDes[advItem.advType] %></td>
                     <td><%= advItem.advHref %></td>
                     <td><%= advItem.orderNum %></td>

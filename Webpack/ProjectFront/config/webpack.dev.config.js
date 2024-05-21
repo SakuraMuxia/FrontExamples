@@ -1,11 +1,20 @@
 const {merge} = require('webpack-merge');
 const baseConfig = require('./webpack.base.config');
-
+const webpack = require('webpack');
 module.exports = merge(baseConfig, {
 
     // 模式
     mode: 'development',
 
+    // sourceMap
+    devtool:'cheap-module-source-map',
+    // 插件
+    plugins: [
+        new webpack.DefinePlugin({
+            // SERVICE_URL: 全局变量 "/api" ，后边的默认是代码片段 /api 会执行，然后报错，经过stringify处理会转为 字符串，
+            SERVICE_URL: JSON.stringify('/api')
+        })
+    ],
     // 自动开启服务
     devServer: {
         host: '127.0.0.7',
