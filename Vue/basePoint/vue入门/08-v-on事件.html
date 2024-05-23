@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <!-- 原生行内式事件监听的this指向是window -->
+    <button onclick="fn1()">原生 JS submit 监听</button>
+    <hr>
+    <div id="app">
+        <!-- Vue v-on事件监听的this是Vue实例 -->
+        <button v-on:click = "num++">Vue JS submit 监听1</button>
+        <button v-on:click = "fn2">Vue JS submit 监听2</button>
+        <button v-on:click = "fn2()">Vue JS submit 监听3</button>
+        <!-- Vue v-bind绑定函数 -->
+        <button v-bind="fn3()">Vue JS submit 4</button>
+    </div>
+    
+
+
+    <script>
+        // 原生行内式JS监听
+        function fn1(){
+            console.log("原生事件监听 this指向",this);  // 指向window
+        }
+
+        // 创建Vue实例
+        new Vue({
+            el: "#app",
+            data:{
+                userName:"Hanser",
+                num:1
+            },
+        
+            methods:{
+                fn2(){
+                    console.log("Vue v-on事件监听 this指向",this);  // 指向Vue实例
+                },
+                fn3(){
+                    console.log("Vue v-bind事件监听 this指向",this);  // 指向Vue实例
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

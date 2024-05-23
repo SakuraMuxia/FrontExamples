@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 阻止默认行为 -->
+        <form v-on:submit="submitHandler">
+            <p>用户名：<input v-model="userName" type="text"></p>
+            <!-- 设置初始值 使用修饰符number sex的值为2，代表女 -->
+            <p>性别：
+                <input v-model.number="sex" name="sex" type="radio" value="1">男
+                <input v-model.number="sex" name="sex" type="radio" value="2">女
+            </p>
+            <!-- 设置初始值 使用修饰符number city的值为2，代表上海 -->
+            <p>城市：
+                <select v-model.number="city">
+                    <option value="1">北京</option>
+                    <option value="2">上海</option>
+                    <option value="3">深圳</option>
+                </select>
+            </p>
+            <p>爱好：
+                <input v-model.number="hobby" type="checkbox" value="1">学习
+                <input v-model.number="hobby" type="checkbox" value="2">睡觉
+                <input v-model.number="hobby" type="checkbox" value="3">吃饭
+            </p>
+            <button>提交</button>
+	    </form>
+    </div>
+    
+
+    
+</body>
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            userName:"Hanser",
+            sex:2,
+            city:2,
+            hobby:[1,2]
+        },
+        methods:{
+            // 阻止默认行为
+            submitHandler(e){
+                e.preventDefault();
+                // 获取表单数据
+                console.log("用户名",this.userName);
+				console.log("城市",this.city);
+				console.log("性别",this.sex);
+				console.log("爱好",this.hobby,this.hobby.length);
+            }
+        }
+    })
+</script>
+</html>
