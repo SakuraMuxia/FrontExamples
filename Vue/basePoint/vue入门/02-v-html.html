@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+		<h3>v-text</h3>
+		<p v-text="userName">{{str}}</p>
+		<p v-text='userName'>{{str}}</p>
+		<p v-text=userName>{{str}}</p>
+		<p v-text=`userName`>{{str}}</p>
+	</div>
+
+    <script>
+        new Vue({
+            el:root,
+            data:{
+                str:"Hanser is my angle",
+                userName:"MinatoAqua is my wife"
+            }
+        })
+    </script>
+</body>
+</html>

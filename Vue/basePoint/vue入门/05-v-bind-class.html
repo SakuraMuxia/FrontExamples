@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./js/vue.js"></script>
+    <style>
+        .bg{
+        background:rgb(110, 110, 91);
+        }
+        .cl{
+            color:rgb(213, 183, 183);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="root">
+        <!-- 绑定值为一个字符串	-->
+        <p class="bg">1</p>
+        <p class="cl">2</p>
+        <p class="bg cl">3</p>
+        <p :class="'bg cl'">4</p>
+        <p :class="one">5</p>
+        <!-- 绑定值为一个对象：常用	-->
+        <!-- class绑定的值可以是对象，对象的属性名即是样式类的名字，值是布尔。如果为true类生效，否则无效	-->
+        <p :class="{bg:false,cl:true}">6</p>
+        <!-- 绑定值为一个数组	-->
+        <p :class="['bg','cl']">7</p>
+    </div>
+
+    <script>
+        new Vue({
+            el:"#root",
+            data:{
+                one:'bg cl'
+            }
+        })      
+    </script>
+</body>
+</html>

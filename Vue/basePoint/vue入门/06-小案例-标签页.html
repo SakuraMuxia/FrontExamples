@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+    <style>
+        #root button {
+			padding: 10px;
+            width: 80px;
+            height: 40px;
+            font-size: 16px;
+            color: #ccc;
+		}
+		
+		#root button.active {
+			background: rgb(38, 39, 24);
+		}
+		
+		#root div {
+			width: 600px;
+			height: 300px;
+			border: 1px solid #ccc;
+		}
+
+    </style>
+</head>
+<body>
+
+    <div id="root">
+        <!-- 选项卡头 -->
+        <button @click="index=newsIndex" :class="{active:index===newsIndex}" :key="newsItem.id" v-for="(newsItem,newsIndex) in newsLists">{{newsItem.typeName}}</button>
+        <!-- 选项卡内容 -->
+        <div v-show="index===newsIndex" v-for="(newsItem,newsIndex) in newsLists" >
+            <!-- 遍历每个分类下的新闻 -->
+            <p v-for="news in newsItem.items" :key="news.id" >
+                <a :href="news.newsHref" target="_blank" >新闻标题:{{news.newsTitle}}</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        new Vue({
+            el:"#root",
+            data:{
+                index:0,
+                newsLists:[
+                    {
+                        id:1,
+                        typeName:"体育",
+                        items:[
+                            {
+                                id:11,
+                                newsTitle:"Hanser",
+                                newsHref:"https://yuluochenxiao.top"
+                            },
+                            {
+                                id:12,
+                                newsTitle:"Reine",
+                                newsHref:"https://yuluochenxiao.top"
+                            }
+                        ]
+                    },
+                    {
+                        id:2,
+                        typeName:"娱乐",
+                        items:[
+                            {
+                                id:21,
+                                newsTitle:"Aqua",
+                                newsHref:"https://yuluochenxiao.top"
+                            },
+                            {
+                                id:22,
+                                newsTitle:"sakuraMiko",
+                                newsHref:"https://yuluochenxiao.top"
+                            }
+                        ]
+                    },
+                    {
+                        id:3,
+                        typeName:"财经",
+                        items:[
+                            {
+                                id:31,
+                                newsTitle:"Fubuki",
+                                newsHref:"https://yuluochenxiao.top"
+                            },
+                            {
+                                id:32,
+                                newsTitle:"雨落辰潇",
+                                newsHref:"https://yuluochenxiao.top"
+                            }
+                        ]
+                    }
+                ]
+            }
+	    })
+    </script>
+</div>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <p>{{isShow}}</p>
+        <p>{{isShow && "你好&&"}}</p>
+        <p>{{isShow || "你好||"}}</p>
+        <!-- 三元表达式	-->
+        <p>{{sex===1?"男":"女"}}</p>
+        <p>{{fn()}}</p>
+        <!--多条件1-->
+        <p>{{getAgeStr()}}</p>
+        <!--多条件2-使用指令-->
+        <p v-if="age>80">老年</p>
+        <p v-else-if="age>40">中年</p>
+        <p v-else-if="age>28">壮年</p>
+        <p v-else-if="age>18">青年</p>
+        <p v-else-if="age>12">少年</p>
+        <p v-else-if="age>6">儿童</p>
+        <p v-else>婴儿</p>
+        
+        <hr/>
+        <template v-if="isLogin">您好，欢迎您的到来！</template>
+        <template v-else>
+            <input type="text" placeholder="请输入管理员账号">
+            <input type="text" placeholder="请输入管理员密码">
+        </template> 
+    </div>  
+
+    <script>
+        new Vue({
+            el:"#root",
+            data:{
+                isShow:false,
+                sex:1,
+                age:100,
+                isLogin:false
+            },
+            methods:{
+                fn(){
+                    return this.sex===1?"男":"女"
+                },
+                getAgeStr(){
+                    if(this.age>80) return "老年";
+                    if(this.age>40) return "中年"
+                    if(this.age>28) return "壮年"
+                    if(this.age>18) return "青年"
+                    if(this.age>12) return "少年"
+                    if(this.age>6) return "儿童"
+                    return "婴儿"
+                }
+            }
+        })
+    </script>
+</body>
+</html>

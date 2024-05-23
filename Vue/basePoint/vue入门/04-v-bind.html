@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+
+    <div id="root">
+        <!-- 未使用style指令 默认 -->
+        <p style="background:yellow;color:red;">1</p>
+        <!-- 使用style指令  绑定值是一个字符串-->
+        <p :style="'background:yellow;color:red;'">2</p>
+        <!-- 使用style指令  绑定值是一个字符串-->
+        <p :style='"background:yellow;color:red;"'>3</p>
+        <!-- 使用style指令  绑定值是一个字符串-->
+        <p :style ="one">4</p>
+
+        <!-- 使用style指令  绑定值是一个对象-->
+        <p :style="{background:'green',color:'pink'}">5</p>
+        <p :style="two">6</p>
+        <!-- 使用style指令  绑定值是一个数组-->
+        <p :style="[{background:'yellow'},{color:'red'}]">7</p>
+        <p :style="[bg,cl]">8</p>
+    </div>
+
+    <script>
+        new Vue({
+            el:"#root",
+            data:{
+                one:"background:yellow;color:red;",
+                two:{background:'green',color:'pink'},
+                bg:{
+                    background:"yellow"
+                },
+                cl:{
+                    color:"red"
+                }
+            }
+        })      
+    </script>
+</body>
+</html>
