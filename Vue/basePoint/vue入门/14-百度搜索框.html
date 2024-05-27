@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>雨落辰潇-度</title>
+    <script src="./js/vue.js"></script>
+    <style>
+        p{
+			border:1px solid #ccc;
+		}
+        input{
+            width: 300px;
+            height: 30px;
+            outline: none;
+            border: 1px solid #ccc;
+            background-color: #f2f2f2;
+            color: #333;
+            border-radius: 4px;
+            box-shadow: 2px,2px,4px,rgba(0, 0, 0, 0.1);
+        }
+        input::placeholder{
+            color:#999;
+            font-style: italic;
+        }
+        button{
+            margin-left: 10px;
+            height: 30px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-shadow: 2px,2px,4px,rgba(0, 0, 0, 0.1);
+        }
+        ul{
+            list-style: none;
+            display: block;
+            border: 1px solid #ccc;
+            width: 310px;
+            padding: 0;
+            margin: 0;
+        }
+
+        li{
+            list-style-type: none;
+            margin-top: 5px;
+            display: block;
+        }
+        li.active{
+            color: skyblue;
+        }
+        li:hover{
+            color: skyblue;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="app">
+        <form action="https://www.baidu.com/s?" name="searchForm">
+            <input @focus="isRender=true" @blur="blurDelay" v-model.trim = "keyword" @keyup.38="changeActiveIndex" @keyup.40="changeActiveIndex" @input="search" autocomplete="off" type="text" name="wd">
+            <button>百度</button>
+        </form>
+        
+        <ul v-show="isRender">
+            <li @mouseenter= "mouseEnter" @click="mouseClick(index)" :key="item.sa" v-for="(item,index) in g" :class="activeAdd(index)">{{item.q}}</li>
+        </ul>
+
+    </div>
+</body>
+<script type="module">
+    // 导入 封装的 jsonp
+    import jsonp from "./js/jsonp.js";
+    
+    // 使用vue
+    new Vue({
+        el:"#app",
+        data:{
+            g:[],       // 存放后台发来的数据
+            keyword:"", //提示关键词 String
+            q:"",   // 暂存input输入的内容
+            isRender:true, // 默认不渲染提示框
+            activeIndex:-1, // 键盘选中的下标,默认为-1
+            classActiveSymbol:""
+        },
+        methods:{
+            // mouseEnter
+            mouseEnter(){
+                // console.log('鼠标进入了');
+                this.activeIndex = -1;
+            },
+            // 设置Acitve状态
+            activeAdd(index){
+                return this.classActiveSymbol = this.activeIndex === index ? 'active' : '';
+            },
+            // 鼠标单机回调函数
+            mouseClick(index){
+                // 可以使用Vue中的ref替代
+                // 提示框内容显示到input输入框 设置input表单的value
+                document.querySelector("input").value = this.g[index].q;
+                // 提交表单内的所有数据 是 input输入框 设置name，然后修改value，点击提交 发送请求
+                document.searchForm.submit();
+            },
+            // 键盘选择条目 提交回调函数        
+            changeActiveIndex(e){
+                switch(e.keyCode){
+                    case 38:{
+                        this.activeIndex--;
+                        if(this.activeIndex<-1){
+                            this.activeIndex = this.g.length-1;
+                        }
+                        this.isDefault();
+                        break;
+                    }
+                    case 40:{
+                        this.activeIndex++;
+                        
+                        if(this.activeIndex>this.g.length-1){
+                            this.activeIndex=-1;
+                        }
+                        this.isDefault();
+                    }
+                }
+			},
+            // 隐藏提示框 点击之后再隐藏 异步
+            blurDelay(){
+                // 设置500ms后才隐藏
+                setTimeout(()=>{
+                    this.isRender=false;
+                },200)
+            },
+            // 重置为-1 显示原输入内容
+            isDefault(){
+                // 如果选中的activeIndex的值为-1，那么将this.q作为文本框的内容
+				if(this.activeIndex === -1){
+                    this.keyword = this.q;
+                }else{
+                    // 如果选中的activeIndex不是-1，那么将 this.g[this.activeIndex].q作为文本框的内容
+                    this.keyword = this.g[this.activeIndex].q;
+                }
+            },
+            
+            // 搜索回调函数
+            search(e){
+                // 先清空上一次定时器
+                if(this.timeId){
+                    clearTimeout(this.timeId);
+                }
+                // 开启新的定时器
+                this.timeId = setTimeout(()=>{
+                    jsonp("https://www.baidu.com/sugrec",{
+                        params:{
+                            prod:"pc",
+                            wd:this.keyword,
+                        },
+                        // 与服务端约定好的查询字符串名字，用于传递函数名
+                        callback:"cb"
+                    }).then((data)=>{
+                        // 获取提示框内的数据
+                        this.g = data.g;
+                        // 把input输入的内容先保存起来
+                        this.q = data.q;
+                    })
+                },1000)
+            }
+        }
+    })
+</script>
+</html>

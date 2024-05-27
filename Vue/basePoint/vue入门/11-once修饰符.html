@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <!-- once修饰符 -->
+    <div id="app">
+        <form action="https://www.baidu.com/s">
+            <input type="text" name="wd">
+            <button @click.once="search">搜索</button>
+	    </form>
+    </div>
+</body>
+<script>
+    new Vue({
+		el:"#app",
+		methods:{
+			search(e){
+				e.preventDefault();
+				console.log("success");
+			}
+		}
+	})
+</script>
+</html>

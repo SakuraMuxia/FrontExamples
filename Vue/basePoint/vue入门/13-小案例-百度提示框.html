@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>雨落辰潇-度</title>
+    <script src="./js/vue.js"></script>
+    <style>
+        p{
+			border:1px solid #ccc;
+		}
+        input{
+            outline: none;
+            border: 1px solid #ccc;
+            background-color: #f2f2f2;
+            color: #333;
+            border-radius: 4px;
+            box-shadow: 2px,2px,4px,rgba(0, 0, 0, 0.1);
+        }
+        input::placeholder{
+            color:#999;
+            font-style: italic;
+        }
+        button{
+            height: auto;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-shadow: 2px,2px,4px,rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <form action="https://www.baidu.com/s">
+            <input @input="search" autocomplete="off" type="text" name="wd">
+            
+        </form>
+    </div>
+    <!-- 百度按钮 -->
+    <button>百度</button>
+    <!-- 京东按钮 -->
+    <button>京东</button>
+</body>
+<script type="module">
+    // 导入 封装的 jsonp
+    import jsonp from "./js/jsonp.js";
+    // 获取按钮
+    const btns = document.querySelectorAll("button");
+    // 监听事件
+    btns[0].onclick = function(){
+        jsonp("https://www.baidu.com/sugrec",{
+            params:{
+                prod:"pc",
+                wd:"三国",
+                
+            },
+            // 与服务端约定好的查询字符串名字，用于传递函数名
+            callback:"cb"
+        }).then((data)=>{
+            console.log("success",data);
+        })
+    }
+    btns[1].onclick = function(){
+        jsonp("https://dd-search.jd.com/",{
+            params:{
+                key:"绿联",
+                terminal:"pc"
+                
+            },
+            callback:"callback"
+        }).then((data)=>{
+            console.log("success",data);
+        })
+    }
+
+
+    // 使用vue
+    // new Vue({
+    //     el:"#app",
+    //     data:{
+
+    //     },
+    //     methods:{
+    //         search(e){
+    //             const wd = e.target.value.trim();
+    //             jsonp("https://www.baidu.com/sugrec",{
+    //                 params:{
+    //                     prod:"pc",
+    //                     wd:this.value,
+    //                 },
+    //                 // 与服务端约定好的查询字符串名字，用于传递函数名
+    //                 callback:"cb"
+    //             }).then((data)=>{
+    //                 console.log("success",data);
+    //             })
+    //         }
+    //     }
+    // })
+</script>
+</html>

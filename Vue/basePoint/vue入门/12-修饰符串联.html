@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>百度</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <!-- once修饰符 -->
+    <div id="app">
+        <form @click="fun" action="https://www.baidu.com/s">
+            <input type="text" name="wd">
+            <button @click.prevent.stop.once="search">搜索</button>
+	    </form>
+    </div>
+</body>
+<script>
+    // 修饰符串联：可以同时使用多个修饰符
+	new Vue({
+		el:"#app",
+		methods:{
+			fun(){
+				console.log("fun");
+			},
+			search(e){
+				console.log("success");
+			}
+		}
+	})
+</script>
+</html>

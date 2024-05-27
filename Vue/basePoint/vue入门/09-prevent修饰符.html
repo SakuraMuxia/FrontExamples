@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./js/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <a @click.prevent="fn" href="http://www.baidu.com">百度</a>
+        <hr/>
+        <form action="https://www.baidu.com/s" target="_blank">
+            <input name="wd" type="text">
+            <button @click.prevent="fn2">搜索</button>
+        </form>
+        <hr/>
+        <div @contextmenu.prevent="fn3" :style="{width:'100px',height:'100px',background:'pink'}">大家好！</div>
+    </div>
+</body>
+<script>
+    new Vue({
+		el:"#app",
+		methods:{
+			fn(e){
+				// e.preventDefault();
+				console.log(e.target.innerText);
+			},
+			fn2(e){
+				// e.preventDefault();
+				console.log(e.target.innerText);
+			},
+			fn3(e){
+				// e.preventDefault();
+				console.log("fn3",e.target.innerText);
+			}
+		}
+	})
+</script>
+</html>
