@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div v-for="item in goodsList" :key="item.id">
+            <p>商品名字：{{item.goodsName}}</p>
+            <p>商品价格：{{item.goodsPrice | currency}}</p>
+            <p>上架时间：{{item.addTime | modifyDate}}</p>
+            <hr/>
+        </div>
+    </div>
+    <div id="root">
+        <div v-for="item in newsList">
+            <p>新闻名字：{{item.newsTitle}}</p>
+            <p>新闻时间：{{item.newsTime | modifyDate}}</p>
+        </div>
+    </div> 
+    
+</body>
+<script type="module">
+	import filters from "./js/vue-filters.js";
+
+    // 遍历filters对象
+	for(let fun in filters){
+        // 把filters对象中的方法定义为全局过滤器
+		Vue.filter(fun,filters[fun])
+	}
+	
+	new Vue({
+        el:"#app",
+        data:{
+            goodsList:[
+                {
+                    id:1,
+                    goodsName:"MacBook",
+                    goodsPrice:6549.001,
+                    addTime:Date.now()
+                },
+                {
+                    id:2,
+                    goodsName:"Nas",
+                    goodsPrice: 1200.002,
+                    addTime: Date.now() - 99898989
+                },
+                {
+                    id:3,
+                    goodsName:"Iphone",
+                    goodsPrice: 5600.003,
+                    addTime: Date.now() 
+                },
+            ]
+        },
+        filters: {
+
+            // 对价格进行4舍5入
+            modifyPrice(data,sliceNum){
+                return data.slice(0,sliceNum);
+            }
+        }
+    })      
+    
+    new Vue({
+        el:"#root",
+        data:{
+            newsList:[
+                {
+                    id:1,
+                    newsTitle:"新闻一号",
+                    newsTime:Date.now()
+                },
+                {
+                    id:2,
+                    newsTitle:"新闻二号",
+                    newsTime:Date.now()
+                }
+            ]
+        }
+    })
+</script>
+</html>

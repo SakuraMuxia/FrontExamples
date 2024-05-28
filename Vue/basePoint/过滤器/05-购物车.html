@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <h3>商品列表</h3>
+    <div v-for="item in goodsList" :key="item.id">
+		<p>商品名称：{{item.goodsName}}</p>
+		<p>商品价格：{{item.goodsPrice | currency}}</p>
+		<p>库存数量：{{item.storeNum}}</p>
+		<p>上架时间：{{item.addTime | modifyDate}}</p>
+		<button @click="joinCar(item.id)">加入购物车</button>
+        
+	</div>
+    <hr>
+
+    <h3>购物车列表</h3>
+    <template v-if="cartList.length===0">
+		<h3>购物车空空如也！</h3>
+	</template>
+    <template v-else>
+        <div v-for="item in cartList">
+            <p>商品名称：{{item.goodsName}}</p>
+            <p>商品价格：{{item.goodsPrice | currency}}</p>
+            <p>购买数量：
+                <button @click="joinCar(item.id,false)">-</button>
+                {{item.buyNum}}
+                <button @click="joinCar(item.id)">+</button>
+            </p>
+            <p>小计：{{(item.buyNum * item.goodsPrice) | currency}}</p>
+            <!-- <button @click="delcartInfoById(item.id)">删除</button> -->
+        </div>
+        <!-- <button @click="clearCar">清空购物车</button> -->
+        <!-- <h5>合计：{{priceSum | currency}}</h5> -->
+    </template>
+</div>
+    
+
+</body>
+<script type="module">
+    import filters from "./js/vue-shopping-cart.js"
+    // 遍历filters对象，并将添加到全局过滤器
+    for(let filter in filters){
+        Vue.filter(filter,filters[filter])
+    }
+
+    // 商品信息
+    new Vue({
+        el:"#app",
+        data:{
+            // 商品列表
+			goodsList: [
+				{
+					id: 1,
+					goodsName: "手机",
+					goodsPrice: 4500,
+					storeNum: 10,
+					addTime: new Date().getTime()
+				}, 
+                {
+					id: 2,
+					goodsName: "笔记本",
+					goodsPrice: 8000,
+					storeNum: 20,
+					addTime: Date.now() - 9999999999
+				}
+			],
+            // 购物车列表
+			cartList: []
+        },
+        methods:{
+            // 加入购物车
+            joinCar(id,isJoin=true){
+                // 如果点击的是+
+                if (isJoin) {
+                    // 根据ID找到商品
+					const goodsobj = this.goodsList.find(v => v.id === id); // 返回满足条件的第一个元素
+                    // console.log(goodsobj); // 返回的是一个对象
+                    // 判断商品的库存是否充足
+					if (goodsobj.storeNum < 1) {
+						// 不充足--提示库存不足
+						alert("库存不足");
+						return;
+					}else{
+                        // // 充足--将该商品放置购物车
+                        // 判断购物车中是否存在商品
+                        const cartInfo = this.cartList.find(v => v.id === id);
+                        if(cartInfo){
+                            // 有该商品- 将购买的数量加1
+						    cartInfo.buyNum++;
+                        }else{
+                            // 无该商品- 为购物车增加该商品，购买数量初始值为1
+                            this.cartList = [
+                                {
+                                    id,
+                                    goodsName: goodsobj.goodsName,
+                                    goodsPrice: goodsobj.goodsPrice,
+                                    buyNum: 1,// 购买数量
+                                },
+                                ...this.cartList,
+						    ]
+                        }
+                        // 商品库存减1
+					    goodsobj.storeNum--;
+                    }
+
+                }else{
+                    // 点击的是-
+                    // 判断购物车中是否存在商品
+                    const cartInfo = this.cartList.find(v => v.id === id);
+                    const goodsobj = this.goodsList.find(v => v.id === id);
+                    // 让购物车中的购买数量减1
+					cartInfo.buyNum--;
+                    goodsobj.storeNum++;
+                    // 判断减1之后，购买数量是否为0，如果为0，在购物车清除该商品，使用 数组的 filter方法，把相反的留下来，相等的去除
+                    if (cartInfo.buyNum < 1) {
+						this.cartList = this.cartList.filter(v => v.id !== id);
+					}
+                }
+            }
+        }
+    })
+
+</script>
+</html>

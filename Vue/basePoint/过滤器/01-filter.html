@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+
+    <div id="root">
+        <div v-for="item in goodsList" :key="item.id">
+            <p>商品名称: {{item.goodsName}}</p>
+            <p>商品价格: {{item.goodsPrice | currency}}</p>
+            <p>上架时间: {{item.addTime | modifyDate}}</p>
+		    <hr/>
+	    </div>
+    </div>
+
+    <script>
+        new Vue({
+            el:"#root",
+            data:{
+                goodsList:[
+                    {
+                        id:1,
+                        goodsName:"MacBook",
+                        goodsPrice:6549,
+                        addTime:Date.now()
+                    },
+                    {
+                        id:2,
+                        goodsName:"Nas",
+                        goodsPrice: 1200,
+                        addTime: Date.now()
+                    },
+                    {
+                        id:3,
+                        goodsName:"Iphone",
+                        goodsPrice: 5600,
+                        addTime: Date.now()
+                    },
+                ]
+		    },
+            filters: {
+                // 未简写
+                currency:function(data){
+                    return "￥"+data.toFixed(2);
+                },
+                // 简写
+                modifyDate(date){
+                    // 实例化日期对象
+                    const d = new Date(date);
+                    // 返回
+                    return  d.getFullYear() + "-" + 
+                            (d.getMonth()+1).toString().padStart(2,0) + "-" +
+                            d.getDate().toString().padStart(2,0)+" "+
+                            d.getHours().toString().padStart(2,0)+":"+
+                            d.getMinutes().toString().padStart(2,0)+":"+
+						    d.getSeconds().toString().padStart(2,0);
+                }
+            }
+        })      
+    </script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+
+    <div id="root">
+        <div v-for="item in goodsList" :key="item.id">
+            <p>商品名称: {{item.goodsName}}</p>
+            <p>商品价格: {{item.goodsPrice | currency}}</p>
+            <p>上架时间: {{item.addTime | modifyDate}}</p>
+		    <hr/>
+	    </div>
+    </div>
+
+    <div id="root1">
+        <div v-for="item in newsList">
+            <p>新闻名字：{{item.newsTitle}}</p>
+            <p>新闻时间：{{item.newsTime | modifyDate}}</p>
+        </div>
+    </div>  
+    <script>
+        // 定义全局过滤器
+        Vue.filter("currency",function(data){
+            return "￥"+ data;
+        }),
+        //  全局过滤器 处理日期格式
+        Vue.filter("modifyDate",function(date){
+            // 实例化日期对象
+            const d = new Date(date);
+            // 返回
+            return  d.getFullYear() + "-" + 
+                    (d.getMonth()+1).toString().padStart(2,0) + "-" +
+                    d.getDate().toString().padStart(2,0)+" "+
+                    d.getHours().toString().padStart(2,0)+":"+
+                    d.getMinutes().toString().padStart(2,0)+":"+
+                    d.getSeconds().toString().padStart(2,0);
+        })
+        new Vue({
+            el:"#root",
+            data:{
+                goodsList:[
+                    {
+                        id:1,
+                        goodsName:"MacBook",
+                        goodsPrice:6549.001,
+                        addTime:Date.now()
+                    },
+                    {
+                        id:2,
+                        goodsName:"Nas",
+                        goodsPrice: 1200.002,
+                        addTime: Date.now()
+                    },
+                    {
+                        id:3,
+                        goodsName:"Iphone",
+                        goodsPrice: 5600.003,
+                        addTime: Date.now()
+                    },
+                ]
+		    },
+            filters: {
+
+                // 对价格进行4舍5入
+                modifyPrice(data,sliceNum){
+                    return data.slice(0,sliceNum);
+                }
+            }
+        })      
+    
+        new Vue({
+            el:"#root1",
+            data:{
+                newsList:[
+                    {
+                        id:1,
+                        newsTitle:"新闻一号",
+                        newsTime:Date.now()
+                    },
+                    {
+                        id:2,
+                        newsTitle:"新闻二号",
+                        newsTime:Date.now()
+                    }
+                ]
+            }
+	    })
+    </script>
+</body>
+</html>
