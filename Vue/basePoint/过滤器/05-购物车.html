@@ -32,10 +32,10 @@
                 <button @click="joinCar(item.id)">+</button>
             </p>
             <p>小计：{{(item.buyNum * item.goodsPrice) | currency}}</p>
-            <!-- <button @click="delcartInfoById(item.id)">删除</button> -->
+            <button @click="delCartInfoById(item.id)">从购物车移除该商品</button>
         </div>
-        <!-- <button @click="clearCar">清空购物车</button> -->
-        <!-- <h5>合计：{{priceSum | currency}}</h5> -->
+        <button @click="clearCar">清空购物车</button>
+        <h5>合计：{{priceSum | currency}}</h5>
     </template>
 </div>
     
@@ -121,6 +121,37 @@
 						this.cartList = this.cartList.filter(v => v.id !== id);
 					}
                 }
+            },
+            // 从购物车移除商品
+            delCartInfoById(id){
+                // 根据ID找到商品信息
+                const goodsInfo = this.goodsList.find(v => v.id === id);
+                if(window.confirm("您确定要删除 "+goodsInfo.goodsName+" 商品吗？")){
+                    // 根据ID找到购物车信息
+					const cartInfo = this.cartList.find(v => v.id === id);
+                    // 商品信息中的库存加上购物车中购买的数量
+					goodsInfo.storeNum += cartInfo.buyNum;
+                    // 删除
+                    this.cartList = this.cartList.filter(v=>v.id !== id);
+                }
+            },
+            // 清空购物车
+            clearCar(){
+                if(window.confirm("您确定要清空购物车吗")){
+					this.cartList.forEach(cartInfo=>{
+						const goodsInfo = this.goodsList.find( v=> v.id === cartInfo.id);
+						goodsInfo.storeNum+=cartInfo.buyNum;
+					})
+					this.cartList = [];
+				}
+            }
+        },
+        computed:{
+            priceSum(){
+                const sum = this.cartList.reduce(function(prev,item){
+                    return prev + item.buyNum*item.goodsPrice;
+                },0)
+                return sum;
             }
         }
     })
