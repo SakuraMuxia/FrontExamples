@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        降水倒为找已迷历六是谭迷力是爱，秦失越。
+        <component-a>{{a}}</component-a>
+    </div>
+</body>
+
+<script type="module">
+
+    // 定义组件A 
+    var ComponentA = {
+        data:{
+            Hanser:445,
+        },
+        template:`
+            <div>
+                <h3>{{Hanser}}</h3>
+            </div>
+        `
+    }
+    // 一旦指定了模板，那么会将模板的内容替换掉el所指定的挂载元素。
+	new Vue({
+        el:'#app',
+        data:{
+            a:445,
+            b:778
+        },
+        methods:{
+
+        },
+        filters:{
+
+        },
+        computed:{
+
+        },
+        // 定义组件
+        components:{
+            'component-a':ComponentA,
+        }
+        
+    })
+</script>
+</html>

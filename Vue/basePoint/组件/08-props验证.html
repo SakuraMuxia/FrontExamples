@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="./js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <span>aqua的体重是:{{aquaWeight}}</span>
+
+    <rushia
+    :rushia-height = "rushiaHeight"
+    ></rushia>
+
+    <!-- 子组件中的属性名 = "父实例中的data属性名" -->
+	<hanser 
+    :hanser-info="hanserInfo"
+    :hanser-image="hanserImage"
+    ></hanser>
+</div>
+</body>
+<script type="module">
+    // 全局组件
+    const vc = Vue.component("hanser",{
+        // 验证props的属性名
+        props:{
+            // 验证是一个对象,并设置默认值
+            hanserInfo:{
+                type:Object,
+            },
+            // 设置默认值
+            hanserImage:{
+                type:Object,
+                default(){
+                    return{
+                        first:"白百合",
+                        second:"白色小礼服"
+                    }
+                }
+            }
+        },
+        // hanser标签模版
+        // 模版中使用属性名就相当于使用父实例的data属性
+        template:(`
+                <div>
+                    <span>Hanser酱的身高是:{{hanserInfo.height}}</span> <br>
+                    <span>Hanser酱的星座是:{{hanserInfo.constellation}}</span> <br>
+                    <span>Hanser酱的生日是:{{hanserInfo.brithDay}}</span> <br>
+                    <span>Hanser酱的形象是:{{hanserImage.first}}</span> <br>
+                </div>
+        `),
+        methods:{
+            fun2(){
+                
+            },
+        },        
+    })
+
+    // 全局组件2
+    const vc2 = Vue.component("rushia",{
+        // 验证props的属性名
+        props:{
+            // 验证属性名是否是一个Number类型
+            rushiaHeight:{
+                type:String,
+                required:true
+            }
+            
+        },
+        template:(`
+                <div>
+                    <span>Rushia的身高是:{{rushiaHeight}}</span> <br>
+                </div>
+        `),       
+    })
+
+    
+    // 创建Vue实例vm
+	const vm = new Vue({
+		el:'#app',
+        data:{
+            aquaWeight:44.5,
+            
+            hanserInfo:{
+                height:"155.5cm",
+                brithDay:"05-15",
+                constellation:"金牛座",
+            },
+
+            hanserImage:{
+                first:"古装憨",
+                second:"毛毛雨"
+            },
+            rushiaHeight:"143cm"
+        },
+        methods:{
+            fun(){
+                
+            },
+        },
+        
+	})
+    
+</script>
+</html>

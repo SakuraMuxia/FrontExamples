@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="./js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <span>aqua的体重是:{{aquaWeight}}</span>
+
+    <!-- 子组件中的属性名 = "父实例中的data属性名" -->
+	<hanser 
+    :hanser-info="hanserInfo" 
+    ></hanser>
+
+</div>
+
+</body>
+<script type="module">
+    // 全局组件
+    const vc = Vue.component("hanser",{
+        // 自定义子组件标签中的属性名(JS中使用小驼峰，HTML中使用小写- ) 
+        props:['hanserInfo'],
+        // hanser标签模版
+        // 模版中使用属性名就相当于使用父实例的data属性
+        template:(`
+                <div>
+                    <span>Hanser的体重是:{{hanserInfo.hanserWeight1}}</span> <br>
+                    <span>Hanser的密码是:{{hanserInfo.hanserPassword1}}</span>  <br>
+                    <span>Hanser的性别是:{{hanserInfo.hanserSex}}</span>  <br>
+                </div>
+        `),
+        methods:{
+            fun2(){
+                
+            },
+        },        
+    })
+    
+    // 创建Vue实例vm
+	const vm = new Vue({
+		el:'#app',
+        data:{
+            aquaWeight:44.5,
+            hanserInfo:{
+                hanserWeight1:47.4,
+                hanserPassword1:"123123",
+                hanserSex:"女"
+            }
+            
+        },
+        methods:{
+            fun(){
+                
+            },
+        },
+        
+	})
+    
+</script>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        降水倒为找已迷历六是谭迷力是爱，秦失越。
+        <h3>{{Hanser}}</h3>
+        <h3>{{yousa}}</h3>
+    </div>
+</body>
+<!-- 使用template模版 -->
+<script type="x/template" id="tp">
+    <div>
+        <h3>template-script</h3>
+        <p>{{a}}</p>
+        <p>{{b}}</p>
+    </div>
+</script>
+
+
+<script type="module">
+    // 一旦指定了模板，那么会将模板的内容替换掉el所指定的挂载元素。
+	new Vue({
+        el:'#app',
+        data:{
+            a:445,
+            b:778
+        },
+        methods:{
+
+        },
+        filters:{
+
+        },
+        computed:{
+
+        },
+        // 指定id为tp的script标签包裹的内容为模板的内容
+        template:'#tp'
+    })
+</script>
+</html>

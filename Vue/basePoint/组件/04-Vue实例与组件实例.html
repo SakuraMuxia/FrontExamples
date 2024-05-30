@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="./js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+	<button @click="fun">Click vm</button>
+	<hanser></hanser>
+</div>
+
+</body>
+<script type="module">
+    // 给Vue.prototype设置属性useName 
+    Vue.prototype.$useName = "zhangsan";
+    // 创建Vue实例vm
+	const vm = new Vue({
+		el:'#app',
+        methods:{
+            fun(){
+                console.log(this === vm);// true this是通过Vue构造函数 实例化出来的 vm
+                console.log(this.__proto__ === Vue.prototype);// true
+                console.log(vm.__proto__ === Vue.prototype);// true
+                console.log(this.$useName)  // zhangsan
+                console.log(this.__proto__.$useName)    // zhangsan
+            },
+        },
+        components:{
+            // Hanser组件
+            Hanser:{
+                // Vue.prototype对象中有什么属性，那么组件的实例vc就拥有什么属性
+                // 组件中的vc实例在Vue.prototype的原型链上
+                template:(`
+                        <button @click="fun2">Click Hanser</button>
+                `),
+                methods:{
+                    fun2(){
+                        console.log(this); // this是通过VueComponent工厂函数 实例化出来的 vc 
+                        console.log(this.__proto__);    //Vue的实例 
+                        console.log(this.__proto__ === vm);    // false 组件中vc.__proto__与 vm 不是同一个对象
+                        console.log(this.__proto__.__proto__ === Vue.prototype);    //true => 组件中的实例在Vue.prototype的原型链上
+                        console.log(this.$useName)      // zhangsan
+                        console.log(this.__proto__.__proto__.$useName) // zhangsan
+                    },
+                },
+            },
+            
+        }
+	})
+</script>
+</html>

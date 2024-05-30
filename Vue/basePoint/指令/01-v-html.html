@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h3>v-html</h3>
+        <p v-html="userName">{{str}}</p>
+        <p v-html='userName'>{{str}}</p>
+        <p v-html=userName>{{str}}</p>
+        <p v-html=`userName`>{{str}}</p>
+        <template v-html="userName">123</template>
+    </div>
+</body>
+<script type="module">
+    new Vue({
+        el:"#root",
+        data:{
+            str:"我是一个字符串",
+            userName:"zhangsan"
+        }
+    })
+</script>
+</html>
