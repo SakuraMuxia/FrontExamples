@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="./js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+	<h3>原生事件绑定到组件</h3>
+	<base-input v-on:focus.native="onFocus"></base-input>
+	
+</div>
+</body>
+<script type="module">
+	
+    Vue.component('base-input', {
+        inheritAttrs: false,
+        props: ['label', 'value'],
+        computed: {
+            inputListeners: function () {
+            var vm = this
+            // `Object.assign` 将所有的对象合并为一个新对象
+            return Object.assign({},
+                // 我们从父级添加所有的监听器
+                this.$listeners,
+                // 然后我们添加自定义监听器，
+                // 或覆写一些监听器的行为
+                {
+                // 这里确保组件配合 `v-model` 的工作
+                    input: function (event) {
+                        vm.$emit('input', event.target.value)
+                    }
+                }
+            )
+        }
+    },
+    template: `
+        <label>
+        {{ label }}
+        <input
+            v-bind="$attrs"
+            v-bind:value="value"
+            v-on="inputListeners"
+        >
+        </label>
+    `
+    })
+
+	// 定义Vue实例
+    new Vue({
+		el:"#app",
+		data:{
+			num:1,
+            lovingVue:false
+		},
+		methods:{
+			changeNum(num){
+				this.num += num;
+			},
+		},
+	})
+</script>
+</html>

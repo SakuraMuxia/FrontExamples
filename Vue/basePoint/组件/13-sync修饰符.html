@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="./js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+	<h3>sync修饰符</h3>
+	<reine v-bind:doc.sync="doc"></reine>
+</div>
+    <!-- <button @click="this.$emit('update:title','目前')">文章标题:{{doc.title}}</button> $emit('update:doc','') -->
+</body>
+<script type="module">
+	
+    Vue.component('reine', {
+
+        props:['doc'],
+        methods:{
+            docMult:function(){
+                const newTitle = '目前在虚研科技旗下成立“兰音工作室”，以虚拟音乐人的身份活动';
+                this.doc.title = newTitle;
+                console.log(this.doc.title)
+            },
+            eventFunc(){
+                const obj = {
+                    title:"目前在虚研科技旗下成立“兰音工作室”，以虚拟音乐人的身份活动",
+                };
+                this.$emit('update:doc',obj)
+            }
+        },
+        template:`
+            <div>
+                <span @click="eventFunc">文章标题:{{doc.title}}</span>
+            </div>
+        `,
+
+    })
+
+	// 定义Vue实例
+    new Vue({
+		el:"#app",
+		data:{
+            doc:{
+                title:'兰音是一名于2021年1月2日开始活动的音乐系虚拟UP主，前虚研社二期生，',
+            }
+            
+		},
+		
+	})
+</script>
+</html>
