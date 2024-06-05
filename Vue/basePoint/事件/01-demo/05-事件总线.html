@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <button @click="fn">FatherBtn</button>
+        <hanser ></hanser>
+    </div>
+</body>
+
+<script type="module">
+    // 在Vue的原型上设置一个全局属性 .$bus
+    Vue.prototype.$bus = new Vue();
+    Vue.component("hanser",{
+        data(){
+            return{
+                num:1
+            }
+        },
+        template:(`
+            <button @click="Hanser">hanserBtn</button>
+        `),  
+        methods:{
+            Hanser(){
+                console.log('子组件中的this',this); // VueComponent的实例;$bus属性在 VueComponent.__proto__.prototype原型上
+                // 子组件设置触发事件 Aqua，并传值
+                this.$bus.$emit("Aqua","mooooooooo~");
+            },
+        },      
+    })
+    new Vue({
+        el:'#app',
+        data:{
+            age:12
+        },
+        methods:{
+            fn(){
+                // 父组件设置触发事件 Aqua，并传值
+                this.$bus.$emit('Aqua',"neeeeeeeee~");
+            },
+        },
+        mounted(){
+            console.log("父组件中的this",this); // Vue的实例;$bus属性在 Vue.prototype上
+            this.$bus.$on('Aqua',function(str){
+                console.log('Aqua',str)
+            })
+        }
+    })
+    
+</script>
+
+</html>

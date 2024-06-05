@@ -1,0 +1,50 @@
+1- 添加微博
+地址：http://127.0.0.1:8090/weibo
+请求方式：post    application/json
+参数：
+    {
+        content:微博内容
+    }
+返回结果：
+    {
+        ok:1,// 1-成功，-1失败
+        msg:说明
+    }
+
+2- 获取微博
+地址：http://127.0.0.1:8090/weibo/{pageNo}?pageSize=xxx
+请求方式：get
+参数：
+   pageNo:页码
+   pageSize:每页显示的条数
+返回结果：
+    {
+        ok:1,// 1-成功，-1失败
+        contentList:微博列表
+        pageSum:总页数
+        pageNo:当前页
+        msg:说明
+    }
+
+3- 删除微博
+地址：http://127.0.0.1:8090/weibo/{id}
+请求方式：delete
+参数：
+   id:唯一标识
+返回结果：
+    {
+        ok:1,// 1-成功，-1失败
+        msg:说明
+    }
+
+4- 修改微博
+地址：http://127.0.0.1:8090/weibo/{id}/{type}
+请求方式：put
+参数：
+   id:唯一标识
+   type:1 顶  2踩
+返回结果：
+    {
+        ok:1,// 1-成功，-1失败
+        msg:说明
+    }

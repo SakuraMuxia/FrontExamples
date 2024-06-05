@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <hanser ></hanser>
+    </div>
+</body>
+
+<script type="module">
+
+    Vue.component("hanser",{
+        data(){
+            return{
+                num:1
+            }
+        },
+        template:(`
+            <button @click="my">ClickMe</button>
+        `),
+        methods:{
+            my(){
+                this.$emit("Aqua",5,"142cm")
+            },
+        },
+        mounted(){
+            console.log(this);
+            const _this = this; // this指向VueComponent的实例
+            this.$on('Aqua',function(age,height){
+                console.log('Aqua',age,height,this===_this)
+                this.$off('Aqua');
+            })
+            this.$once('Aqua',(age,height)=>{
+                console.log('Aqua',age,height,this) // this指向VueComponent的实例
+            })
+        }
+    })
+    new Vue({
+        el:'#app',
+        data:{
+            age:12
+        },
+        methods:{
+            fn(){
+                this.$refs.hanserRef.num++;
+                console.log(this); // vm.$ref() 返回{hanserRef:VueComponent}
+            },
+        },
+    })
+</script>
+
+</html>

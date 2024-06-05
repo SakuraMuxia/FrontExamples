@@ -10,3 +10,4 @@ Webpack/**/node_modules/
 Webpack/**/dist/
 Webpack/ProjectBack/_git/
 Webpack/ProjectBack/node_modules/
+Vue/**/node_modules/

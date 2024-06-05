@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <button @click="fn">父点击</button>
+        <hanser ref="hanserRef" ></hanser>
+    </div>
+</body>
+
+<script type="module">
+
+    Vue.component("hanser",{
+        data(){
+            return{
+                num:1
+            }
+        },
+        template:(`
+            <button @click="num++">{{num}}</button>
+        `),
+    })
+    new Vue({
+        el:'#app',
+        data:{
+            arrs:["Minato Aqua","Shirakami Fubuki","Nakiri Ayame","Akai Haato"],
+        },
+        methods:{
+            fn(){
+                this.$refs.hanserRef.num++;
+                console.log(this); // vm.$ref() 返回{hanserRef:VueComponent}
+            },
+        },
+    })
+</script>
+
+</html>

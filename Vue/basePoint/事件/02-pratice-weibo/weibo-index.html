@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<link href="./css/weibo.css" rel="stylesheet" type="text/css" />
+	<script src="./js/vue.js"></script>
+	<script src="./js/axios.min.js"></script>
+</head>
+<body>
+<div class="jyArea">
+	<take-comment></take-comment>
+	<comment-on></comment-on>
+</div>
+
+</body>
+<script type="module">
+	import CommentOn from "./components/CommentOn.js";
+	import TakeComment from "./components/TakeComment.js";
+	// 设置事件总线，全局axios实例对象
+	Vue.prototype.$bus = new Vue();
+	
+
+	// 定义一个axios实例
+	const $axios = axios.create({
+		baseURL: 'http://192.168.1.198:8090',
+	})
+	// 把axios实例设置为Vue全局属性
+	Vue.prototype.$axios = $axios;
+	// 设置一个响应拦截器
+	$axios.interceptors.response.use(res =>{
+		if(res.data.ok === 1){
+			return res.data;
+		}else{
+			alert(res.data.msg);
+			return new Promise(()=>{});
+		}
+	})
+
+	new Vue({
+		el:'.jyArea',
+		components:{
+			TakeComment,
+			CommentOn
+		}
+	})
+</script>
+</html>
