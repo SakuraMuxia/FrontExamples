@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" ref="inp">
+        <div ref="my">my</div>
+        <button ref="btn" @click="fn">点我</button>
+        <base-input ref="base"></base-input>
+    </div>
+</body>
+
+<script type="module">
+    // 定义一个组件
+    Vue.component("base-input",{
+        
+        template:(`
+            <button @click="fn">ClickMe</button>
+        `),
+        methods:{
+            fn(){
+                // console.log(this.$refs.usernameInput);
+            }
+        }
+    })
+    // Vue实例
+    new Vue({
+        el:"#app",
+        data:{
+
+        },
+        methods:{
+            fn(e){
+                console.log('通过event对象获取DOM对象',e.target);   // <button></button>
+                console.log('通过document对象获取DOM对象',document.querySelector("button")); // <button></button>
+                console.log('this指向',this); // Vue()实例vm
+                console.log('通过$ref方法获取DOM对象',this.$refs); // Vue()实例vm.refs()返回一个对象 {ref名:对应标签,...}
+                console.log('通过$ref方法获取DOM对象',this.$refs.btn); // <button></button>
+                console.log('通过$ref方法获取DOM对象属性值',this.$refs.inp.value) //
+            }
+        },
+    })
+</script>
+</html>

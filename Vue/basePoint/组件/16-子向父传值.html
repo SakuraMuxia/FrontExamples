@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="./js/vue.js"></script>
+</head>
+<body>
+
+	<div id="app">
+        <reine :change-num="changeNum"></reine>
+    </div>  
+
+</body>
+<script type="module">
+	
+    Vue.component('reine',{
+        props:['changeNum'],
+        // 父向子传递函数 子组件调用函数改变父数据 不传参数默认传递一个event事件对象
+        template:`
+                <div>
+                    <button @click="changeNum(2)"> reine </button>
+                </div>
+            `,
+    })
+
+    // 定义Vue实例
+    new Vue({
+        el:"#app",
+        data:{
+            num:1,
+        },
+        methods:{
+            changeNum(num){
+                this.num += num;
+                console.log(num);
+            },
+        },
+    })  
+</script>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="./js/vue.js"></script>
+    <link rel="stylesheet" href="./css/todoList.css">
+</head>
+<body>
+    <div id="root">
+        <div class="todo-container">
+            <div class="todo-wrap">
+                <todo-header :add-task-list="addTaskList"></todo-header>
+                <todo-main :task-list.sync="taskList"></todo-main>
+                <todo-footer></todo-footer>
+            </div>
+        </div>
+	</div>
+
+</body>
+<script type="module">
+    // 使用默认导出 引入
+    import todoListHeader from './components/todoListHeader.js';
+    import {todoListMain} from './components/todoListMain.js';
+    import {todoListFooter} from './components/todoListFooter.js';
+    // todoHeader 组件
+    Vue.component('todoHeader',todoListHeader);
+    // todoMain 组件
+    Vue.component('todoMain',todoListMain);
+    // todoFooter 组件
+    Vue.component('todoFooter',todoListFooter);
+    
+    // 实例
+	new Vue({
+        el:"#root",
+        data:{
+            // [{id:唯一标识，title:任务标题,isChecked:是否被选中}]
+            taskList:[]
+        },
+        methods:{
+            // 在任务列表头部添加任务
+            addTaskList(e){
+                // 获取标题
+                const title = e.target.value.trim();
+                // 判断长度
+                if(title.length < 1){
+                    alert("请输入任务标题");
+                    return;
+                }
+                // 判断任务列表中是否已经拥有同名字的任务 数组的some方法 回调函数返回true，some函数返回true
+                if(this.taskList.some(item => item.title === title)){
+                    alert("任务的标题已经存在");
+                    return;
+                }
+                // 添加任务,向数组中添加一个对象元素
+                this.taskList = [
+                    {
+                        id:Date.now(),
+                        title,
+                        isChecked:true
+                    },
+                    ...this.taskList
+                ];
+                // 把输入框清空
+                e.target.value = null
+
+            }
+        }
+    })
+    
+</script>
+</html>

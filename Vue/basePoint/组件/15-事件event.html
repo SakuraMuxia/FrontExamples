@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="./js/vue.js"></script>
+</head>
+<body>
+
+	<div id="counter-event-example">
+        <button-counter v-bind:increment-total="incrementTotal"></button-counter>   <br>
+    </div>  
+
+</body>
+<script type="module">
+	
+    Vue.component('button-counter', {
+        props:['incrementTotal'],
+        template: '<button v-on:click="incrementTotal">clickMe</button>',
+    })
+
+	// 定义Vue实例
+    new Vue({
+        el: '#counter-event-example',
+        data: {
+            total: 0
+        },
+        methods: {
+            incrementTotal: function (e) {
+                console.log(e)
+            }
+        }
+    })
+</script>
+</html>
