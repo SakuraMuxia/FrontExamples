@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <input v-model="userName" type="text">
+        <span v-hanser="userName">{{userName}}</span>
+    </div>
+</body>
+<script type="module">
+    new Vue({
+        el:"#root",
+        data:{
+            userName:"Hanser"
+        },
+        directives:{
+            color:{
+                function(el,binding){
+                    el.style.color = binding.value;
+                }
+            },
+            // 简写 在钩子函数bind和update时调用
+            hanser(el){
+                console.log("设置v-hanser自定义指令:",document.querySelector("span").innerText);
+                el.innerText = "#" + el.innerText + "#";
+            }
+        },
+        mounted(){
+            console.log("mounted is finished");
+        }
+    })
+</script>
+</html>
