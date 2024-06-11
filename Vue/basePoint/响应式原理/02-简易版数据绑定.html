@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+        <input type="text">
+        <div></div>
+    </div>
+</body>
+<script>
+    // 获取元素
+    const inp = document.querySelector("#root input");
+	const div = document.querySelector("#root div");
+    // 设置数据
+	const data = {
+		str:"Hanser is an angle"
+	};
+    // 设置全局对象
+    let _str = data.str;
+    // 设置对象属性
+    Object.defineProperty(data,"str",{
+        get:function(){
+            return _str
+        },
+
+        set:function(Newvalue){
+            div.innerText = Newvalue;
+            _str = Newvalue;
+            inp.value = Newvalue;
+        }
+    })
+    // 设置事件
+    inp.oninput = function(){
+        data.str = this.value;
+        // div.innerText = this.value;
+    }
+</script>
+</html>
