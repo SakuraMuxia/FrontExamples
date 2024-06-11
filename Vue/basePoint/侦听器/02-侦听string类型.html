@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+       <input type="text" v-model="str">
+    </div>
+</body>
+<script type="module">
+    new Vue({
+        el:"#root",
+        data:{
+            str:"I am ironMan",
+        },
+        methods:{
+            changeNum() {
+                this.num++;
+                this.a = this.num + '!'
+	        },
+        },
+        watch:{
+            num(newValue,oldValue){
+                console.log("num侦听函数变量",newValue,oldValue);
+                console.log('this的指向',this); // 指向Vue实例
+            },
+            // 写法1 函数形式 未指定选项
+            str(newValue,oldValue){
+				console.log("str侦听函数变量",newValue,oldValue);
+			},
+            // 写法2 对象形式 指定immediate选项
+            str:{
+				handler(newValue,oldValue){
+					console.log("str",newValue,oldValue)
+				},
+				immediate:true
+			}
+        },
+        // 全部都挂载到父元素完成 视图更新
+        mounted(){
+            console.log("mounted is finished");
+        }
+    })
+</script>
+</html>

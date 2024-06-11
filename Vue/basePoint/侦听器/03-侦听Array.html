@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <button @click="changeArr">更改</button>
+    </div>
+</body>
+<script type="module">
+    new Vue({
+        el:"#root",
+        data:{
+            arr:[1,2,3,4]
+        },
+        methods:{
+            changeArr(){
+                // 添加一个元素，可以侦听到，响应式
+                this.arr.push(this.arr.length+1);
+                // 更改某一个元素:不支持响应式，也不支持侦听(包括深度侦听也不支持)。
+                // this.arr[3] = 100;
+                // 解决方案一：通过更改数组的引用地址
+                // this.arr = this.arr.map((item,index)=>{
+                //     if(index===3) item = 100;
+                //     return item;
+                // })
+                // 解决方案二：通过实例中的$set方法。
+                this.$set(this.arr,3,100);
+            }
+        },
+        watch:{
+            // 写法1 函数形式不指定 选项
+            arr(newValue,oldValue){
+                console.log("arr的新Value和旧Value",newValue,oldValue);
+                console.log(this);
+            }
+        },
+        // 全部都挂载到父元素完成 视图更新
+        mounted(){
+            console.log("mounted is finished");
+        }
+    })
+</script>
+</html>

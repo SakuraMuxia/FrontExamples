@@ -8,7 +8,9 @@
 <body>
     <div id="root">
         <input v-model="userName" type="text">
-        <span v-hanser="userName">{{userName}}</span>
+        <span v-color="'blue'" v-yousa>{{userName}}</span>
+        <hr>
+        
     </div>
 </body>
 <script type="module">
@@ -19,14 +21,26 @@
         },
         directives:{
             color:{
-                function(el,binding){
+                bind:function(el,binding){
                     el.style.color = binding.value;
                 }
             },
             // 简写 在钩子函数bind和update时调用
-            hanser(el){
-                console.log("设置v-hanser自定义指令:",document.querySelector("span").innerText);
-                el.innerText = "#" + el.innerText + "#";
+            hanser:{
+                bind:function(el){
+                    console.log("设置v-hanser自定义指令:",document.querySelector("span").innerText);
+                    el.innerText = "#" + el.innerText + "#";
+                }
+            },
+            yousa(el){
+                console.log('span标签元素与指令绑定元素是否状态一致',document.querySelector("span")===el);// false
+                // 视图未更新
+                console.log('span标签内内容',document.querySelector("#root span").innerText); // {{userName}}
+                // 使用指令编辑元素内容 在 bind和update状态执行，update数据更新时即运行。
+                el.innerText = `《${el.innerText}》`;// 将div元素的内容包裹上书名号
+                // span标签元素与指令绑定元素内容是否状态一致
+                console.log('span标签元素与指令绑定元素内容是否状态一致',el.innerText,document.querySelector("#root span").innerText); // 《Hanser》 {{userName}}
+                
             }
         },
         mounted(){

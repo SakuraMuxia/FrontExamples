@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <input v-focuson ref="inp" v-model="str"  type="text">
+        <hr>
+    </div>
+</body>
+<script type="module">
+    new Vue({
+        el:"#root",
+        data:{
+            str:"userName is undefined"
+        },
+        directives:{
+            // 未挂载完成之前 执行，增加延迟也可以实现
+            focus(el){
+				setTimeout(()=>{
+                    // 使用元素的 focus方法 获取焦点
+					document.querySelector("input").focus();
+				},200)
+			},
+            // 挂载到父元素完成之后执行
+            focuson:{
+                inserted:function(el){
+                    document.querySelector("input").focus();
+                }
+            }
+            
+        },
+        // 全部都挂载到父元素完成 视图更新
+        mounted(){
+            console.log("mounted is finished");
+        }
+    })
+</script>
+</html>

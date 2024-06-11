@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text"><button>更改</button>
+    <script>
+        const inp = document.querySelector("input");
+	    const btn = document.querySelector("button");
+        let info = {
+            bookName:"天龙八部"
+        }
+        // 存储日志
+        let logArr = [{
+            id:1,
+            bookName:info.bookName,
+            addTime:Date.now()
+        }];
+        let _bookName = info.bookName;
+        Object.defineProperty(info,"bookName",{
+            get(){
+                return _bookName;
+                // return logArr[logArr.length-1].bookName;
+            },
+            // info.bookName修改时执行。
+            set(bookName){
+                _bookName = bookName;
+                logArr.push({
+                    id:logArr.length+1,
+                    bookName:_bookName,
+                    addTime:Date.now()
+                })
+            }
+        })
+        btn.onclick = function(){
+            const bookName = inp.value.trim();
+            if(bookName){
+                info.bookName = bookName;
+            }else alert("请输入内容！");
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+       <button @click="changeNum">{{num}}</button>
+    </div>
+</body>
+<script type="module">
+    new Vue({
+        el:"#root",
+        data:{
+            num:445,
+        },
+        methods:{
+            changeNum() {
+                this.num++;
+                this.a = this.num + '!'
+	        },
+        },
+        watch:{
+            num(newValue,oldValue){
+                console.log("num侦听函数变量",newValue,oldValue);
+                console.log('this的指向',this); // 指向Vue实例
+            }
+        },
+        // 全部都挂载到父元素完成 视图更新
+        mounted(){
+            console.log("mounted is finished");
+        }
+    })
+</script>
+</html>
