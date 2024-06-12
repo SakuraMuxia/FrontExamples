@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+	    <button @click="changeUserName">{{userName}}|{{num}}</button>
+    </div>
+</body>
+<script>
+    new Vue({
+		el:"#app",
+		data:{
+			userName:"zhangsan",
+			num:1
+		},
+		created(){
+			// 挂载完毕之后调用。
+			this.$nextTick().then(value=>{
+				console.log(document.querySelector("button").innerText)
+			})
+		},
+		methods:{
+			
+			changeUserName(){
+				this.userName+="!";
+				this.num +=1;
+                // 数据发生改变，默认视图不会立即更新。
+				// console.log(this.userName,this.num,document.querySelector("button").innerText);
+
+				// 可以通过调用$nextTick获取视图更新(update钩子函数后)以后的视图信息（会在updated后调用 ）
+				// 1-回调函数
+				// this.$nextTick(function(){
+				// 	console.log(this.userName,this.num,document.querySelector("button").innerText)
+				// })
+                
+				// 2- Promise
+				this.$nextTick().then(()=>{
+					console.log(this.userName,this.num,document.querySelector("button").innerText)
+				})
+			}
+		},
+		beforeUpdate(){
+			console.log("beforeUpdate")
+		},
+		updated(){
+			console.log("updated")
+		},
+		mounted(){
+			console.log("mounted")
+		}
+		
+	})
+</script>
+</html>
