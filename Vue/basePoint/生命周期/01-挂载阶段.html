@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h3 ref="h3Ref">{{title}}</h3>
+    </div>
+</body>
+<script>
+    new Vue({
+		el:"#app",
+		data:{
+			title:"生命周期"
+		},
+		methods:{
+			fun(){
+				this.userName+="!";
+				this.num +=1;
+			}
+		},
+        beforeCreate(){
+			// 实例创建完成之前调用:常用于判断用户权限以及设置Vue.prototype
+			Vue.prototype.$bus = new Vue();
+            this.title = "实例创建前";
+			console.group("**********1-beforeCreate*************************");
+			console.log("$data",this.$data);// undefined
+			console.log("data",this.title);// undefined
+			console.log("methods",this.fun);// undefined
+			console.log("ref",this.$refs.h3Ref);// undefined
+			console.groupEnd();
+		},
+        created(){
+			// 实例创建完成.可以在此处调用属性以及方法
+			this.title = "实例创建完成";// 修改数据状态,不会更新视图.
+			console.group("**********2-created*************************");
+			console.log("$data",this.$data);// {title:"学习挂载阶段"}
+			console.log("data",this.title);// 学习挂载阶段
+			console.log("methods",this.fun);// function(){}
+			console.log("ref",this.$refs.h3Ref);// undefined
+			console.groupEnd();
+		},
+        beforeMount(){
+			this.title = "挂载前";
+			console.group("**********3-beforeMount*************************");
+			console.log("$data",this.$data);// {title:"正在学习挂载阶段"}
+			console.log("data",this.title);// 正在学习挂载阶段
+			console.log("methods",this.fun);// function(){}
+			console.log("ref",this.$refs.h3Ref);// undefined
+			console.groupEnd();
+		},
+		mounted(){
+			this.title = "挂载完成";
+			console.group("**********3-beforeMount*************************");
+			console.log("$data",this.$data);// {title:"正在学习挂载阶段"}
+			console.log("data",this.title);// 正在学习挂载阶段
+			console.log("methods",this.fun);// function(){}
+			console.log("ref",this.$refs.h3Ref);// <h3>​挂载完成​</h3>​
+			console.groupEnd();
+            
+		},
+        beforeUpdate(){
+			console.log("beforeUpdate")
+		},
+		updated(){
+			console.log("updated")
+		},
+		
+	})
+</script>
+</html>

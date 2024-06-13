@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/hanser.js"></script>
+</head>
+<body>
+    <div id="root">
+        <button @click="fun1">ClickMe</button>
+        <input h-model="info" type="text">
+        <div h-text="info"></div>
+        <div h-html="userName"></div>
+    </div>
+</body>
+<script>
+    const hs = new Hanser({
+        el:"#root",
+        data:{
+            age:12,
+            userName:'冰糖io',
+            info:'冰糖io是在'
+        },
+        methods:{
+            fun1(){
+                this.age += 1;
+                this.userName += "io";
+            }
+        }
+        
+    })
+    
+</script>
+</html>

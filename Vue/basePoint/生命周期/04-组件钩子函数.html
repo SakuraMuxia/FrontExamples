@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <button @click="userName+='!'">{{userName}}</button>
+        <button @click="isShow=!isShow">isShow取反</button>
+        <One v-if="isShow" :user-name="userName"></One>
+    </div>
+</body>
+<script>
+    new Vue({
+		el:"#app",
+		data:{
+			userName:"zhangsan",
+			isShow:true
+		},
+		components:{
+			// 父组件更新如果影响到子组件视图的话，子组件会执行更新阶段的钩子。
+			One:{
+				props:["user-name"],
+				template:(`
+					<h3>one:{{userName}}</h3>
+				`),
+				beforeCreate(){
+					console.log("4-One->beforeCreate")
+				},
+				created(){
+					console.log("5-One->created");
+				},
+				beforeMount(){
+					console.log("6-One->beforeMount");
+				},
+				mounted(){
+					console.log("7-One->mounted");
+				},
+				beforeUpdate(){
+					console.log("one->beforeUpdate")
+				},
+				updated(){
+					console.log("one->updated")
+				},
+				beforeDestroy() {
+					console.log("one->beforeDestroy")
+				},
+				destroyed(){
+					console.log("one->destroyed")
+				}
+			}
+		},
+		beforeCreate(){
+			console.log("1-beforeCreate")
+		},
+		created(){
+			console.log("2-created");
+		},
+		beforeMount(){
+			console.log("3-beforeMount");
+		},
+		mounted(){
+			console.log("8-mounted");
+		},
+        beforeUpdate(){
+			console.log("9-beforeUpdate")
+		},
+		updated(){
+			console.log("10-updated")
+		},
+	})
+</script>
+</html>

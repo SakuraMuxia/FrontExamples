@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <button @click="changeIsEdit">{{isEdit?'完成':'编辑'}}</button>
+	    <input ref="inpRef" v-if="isEdit" v-model="str" type="text">
+	    <span v-else>{{str}}</span>
+    </div>
+</body>
+<script>
+    new Vue({
+		el:"#app",
+		data:{
+			isEdit:false,
+			str:"Hanser is an angle"
+		},
+        methods:{
+            changeIsEdit(){
+				this.isEdit = !this.isEdit;
+				this.$nextTick(function(){
+					// 当视图更新后执行
+                    console.log('nextTick');
+					this.$refs.inpRef.focus();
+				})
+			}
+        },
+		beforeCreate(){
+			console.log("beforeCreate")
+		},
+		created(){
+			console.log("created");
+            
+		},
+		beforeMount(){
+			console.log("beforeMount");
+            this.$nextTick().then(()=>{
+                console.log('nextTick-c');
+            })
+		},
+		mounted(){
+			console.log("mounted");
+		},
+        beforeUpdate(){
+			console.log("beforeUpdate")
+		},
+		updated(){
+			console.log("updated")
+		},
+	})
+</script>
+</html>

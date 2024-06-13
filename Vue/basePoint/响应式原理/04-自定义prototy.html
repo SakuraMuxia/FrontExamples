@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/yuluo.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    const yl = new Yuluo({
+        data:{
+            age:12,
+            userName:'冰糖io'
+        },
+        methods:{
+            fun1(){
+                console.log(this,this.age,this.userName);
+            }
+        }
+    })
+
+    // get获取data数值
+    console.log(yl.$data.age);
+    // 调用函数
+    yl.fun1();
+</script>
+</html>
