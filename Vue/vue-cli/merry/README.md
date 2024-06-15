@@ -1,4 +1,4 @@
-# umy
+# merry
 
 ## Project setup
 ```
