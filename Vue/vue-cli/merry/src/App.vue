@@ -45,7 +45,6 @@ export default {
             this.isLoading = false;
             this.isError = true;
         }
-        
     }
 }
 </script>
