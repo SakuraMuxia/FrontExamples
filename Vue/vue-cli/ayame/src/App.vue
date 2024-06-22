@@ -2,18 +2,13 @@
     <div id="app">
         <nav>
             <router-link exact to="/">首页</router-link> |
-            <!-- <router-link :to="{
-                path:'newslist',
-                query:{
-                    username: 'hanser',
-                    age:12,
-                    friends:{
-                        username:'yousa',
-                        age:14,
-                    },
-                }, 
-            }">新闻列表</router-link> | -->
-            <router-link to="/newslist?username='yousa'">新闻资讯</router-link> |
+            <router-link to="/newslist/hanser">新闻列表</router-link> |
+            <router-link :to="{
+                name:'newslist',
+                params:{
+                    username:'yousa'
+                }
+            }">新闻资讯</router-link> |
             <router-link to="/goodslist">商品列表</router-link> |
             <router-link to="/carshopping">购物车</router-link> |
             <router-link to="/my">个人中心</router-link> |

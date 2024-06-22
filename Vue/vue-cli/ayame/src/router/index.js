@@ -18,7 +18,7 @@ const routes = [
         component: Home
     },
     {
-        path: '/newslist',
+        path: '/newslist/:username',
         name:"newslist",
         component: NewsList,
     },
