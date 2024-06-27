@@ -19,18 +19,25 @@ const routes = [
         children: [
             {
                 path: "/",
-                component: Home
+                component: Home,
+                meta:{
+                    title:"首页"
+                }
             }, 
             {
                 path: "/goodsList",
-                component: GoodsList
+                component: GoodsList,
+                meta:{
+                    isAuthor:true,
+                    title:"商品列表"
+                }
             }, 
             {
                 path: "/newsList",
                 component: NewsList,
                 meta: {
-                    title:"新闻列表",
                     isAuthor: true,
+                    title: "新闻列表",
                 },
             }, 
             {

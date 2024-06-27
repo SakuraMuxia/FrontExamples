@@ -1,5 +1,5 @@
 {
-    "news":[
+    "vtuber":[
         {
             "id":1,
             "title":"A-SOUL",
@@ -14,6 +14,23 @@
             "id": 3,
             "title": "psplive",
             "content":"psplive（又称Project SP，简称P-SP）是在中国诞生的虚拟艺人团体，于2019年9月24日正式公开"
+        }
+    ],
+    "gaming":[
+        {
+            "id": 1,
+            "title": "西安WE",
+            "content": "WE电子竞技俱乐部，成立于2005年，是历史最悠久的电竞俱乐部之一，LPL联盟成员之一。"
+        },
+        {
+            "id": 2,
+            "title": "BLG星纪",
+            "content": "BLG电子竞技俱乐部是哔哩哔哩旗下英雄联盟分部，于2017年12月18日成立，代表哔哩哔哩征战英雄联盟顶级职业联赛。"
+        },
+        {
+            "id": 3,
+            "title": "IG",
+            "content": "InvictusGaming（简称：iG）成立于2011年，由王思聪先生创立，是国内最老牌的电竞俱乐部之一。"
         }
     ]
 }

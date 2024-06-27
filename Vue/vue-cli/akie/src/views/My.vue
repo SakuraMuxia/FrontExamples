@@ -35,6 +35,7 @@ export default {
         },
         // 定义一个方法，接收从NewsList传来的新闻id，然后发送axios请求，在这个页面渲染
         getNewsById(id){
+            if (!id) return;
             axios.get("http://127.0.0.1:8001/news/",{
                 params:{
                     id,
