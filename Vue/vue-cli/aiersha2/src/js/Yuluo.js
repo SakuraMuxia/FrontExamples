@@ -1,4 +1,4 @@
-export const mapState = function(Options){
+const mapState = function(Options){
     // 定义一个对象
     const obj = {};
     // 当mapState() 传入的是一个数组 mapState([])
@@ -26,4 +26,31 @@ export const mapState = function(Options){
     
     // 把对象返回
     return obj;
+};
+// 定义mapMutations函数
+const mapMutations = function(Options){
+    const obj = {};
+    // 判断是否是一个数组
+    if (Options instanceof Array){
+        Options.forEach(arr =>{
+            // 遍历每一个元素，并把每一个元素作为属性名，属性值是一个函数
+            obj[arr] = function(payload){
+                this.$store.commit(arr, payload);
+            }
+        })
+    }else{
+        // 遍历对象,把key作为属性名，属性值。
+        for(let key in Options){
+            obj[key] = function(payload){
+                this.$store.commit(Options[key],payload);
+            }
+        }
+    }
+    
+    // 把对象返回
+    return obj;
+}
+export {
+    mapState,
+    mapMutations
 }
