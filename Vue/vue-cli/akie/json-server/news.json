@@ -32,5 +32,13 @@
             "title": "IG",
             "content": "InvictusGaming（简称：iG）成立于2011年，由王思聪先生创立，是国内最老牌的电竞俱乐部之一。"
         }
+    ],
+    "user": [
+        {
+            "username": "hanser",
+            "data":"201516030412",
+            "code": 200,
+            "respose": "登陆成功"
+        }
     ]
 }
