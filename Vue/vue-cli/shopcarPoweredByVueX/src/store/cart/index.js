@@ -1,3 +1,4 @@
+
 // 数据状态
 const state = {
     cartList:[]
@@ -34,7 +35,7 @@ const mutations = {
 }
 // 异步的方法
 const actions = {
-
+    
 }
 // 模块
 const modules = {

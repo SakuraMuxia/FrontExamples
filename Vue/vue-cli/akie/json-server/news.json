@@ -40,5 +40,19 @@
             "code": 200,
             "respose": "登陆成功"
         }
+    ],
+    "info": [
+        {
+            "username": "hanser",
+            "data": "202407081456",
+            "code": 200,
+            "respose": "HanserIsMyAngle"
+        }
+    ],
+    "logout": [
+        {
+            "username": "hanser",
+            "state":"logout success"
+        }
     ]
 }
