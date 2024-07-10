@@ -1,5 +1,10 @@
 <template>
     <div>
+        <input v-model="message" type="text">
+        <br>
+        <p>message：{{ this.message }}</p>
+        <button @click="this.ADD_Number">+1</button>
+
         <p>商品名称：<input ref="goodsNameRef" type="text"></p>
         <p>商品价格：<input ref="goodsPriceRef" type="text"></p>
         <button @click="addGoods">提交</button>
@@ -7,7 +12,7 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { mapMutations,mapState } from "vuex";
 export default {
     name: "AddGoods",
     data(){
@@ -16,7 +21,9 @@ export default {
         }
     },
     methods: {
-        ...mapMutations(["ADD_GOODS"]),
+
+        ...mapMutations("goods",["ADD_GOODS"]),
+        ...mapMutations(["ADD_Number"]),
         addGoods(){
             // 判断是否登陆=>localStorage中是否存在 token字段
             if (localStorage.getItem("token")) {
@@ -43,6 +50,17 @@ export default {
             }
             
             
+        }
+    },
+    computed:{
+        ...mapState(["num"]),
+        message:{
+            get() {
+                return this.$store.state.message
+            },
+            set(value) {
+                this.$store.commit('UP_Message', value)
+            }
         }
     },
     mounted() {

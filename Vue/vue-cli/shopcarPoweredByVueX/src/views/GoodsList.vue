@@ -18,7 +18,7 @@ export default {
     name: "GoodsList",
     methods:{
         // 映射 JOIN_CART 方法 操作数据
-        ...mapMutations(["JOIN_CART"]),
+        ...mapMutations("cart",["JOIN_CART"]),
         // 加入购物车方法
         joinCart(payload) {
             // 判断是否存在token

@@ -32,6 +32,7 @@ const modules = {
 }
 // 暴漏数据
 export default {
+    namespaced:true,
     state,
     getters,
     mutations,

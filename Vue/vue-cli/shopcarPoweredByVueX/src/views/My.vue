@@ -12,13 +12,13 @@ export default {
     methods:{
         async logout(){
             // 通过dispatch方法调用action异步方法
-            await this.$store.dispatch('postLogout');
+            await this.$store.dispatch('user/postLogout');
             // 跳转到登陆界面，并保存当前路径作为查询字符串
             this.$router.push("/login?cb=" + this.$route.path);
         }
     },
     mounted(){
-        this.$store.dispatch("getInfo");
+        this.$store.dispatch("user/getInfo");
     }
 }
 </script>

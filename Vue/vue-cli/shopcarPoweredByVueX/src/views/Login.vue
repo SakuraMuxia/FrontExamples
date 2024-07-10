@@ -13,7 +13,7 @@ import {mapActions} from "vuex"
 export default {
     name: "Login",
     methods:{
-        ...mapActions({
+        ...mapActions("user",{
             result:"login",
         }),
         async login(){

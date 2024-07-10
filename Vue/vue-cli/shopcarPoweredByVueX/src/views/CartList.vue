@@ -1,7 +1,7 @@
 <template>
     <div>
         <h3>购物车列表界面</h3>
-        <template v-if="$store.state.cart.cartList.length > 0">
+        <template v-if="this.cartList.length > 0">
             <div v-for="item in cartList" :key="item.id">
                 <p>商品名称：{{ item.goodsName }}</p>
                 <p>商品价格：{{ item.goodsPrice | currency }}</p>
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters,mapState} from 'vuex';
 export default {
     name: "CartList",
     methods:{
@@ -23,11 +23,12 @@ export default {
     },
     computed:{
         // 获取store中cart模块中的cartList数据状态
-        cartList() {
-            return this.$store.state.cart.cartList
-        },
+        // cartList() {
+        //     return this.$store.state.cart.cartList
+        // },
         // 计算总价
-        ...mapGetters(["sumPrice"]),
+        ...mapGetters("cart",["sumPrice"]),
+        ...mapState("cart", ["cartList"])
     },
     mounted(){
         
