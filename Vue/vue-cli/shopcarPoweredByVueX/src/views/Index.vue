@@ -6,7 +6,10 @@
             <router-link to="/cartList">购物车列表</router-link>|
             <router-link to="/my">个人中心</router-link>
         </nav>
-        <router-view></router-view>
+        <keep-alive>
+            <router-view></router-view>
+        </keep-alive>
+
     </div>
 </template>
 
