@@ -2815,7 +2815,7 @@ export default {
                             width: 35px;
                             height: 35px;
                             display: block;
-                            //background: url(../assets/images/home/bg0.png);
+                            background: url(./assets/images/home/bg0.png);
                             margin-left: 10px;
                         }
                     }
@@ -2920,7 +2920,7 @@ export default {
 
                 .fr {
                     float: right;
-                    //background-image: url(../assets/images/home/icons.png);
+                    background-image: url(./assets/images/home/icons.png);
                     width: 66px;
                     height: 25px;
                     background-position: 182px -104px;
