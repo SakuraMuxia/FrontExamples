@@ -1702,16 +1702,16 @@
                     <div class="swiper-container" id="mySwiper">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
-                                <img src="./images/banner1.jpg" />
+                                <img src="../../assets/images/home/banner1.jpg" />
                             </div>
                             <div class="swiper-slide">
-                                <img src="./images/banner2.jpg" />
+                                <img src="../../assets/images/home/banner2.jpg" />
                             </div>
                             <div class="swiper-slide">
-                                <img src="./images/banner3.jpg" />
+                                <img src="../../assets/images/home/banner3.jpg" />
                             </div>
                             <div class="swiper-slide">
-                                <img src="./images/banner4.jpg" />
+                                <img src="../../assets/images/home/banner4.jpg" />
                             </div>
                         </div>
                         <!-- 如果需要分页器 -->
@@ -1798,7 +1798,7 @@
                         </li>
                     </ul>
                     <div class="ads">
-                        <img src="./images/ad1.png" />
+                        <img src="../../assets/images/home/ad1.png" />
                     </div>
                 </div>
             </div>
@@ -1810,21 +1810,21 @@
                 <ul class="recommend">
                     <li class="clock">
                         <div class="time">
-                            <img src="./images/clock.png" />
+                            <img src="../../assets/images/home/clock.png" />
                             <h3>今日推荐</h3>
                         </div>
                     </li>
                     <li class="banner">
-                        <img src="./images/today01.png" />
+                        <img src="../../assets/images/home/today01.png" />
                     </li>
                     <li class="banner">
-                        <img src="./images/today02.png" />
+                        <img src="../../assets/images/home/today02.png" />
                     </li>
                     <li class="banner">
-                        <img src="./images/today03.png" />
+                        <img src="../../assets/images/home/today03.png" />
                     </li>
                     <li class="banner">
-                        <img src="./images/today04.png" />
+                        <img src="../../assets/images/home/today04.png" />
                     </li>
                 </ul>
             </div>
@@ -1861,7 +1861,7 @@
                         <div class="img-item">
                             <p class="tab-pic">
                                 <a href="#">
-                                    <img src="./images/1.jpg" />
+                                    <img src="../../assets/images/home/1.jpg" />
                                 </a>
                             </p>
                             <div class="tab-info">
@@ -1874,7 +1874,7 @@
                         <div class="img-item">
                             <p class="tab-pic">
                                 <a href="#">
-                                    <img src="./images/1.jpg" />
+                                    <img src="../../assets/images/home/1.jpg" />
                                 </a>
                             </p>
                             <div class="tab-info">
@@ -1887,7 +1887,7 @@
                         <div class="img-item">
                             <p class="tab-pic">
                                 <a href="#">
-                                    <img src="./images/1.jpg" />
+                                    <img src="../../assets/images/home/1.jpg" />
                                 </a>
                             </p>
                             <div class="tab-info">
@@ -1900,7 +1900,7 @@
                         <div class="img-item">
                             <p class="tab-pic">
                                 <a href="#">
-                                    <img src="./images/1.jpg" />
+                                    <img src="../../assets/images/home/1.jpg" />
                                 </a>
                             </p>
                             <div class="tab-info">
@@ -1925,42 +1925,42 @@
                 <div class="bd">
                     <ul class="favourate">
                         <li>
-                            <img src="./images/like_02.png" alt="" />
+                            <img src="../../assets/images/home/like_02.png" alt="" />
                             <div class="like-text">
                                 <p>阳光美包新款单肩包女包时尚子母包四件套女</p>
                                 <h3>¥116.00</h3>
                             </div>
                         </li>
                         <li>
-                            <img src="./images/like_03.png" alt="" />
+                            <img src="../../assets/images/home/like_03.png" alt="" />
                             <div class="like-text">
                                 <p>阳光美包新款单肩包女包时尚子母包四件套女</p>
                                 <h3>¥116.00</h3>
                             </div>
                         </li>
                         <li>
-                            <img src="./images/like_01.png" alt="" />
+                            <img src="../../assets/images/home/like_01.png" alt="" />
                             <div class="like-text">
                                 <p>阳光美包新款单肩包女包时尚子母包四件套女</p>
                                 <h3>¥116.00</h3>
                             </div>
                         </li>
                         <li>
-                            <img src="./images/like_02.png" alt="" />
+                            <img src="../../assets/images/home/like_02.png" alt="" />
                             <div class="like-text">
                                 <p>阳光美包新款单肩包女包时尚子母包四件套女</p>
                                 <h3>¥116.00</h3>
                             </div>
                         </li>
                         <li>
-                            <img src="./images/like_03.png" alt="" />
+                            <img src="../../assets/images/home/like_03.png" alt="" />
                             <div class="like-text">
                                 <p>阳光美包新款单肩包女包时尚子母包四件套女</p>
                                 <h3>¥116.00</h3>
                             </div>
                         </li>
                         <li>
-                            <img src="./images/like_01.png" alt="" />
+                            <img src="../../assets/images/home/like_01.png" alt="" />
                             <div class="like-text">
                                 <p>阳光美包新款单肩包女包时尚子母包四件套女</p>
                                 <h3>¥116.00</h3>
@@ -2014,19 +2014,19 @@
                                     <li>滚筒洗衣机</li>
                                     <li>电热水器</li>
                                 </ul>
-                                <img src="./images/floor-1-1.png" />
+                                <img src="../../assets/images/home/floor-1-1.png" />
                             </div>
                             <div class="floorBanner">
                                 <div class="swiper-container" id="floor1Swiper">
                                     <div class="swiper-wrapper">
                                         <div class="swiper-slide">
-                                            <img src="./images/floor-1-b01.png">
+                                            <img src="../../assets/images/home/floor-1-b01.png">
                                         </div>
                                         <div class="swiper-slide">
-                                            <img src="./images/floor-1-b02.png">
+                                            <img src="../../assets/images/home/floor-1-b02.png">
                                         </div>
                                         <div class="swiper-slide">
-                                            <img src="./images/floor-1-b03.png">
+                                            <img src="../../assets/images/home/floor-1-b03.png">
                                         </div>
                                     </div>
                                     <!-- 如果需要分页器 -->
@@ -2040,115 +2040,22 @@
                             <div class="split">
                                 <span class="floor-x-line"></span>
                                 <div class="floor-conver-pit">
-                                    <img src="./images/floor-1-2.png" />
+                                    <img src="../../assets/images/home/floor-1-2.png" />
                                 </div>
                                 <div class="floor-conver-pit">
-                                    <img src="./images/floor-1-3.png" />
+                                    <img src="../../assets/images/home/floor-1-3.png" />
                                 </div>
                             </div>
                             <div class="split center">
-                                <img src="./images/floor-1-4.png" />
+                                <img src="../../assets/images/home/floor-1-4.png" />
                             </div>
                             <div class="split">
                                 <span class="floor-x-line"></span>
                                 <div class="floor-conver-pit">
-                                    <img src="./images/floor-1-5.png" />
+                                    <img src="../../assets/images/home/floor-1-5.png" />
                                 </div>
                                 <div class="floor-conver-pit">
-                                    <img src="./images/floor-1-6.png" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!--楼层-->
-        <div class="floor">
-            <div class="py-container">
-                <div class="title clearfix">
-                    <h3 class="fl">家用电器</h3>
-                    <div class="fr">
-                        <ul class="nav-tabs clearfix">
-                            <li class="active">
-                                <a href="#tab1" data-toggle="tab">热门</a>
-                            </li>
-                            <li>
-                                <a href="#tab2" data-toggle="tab">大家电</a>
-                            </li>
-                            <li>
-                                <a href="#tab3" data-toggle="tab">生活电器</a>
-                            </li>
-                            <li>
-                                <a href="#tab4" data-toggle="tab">厨房电器</a>
-                            </li>
-                            <li>
-                                <a href="#tab5" data-toggle="tab">应季电器</a>
-                            </li>
-                            <li>
-                                <a href="#tab6" data-toggle="tab">空气/净水</a>
-                            </li>
-                            <li>
-                                <a href="#tab7" data-toggle="tab">高端电器</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="tab-content">
-                    <div class="tab-pane">
-                        <div class="floor-1">
-                            <div class="blockgary">
-                                <ul class="jd-list">
-                                    <li>节能补贴</li>
-                                    <li>4K电视</li>
-                                    <li>空气净化器</li>
-                                    <li>IH电饭煲</li>
-                                    <li>滚筒洗衣机</li>
-                                    <li>电热水器</li>
-                                </ul>
-                                <img src="./images/floor-1-1.png" />
-                            </div>
-                            <div class="floorBanner">
-                                <div class="swiper-container" id="floor2Swiper">
-                                    <div class="swiper-wrapper">
-                                        <div class="swiper-slide">
-                                            <img src="./images/floor-1-b01.png">
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <img src="./images/floor-1-b02.png">
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <img src="./images/floor-1-b03.png">
-                                        </div>
-                                    </div>
-                                    <!-- 如果需要分页器 -->
-                                    <div class="swiper-pagination"></div>
-
-                                    <!-- 如果需要导航按钮 -->
-                                    <div class="swiper-button-prev"></div>
-                                    <div class="swiper-button-next"></div>
-                                </div>
-                            </div>
-                            <div class="split">
-                                <span class="floor-x-line"></span>
-                                <div class="floor-conver-pit">
-                                    <img src="./images/floor-1-2.png" />
-                                </div>
-                                <div class="floor-conver-pit">
-                                    <img src="./images/floor-1-3.png" />
-                                </div>
-                            </div>
-                            <div class="split center">
-                                <img src="./images/floor-1-4.png" />
-                            </div>
-                            <div class="split">
-                                <span class="floor-x-line"></span>
-                                <div class="floor-conver-pit">
-                                    <img src="./images/floor-1-5.png" />
-                                </div>
-                                <div class="floor-conver-pit">
-                                    <img src="./images/floor-1-6.png" />
+                                    <img src="../../assets/images/home/floor-1-6.png" />
                                 </div>
                             </div>
                         </div>
@@ -2162,45 +2069,47 @@
             <div class="py-container">
                 <ul class="brand-list">
                     <li class="brand-item">
-                        <img src="./images/brand_21.png" />
+                        <img src="../../assets/images/home/brand_21.png" />
                     </li>
                     <li class="brand-item">
-                        <img src="./images/brand_03.png" />
+                        <img src="../../assets/images/home/brand_03.png" />
                     </li>
                     <li class="brand-item">
-                        <img src="./images/brand_05.png" />
+                        <img src="../../assets/images/home/brand_05.png" />
                     </li>
                     <li class="brand-item">
-                        <img src="./images/brand_07.png" />
+                        <img src="../../assets/images/home/brand_07.png" />
                     </li>
                     <li class="brand-item">
-                        <img src="./images/brand_09.png" />
+                        <img src="../../assets/images/home/brand_09.png" />
                     </li>
                     <li class="brand-item">
-                        <img src="./images/brand_11.png" />
+                        <img src="../../assets/images/home/brand_11.png" />
                     </li>
                     <li class="brand-item">
-                        <img src="./images/brand_13.png" />
+                        <img src="../../assets/images/home/brand_13.png" />
                     </li>
                     <li class="brand-item">
-                        <img src="./images/brand_15.png" />
+                        <img src="../../assets/images/home/brand_15.png" />
                     </li>
                     <li class="brand-item">
-                        <img src="./images/brand_17.png" />
+                        <img src="../../assets/images/home/brand_17.png" />
                     </li>
                     <li class="brand-item">
-                        <img src="./images/brand_19.png" />
+                        <img src="../../assets/images/home/brand_19.png" />
                     </li>
                 </ul>
             </div>
         </div>
     </div>
 </template>
+
 <script>
 export default {
     name:"Home",
 }
 </script>
+
 <style lang="less" scoped>
 .outer {
     .type-nav {
@@ -2396,7 +2305,7 @@ export default {
                         width: 25%;
 
                         .list-item {
-                            //background-image: url(./images/icons.png);
+                            //background-image: url(../../assets/images/home/icons.png);
                             width: 61px;
                             height: 40px;
                             display: block;
@@ -2574,7 +2483,7 @@ export default {
                             width: 35px;
                             height: 35px;
                             display: block;
-                            background: url(./images/bg0.png);
+                            background: url(../../assets/images/home/bg0.png);
                             margin-left: 10px;
                         }
                     }
@@ -2679,7 +2588,7 @@ export default {
 
                 .fr {
                     float: right;
-                    background-image: url(./images/icons.png);
+                    background-image: url(../../assets/images/home/icons.png);
                     width: 66px;
                     height: 25px;
                     background-position: 182px -104px;
