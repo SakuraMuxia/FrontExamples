@@ -1,18 +1,24 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-
+import enVueRouter from '@/utils/pushReWrite';
 import Home from '@/pages/Home';
 import Login from '@/pages/Login';
 import Register from '@/pages/Register';
 import Search from '@/pages/Search';
 
 Vue.use(VueRouter);
+// 重写push,replace方法
+enVueRouter("push");
+enVueRouter("replace");
 
 // 定义路由
 const routes = [
     {
         path:'/',
         component:Home,
+        meta:{
+            isTypeNav:true,
+        }
     },
     {
         path: '/login',
@@ -25,6 +31,10 @@ const routes = [
     {
         path: '/search',
         component: Search,
+        meta: {
+            // 是否使用导航
+            isTypeNav: true
+        }
     },
 ]
 

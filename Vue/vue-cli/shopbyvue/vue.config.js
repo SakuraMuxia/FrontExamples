@@ -4,7 +4,15 @@ module.exports = defineConfig({
     devServer: {
         open: true,
         host: "127.0.0.1",
-        port: 8088
+        port: 8088,
+        proxy: {
+            // 请求地址：http://sph-h5-api.atguigu.cn/api/product/getBaseCategoryList
+            // 访问"/api"的路径，统一拼接为"http://sph-h5-api.atguigu.cn/api"
+            "/api": {
+                target: "http://sph-h5-api.atguigu.cn",
+                changeOrigin: true
+            }
+        }
     },
     pages: {
         index: {

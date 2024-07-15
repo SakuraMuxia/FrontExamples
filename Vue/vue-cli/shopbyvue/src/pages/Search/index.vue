@@ -1,5 +1,7 @@
 <template lang="">
-    <div>Search</div>
+    <div>
+        Search
+    </div>
 </template>
 <script>
 export default {

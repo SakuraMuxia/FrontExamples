@@ -27,24 +27,32 @@
             <!--头部第二行 搜索区域-->
             <div class="bottom">
                 <h1 class="logoArea">
-                    <router-link class="logo" title="尚品汇">
+                    <router-link to="/" class="logo" title="尚品汇">
                         <img src="./images/logo.png" alt="">
                     </router-link>
                 </h1>
                 <div class="searchArea">
                     <form action="###" class="searchForm">
                         <input type="text" id="autocomplete" class="input-error input-xxlarge" />
-                        <button class="sui-btn btn-xlarge btn-danger" type="button">搜索</button>
+                        <button @click="goSearch" class="sui-btn btn-xlarge btn-danger" type="button">搜索</button>
                     </form>
                 </div>
             </div>
-            看着淡淡月光不禁为之入迷
         </header>
+        <!-- 商品分类栏 -->
+        <TypeNav v-if="$route.meta.isTypeNav"></TypeNav>
     </div>
 </template>
 <script>
+import TypeNav from "@/components/Header/TypeNav";
 export default {
-    name:"Header"
+    name:"Header",
+    components: { TypeNav },
+    methods: {
+        goSearch() {
+            this.$router.replace("/search");
+        }
+    }
 }
 </script>
 <style lang="less">
