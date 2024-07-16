@@ -1694,11 +1694,11 @@
 </template>
 
 <script>
-import {sphRequest} from "@/request"
+import { getBaseCategoryList } from '@/api/product';
 export default {
     name: "TypeNav",
     mounted() {
-        sphRequest.get("/product/getBaseCategoryList")
+        getBaseCategoryList()
         .then(res=>{
             console.log("res",res);
         })
