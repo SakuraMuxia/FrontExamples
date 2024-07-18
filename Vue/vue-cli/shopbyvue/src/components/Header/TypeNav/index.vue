@@ -45,22 +45,18 @@
 
 <script>
 // 导入api接口方法
-import { getBaseCategoryList } from '@/api/product';
+import { mapActions, mapState } from 'vuex';
 export default {
     name: "TypeNav",
     data(){
         return{
-            // 分类数据
-            categoryList:[],
             // 是否展开分类页面,当路径为/展开,默认展开
             isShowCategory:this.$route.path === "/",
         }
     },
     mounted() {
-        getBaseCategoryList()
-        .then(res=>{
-            this.categoryList = res.data.splice(0,15);
-        })
+        // 触发action中的方法
+        this.getBaseCategoryListAsync(15);
     },
     methods:{
         // 分类展开方法,如果路径不是/ 不展开分类
@@ -68,7 +64,9 @@ export default {
             if (this.$route.path !== '/'){
                 this.isShowCategory = false;
             }
-        }
+        },
+        // 快速获取action中的方法，并映射为this
+        ...mapActions("product", ["getBaseCategoryListAsync"]),
     },
     // 监听数据变化
     watch:{
@@ -78,7 +76,11 @@ export default {
                 this.isShowCategory = this.$route.path === '/';
             }
         }
-    }
+    },
+    computed: {
+        // 借助mapState，映射store中product模块中的categoryList
+        ...mapState("product", ["categoryList"]),
+    },
 }
 </script>
 

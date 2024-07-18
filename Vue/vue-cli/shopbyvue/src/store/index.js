@@ -1,7 +1,7 @@
 import Vue from 'vue';
-import Vuex from 'vuex'
+import Vuex from 'vuex';
 // 导入product模块
-import product from "@/store/product";
+import product from "@/store/product/index.js";
 
 // 挂载
 Vue.use(Vuex);

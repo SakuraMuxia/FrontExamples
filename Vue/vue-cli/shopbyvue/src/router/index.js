@@ -23,10 +23,18 @@ const routes = [
     {
         path: '/login',
         component: Login,
+        meta:{
+            // 隐藏页脚中的列表信息
+            isHideFooterList:true,
+        }
     },
     {
         path: '/register',
         component: Register,
+        meta: {
+            // 隐藏页脚中的列表信息
+            isHideFooterList: true,
+        }
     },
     {
         path: '/search',
