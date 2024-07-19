@@ -5,6 +5,8 @@ import "@/assets/css/reset.css";
 // 导入路由
 import router from '@/router/index';
 import store from '@/store';
+// 导入mock
+import "@/mock";
 
 Vue.config.productionTip = false
 
