@@ -8,8 +8,13 @@ const getBaseCategoryList = function(){
 const getFloorList = ()=>{
     return mockRequest("/floorList")
 }
+// 获取rank数据
+const getRankList = () =>{
+    return mockRequest("/rankList")
+}
 // 暴漏数据
 export { 
     getBaseCategoryList,
-    getFloorList
+    getFloorList,
+    getRankList
 }

@@ -1,0 +1,92 @@
+[
+    {
+        "id": 1,
+        "typeName": "热卖排行",
+        "productList": [
+            {
+                "id": 11,
+                "name": "方便面经典多口味8连包",
+                "imgUrl": "/images/1.jpg",
+                "price": 28.8
+            },
+            {
+                "id": 12,
+                "name": "Apple iPhone 8 Plus 256GB 银色 移动联通电信4G手机",
+                "imgUrl": "/images/1.jpg",
+                "price": 100.98
+            },
+            {
+                "id": 13,
+                "name": "Apple iPhone 8 Plus 256GB 银色 移动联通电信4G手机",
+                "imgUrl": "/images/1.jpg",
+                "price": 100.98
+            },
+            {
+                "id": 14,
+                "name": "Apple iPhone 8 Plus 256GB 银色 移动联通电信4G手机",
+                "imgUrl": "/images/1.jpg",
+                "price": 100.98
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "typeName": "特价排行",
+        "productList": [
+            {
+                "id": 21,
+                "name": "千柏山",
+                "imgUrl": "/images/1.jpg",
+                "price": 11.8
+            },
+            {
+                "id": 22,
+                "name": "Apple iPhone 8 Plus 256GB 银色 移动联通电信4G手机",
+                "imgUrl": "/images/1.jpg",
+                "price": 100.98
+            },
+            {
+                "id": 23,
+                "name": "Apple iPhone 8 Plus 256GB 银色 移动联通电信4G手机",
+                "imgUrl": "/images/1.jpg",
+                "price": 100.98
+            },
+            {
+                "id": 24,
+                "name": "Apple iPhone 8 Plus 256GB 银色 移动联通电信4G手机",
+                "imgUrl": "/images/1.jpg",
+                "price": 100.98
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "typeName": "新品排行",
+        "productList": [
+            {
+                "id": 31,
+                "name": "千丝板栗味馅饼整箱",
+                "imgUrl": "/images/1.jpg",
+                "price": 6
+            },
+            {
+                "id": 32,
+                "name": "移动联通电信4G手机",
+                "imgUrl": "/images/1.jpg",
+                "price": 100.98
+            },
+            {
+                "id": 33,
+                "name": "Apple iPhone 8 Plus",
+                "imgUrl": "/images/1.jpg",
+                "price": 100.98
+            },
+            {
+                "id": 34,
+                "name": "银色 移动联通电信4G手机",
+                "imgUrl": "/images/1.jpg",
+                "price": 100.98
+            }
+        ]
+    }
+]

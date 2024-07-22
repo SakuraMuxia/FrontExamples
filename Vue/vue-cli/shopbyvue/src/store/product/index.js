@@ -1,5 +1,5 @@
 // 导入api
-import { getBaseCategoryList,getFloorList} from '@/api/product';
+import { getBaseCategoryList, getFloorList, getRankList } from '@/api/product';
 
 // 定义商品的数据状态
 const state = {
@@ -7,6 +7,8 @@ const state = {
     categoryList:[],
     // 楼层数据状态
     floorList:[],
+    // rank的数据仓库
+    rankList:[],
 }
 // 定义mutations
 const mutations = {
@@ -17,6 +19,10 @@ const mutations = {
     // 修改state中的楼层列表
     SAVE_FLOOR_LIST(state, floorList) {
         state.floorList = floorList;
+    },
+    // 修改rank中的数据
+    SAVE_RANK_LIST(state, rankList) {
+        state.rankList = rankList;
     }
 }
 // 定义actions
@@ -30,6 +36,11 @@ const actions = {
     async getFloorListAsync({ commit }) {
         const { data } = await getFloorList();
         commit("SAVE_FLOOR_LIST", data);
+    },
+    // 使用api获取rankList说几句
+    async getRankListAsync({ commit }) {
+        const { data } = await getRankList();
+        commit("SAVE_RANK_LIST", data);
     }
 }
 // 暴漏数据，导出模块
