@@ -7,8 +7,11 @@ import router from '@/router/index';
 import store from '@/store';
 // 导入mock
 import "@/mock";
+// 导入filters
+import filters from "@/filters"
 
 Vue.config.productionTip = false
+Vue.use(filters);
 
 new Vue({
     store,

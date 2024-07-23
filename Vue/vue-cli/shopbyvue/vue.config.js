@@ -11,6 +11,15 @@ module.exports = defineConfig({
             "/api": {
                 target: "http://sph-h5-api.atguigu.cn",
                 changeOrigin: true
+            },
+            // 访问"/hanser"的路径，统一拼接为"http://127.0.0.1:9090/hanser"
+            "/hanser":{
+                target: "http://127.0.0.1:7070",
+                // changeOrigin:true,
+                pathRewrite:{
+                    // http://127.0.0.1:7070 == http://127.0.0.1:7070/hanser
+                    "^/hanser":""
+                }
             }
         }
     },

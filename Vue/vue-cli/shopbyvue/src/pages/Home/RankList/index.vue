@@ -29,7 +29,7 @@
                                 <div class="info-title">
                                     <a href="#">{{info.name}}</a>
                                 </div>
-                                <p class="info-price">定金:{{info.price}}</p>
+                                <p class="info-price">定金:{{info.price|currency(2,"￥")}}</p>
                             </div>
                         </div>
                     </li>

@@ -1,5 +1,5 @@
 // 导入api
-import { getBaseCategoryList, getFloorList, getRankList } from '@/api/product';
+import { getBaseCategoryList, getFloorList, getRankList,getLikeList} from '@/api/product';
 
 // 定义商品的数据状态
 const state = {
@@ -9,6 +9,9 @@ const state = {
     floorList:[],
     // rank的数据仓库
     rankList:[],
+    // 猜你喜欢
+    likeList:[],
+    pageSum:0,
 }
 // 定义mutations
 const mutations = {
@@ -23,6 +26,14 @@ const mutations = {
     // 修改rank中的数据
     SAVE_RANK_LIST(state, rankList) {
         state.rankList = rankList;
+    },
+    // 修改like中的数据
+    SAVE_LIKE_LIST(state, likeList) {
+        state.likeList = likeList;
+    },
+    // 修改pageSum的数据
+    SAVE_SUM(state, pageSum){
+        state.pageSum = pageSum;
     }
 }
 // 定义actions
@@ -41,6 +52,16 @@ const actions = {
     async getRankListAsync({ commit }) {
         const { data } = await getRankList();
         commit("SAVE_RANK_LIST", data);
+    },
+    // 使用api获取likeList说几句
+    async getLikeListAsync({ commit },pageNo,pageSize=6) {
+        try {
+            const { data , pageSum} = await getLikeList(pageNo,pageSize);
+            commit("SAVE_LIKE_LIST", data);
+            commit("SAVE_SUM", pageSum);
+        } catch (error) {
+            console.error("Failed to fetch like list:", error);
+        }
     }
 }
 // 暴漏数据，导出模块

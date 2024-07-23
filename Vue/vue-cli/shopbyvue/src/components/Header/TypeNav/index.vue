@@ -5,21 +5,22 @@
             <div @mouseleave="categroyConstricted" class="nav-left">
                 <h2 @mouseenter="isShowCategory=true" class="all">全部商品分类</h2>
                 <div class="sort" v-show="isShowCategory">
-                    <div @click="$router.push('/search')" class="all-sort-list2">
+                    <div @click="goSearch" class="all-sort-list2">
                         <!--  全部商品分类-->
                         <div v-for="c1 in categoryList" :key="c1.categoryId" class="item">
                             <h3>
-                                <a>{{ c1.categoryName }}</a>
+                                <a data-level="1" :data-id="c1.categoryId"> {{ c1.categoryName }}</a>
                             </h3>
                             <div class="item-list clearfix">
                                 <div v-for="c2 in c1.categoryChild" :key="c2.categoryId" class="subitem">
                                     <dl class="fore">
                                         <dt>
-                                            <a href="">{{ c2.categoryName }}</a>
+                                            <a data-level="2" :data-id="c2.categoryId" href="">{{ c2.categoryName }}</a>
                                         </dt>
                                         <dd>
                                             <em v-for="c3 in c2.categoryChild" :key="c3.categoryId">
-                                                <a href="">{{ c3.categoryName }}</a>
+                                                <a data-level="3" :data-id="c3.categoryId" href="">{{ c3.categoryName
+                                                    }}</a>
                                             </em>
                                         </dd>
                                     </dl>
@@ -62,6 +63,23 @@ export default {
         // 分类展开方法,如果路径不是/ 不展开分类
         categroyConstricted(){
             if (this.$route.path !== '/'){
+                this.isShowCategory = false;
+            }
+        },
+        // 点击分类跳转
+        goSearch(e){
+            const {id,level} = e.target.dataset;
+            // 如果id存在，点击后路由到/search并且拼接查询字符串
+            if(id){
+                this.$router.push({
+                    path:"/search",
+                    query:{
+                        // category2Id:12
+                        ["category"+level+"Id"]:id,
+                        categoryName:e.target.innerText.trim()
+                    }
+                })
+                // 点击后 分类页隐藏
                 this.isShowCategory = false;
             }
         },

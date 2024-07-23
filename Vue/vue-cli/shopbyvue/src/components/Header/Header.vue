@@ -33,7 +33,7 @@
                 </h1>
                 <div class="searchArea">
                     <form action="###" class="searchForm">
-                        <input type="text" id="autocomplete" class="input-error input-xxlarge" />
+                        <input placeholder="请输入搜索关键词" ref="keyword" type="text" id="autocomplete" class="input-error input-xxlarge" />
                         <button @click="goSearch" class="sui-btn btn-xlarge btn-danger" type="button">搜索</button>
                     </form>
                 </div>
@@ -49,10 +49,27 @@ export default {
     name:"Header",
     components: { TypeNav },
     methods: {
+        // 搜索跳转方法
         goSearch() {
-            this.$router.replace("/search");
+            const keyword = this.$refs.keyword.value.trim();
+            console.log(keyword);
+            // 判断关键字是否有值，
+            if(keyword){
+                this.$router.push({
+                    path:"/search",
+                    query:{
+                        keyword,
+                    }
+                })
+            }
         }
+    },
+    mounted(){
+        // 判断查询字符串中是否有keyword,如果有将其值设置为搜索框的内容。
+        if (this.$route.query.keyword)
+            this.$refs.keyword.value = this.$route.query.keyword;
     }
+
 }
 </script>
 <style lang="less">
