@@ -3,7 +3,7 @@
         <h3>搜索界面,接收的参数：{{$route.query}}</h3>
         <div class="py-container">
             <!--bread-->
-            <div class="bread">
+            <div class="bread" v-show="isSelector">
                 <ul class="fl sui-breadcrumb">
                     <li>
                         <a href="#">全部结果</a>
@@ -17,6 +17,14 @@
                     <!--  关键词内容 -->
                     <li v-if="$route.query.keyword" class="with-x">
                         {{$route.query.keyword}}<i @click="moveKeyword">×</i>
+                    </li>
+                    <!--  品牌内容 -->
+                    <li v-if="$route.query.trademark" class="with-x">
+                        {{$route.query.trademark|trademark}}<i @click="moveTrademark">×</i>
+                    </li>
+                    <!-- 属性内容显示 -->
+                    <li v-for="(item,index) in $route.query.props" :key="index" class="with-x">
+                        {{item.split(":")[1]}}<i @click="moveProps(item)">×</i>
                     </li>
                 </ul>
             </div>
@@ -196,7 +204,13 @@ export default {
         }
     },
     computed:{
-        ...mapState("product", ["searchResult"])
+        ...mapState("product", ["searchResult"]),
+        // 判断隐藏面包屑的方法
+        isSelector() {
+            // Object.values 返回由对象的属性值组成的数组，把对象的属性值进行过滤，过滤出 undefined的，如果length>0返回真
+            // true 代表存在 有查询
+            return Object.values(this.$route.query).filter(v => v).length > 0;
+        }
     },
     mounted(){
         
@@ -223,6 +237,30 @@ export default {
             this.$router.push({
                 path: "/search",
                 query
+            })
+        },
+        moveTrademark(){
+            const query = { ...this.$route.query };
+            // 删除query中的keyword属性
+            delete query.trademark;
+            // 路由到指定地址
+            this.$router.push({
+                path: "/search",
+                query
+            })
+        },
+        // 移除属性过滤
+        moveProps(item){
+            // 跳转到指定路由
+            this.$router.push({
+                path: "/search",
+                query:{
+                    // 把之前的query拼接上
+                    ...this.$route.query,
+                    // 使用过滤器把props过滤后的拼接上
+                    // 把不相等的返回流下来，相等的去除。
+                    props: this.$route.query.props.filter(value =>{ return value !== item})
+                }
             })
         }
     }

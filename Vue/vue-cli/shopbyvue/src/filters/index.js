@@ -13,7 +13,14 @@ const filters = {
     // 金额过滤器
     currency(v, n = 2, type = "$") {
         return type + v.toFixed(n);
-    }
+    },
+    // 品牌过滤器
+    trademark(value){
+        // console.log(value.split(":"));
+        return value.split(":")[1];
+    },
+    
+    
 }
 // 暴漏一个函数
 export default function(V){

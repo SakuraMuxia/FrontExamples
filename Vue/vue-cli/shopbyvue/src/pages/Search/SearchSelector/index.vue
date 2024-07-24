@@ -5,7 +5,14 @@
                 <div class="fl key brand">品牌</div>
                 <div class="value logos">
                     <ul class="logo-list">
-                        <li v-for="item in trademarkList" :key="item.tmId">{{item.tmName}}</li>
+                        <li @click="$router.push({
+                            path:'/search',
+                            query:{
+                                ...$route.query,
+                                // 按照后台的接口进行控制
+                                trademark:item.tmId+':'+item.tmName
+                            }
+                        })" v-for="item in trademarkList" :key="item.tmId">{{item.tmName}}</li>
                     </ul>
                 </div>
             </div>
@@ -14,7 +21,7 @@
                 <div class="fl value">
                     <ul class="type-list">
                         <li v-for="(info,index) in item.attrValueList" :key="index">
-                            <a>{{info}}</a>
+                            <a @click="addPropsGoSearch(item.attrId,info,item.attrName)">{{info}}</a>
                         </li>
                     </ul>
                 </div>
@@ -43,6 +50,27 @@ export default {
             }
         })
     },
+    methods:{
+        // 添加属性栏搜索过滤方法
+        addPropsGoSearch(attrId, info, attrName){
+            // 定义后端接收的属性值 16:麒麟990:CPU型号
+            const propsValue = attrId + ':' + info + ':' + attrName;
+            // 判断 this.$route.query中的 props是否有值，如果无值，则为空数组
+            const props = this.$route.query.props || [];
+            // 如果拥有该属性值，那么程序停止，不重复添加 。
+            if (props.includes(propsValue)) return;
+            // 如果未拥有属性值，则添加到query，并且路由跳转
+            this.$router.push({
+                path:'/search',
+                query:{
+                    // 拼接上之前的query
+                    ...this.$route.query,
+                    // 设置上新的props属性,并且拼接上之前的props
+                    props: [...props,propsValue],
+                }
+            })
+        }
+    }
 
 }
 </script>
