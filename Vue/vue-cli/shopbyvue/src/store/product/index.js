@@ -1,5 +1,5 @@
 // 导入api
-import { getBaseCategoryList, getFloorList, getRankList,getLikeList} from '@/api/product';
+import { getBaseCategoryList, getFloorList, getRankList, getLikeList, postProductList } from '@/api/product';
 
 // 定义商品的数据状态
 const state = {
@@ -12,6 +12,8 @@ const state = {
     // 猜你喜欢
     likeList:[],
     pageSum:0,
+    // 搜索数据
+    searchResult:{},
 }
 // 定义mutations
 const mutations = {
@@ -34,7 +36,11 @@ const mutations = {
     // 修改pageSum的数据
     SAVE_SUM(state, pageSum){
         state.pageSum = pageSum;
-    }
+    },
+    // 保存搜索结果
+    SAVE_SEARCH_RESULT(state, result) {
+        state.searchResult = result;
+    },
 }
 // 定义actions
 const actions = {
@@ -62,6 +68,11 @@ const actions = {
         } catch (error) {
             console.error("Failed to fetch like list:", error);
         }
+    },
+    // 使用api获取搜索的数据
+    async postProductListAsync({ commit }, body) {
+        const { data } = await postProductList(body);
+        commit("SAVE_SEARCH_RESULT", data);
     }
 }
 // 暴漏数据，导出模块

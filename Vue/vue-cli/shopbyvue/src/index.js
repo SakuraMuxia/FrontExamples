@@ -16,5 +16,9 @@ Vue.use(filters);
 new Vue({
     store,
     router,
+    beforeCreate() {
+        // 设置事件总线
+        Vue.prototype.$bus = this;
+    },
     render: h => h(App),
 }).$mount('#app')

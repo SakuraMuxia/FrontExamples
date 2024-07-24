@@ -21,10 +21,15 @@ const getLikeList = function(pageNo,pageSize){
         }
     })
 }
+// 搜索获取数据
+const postProductList = function(body){
+    return sphRequest.post("/list",body);
+}
 // 暴漏数据
 export { 
     getBaseCategoryList,
     getFloorList,
     getRankList,
-    getLikeList
+    getLikeList,
+    postProductList
 }

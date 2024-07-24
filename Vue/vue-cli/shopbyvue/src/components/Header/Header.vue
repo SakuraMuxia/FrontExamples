@@ -58,6 +58,7 @@ export default {
                 this.$router.push({
                     path:"/search",
                     query:{
+                        ...this.$route.query,
                         keyword,
                     }
                 })
@@ -66,8 +67,11 @@ export default {
     },
     mounted(){
         // 判断查询字符串中是否有keyword,如果有将其值设置为搜索框的内容。
-        if (this.$route.query.keyword)
-            this.$refs.keyword.value = this.$route.query.keyword;
+        this.$refs.keyword.value = this.$route.query.keyword || null;
+        // 设置监听事件 clearKeyword
+        this.$bus.$on("clearKeyword", () => {
+            this.$refs.keyword.value = null;
+        })
     }
 
 }

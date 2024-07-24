@@ -76,7 +76,8 @@ export default {
                     query:{
                         // category2Id:12
                         ["category"+level+"Id"]:id,
-                        categoryName:e.target.innerText.trim()
+                        categoryName:e.target.innerText.trim(),
+                        keyword: this.$route.query.keyword,
                     }
                 })
                 // 点击后 分类页隐藏
