@@ -78,6 +78,7 @@ export default {
                         ["category"+level+"Id"]:id,
                         categoryName:e.target.innerText.trim(),
                         keyword: this.$route.query.keyword,
+
                     }
                 })
                 // 点击后 分类页隐藏

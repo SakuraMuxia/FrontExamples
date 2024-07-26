@@ -32,9 +32,9 @@
                     </router-link>
                 </h1>
                 <div class="searchArea">
-                    <form action="###" class="searchForm">
+                    <form @submit.prevent="goSearch" class="searchForm">
                         <input placeholder="请输入搜索关键词" ref="keyword" type="text" id="autocomplete" class="input-error input-xxlarge" />
-                        <button @click="goSearch" class="sui-btn btn-xlarge btn-danger" type="button">搜索</button>
+                        <button class="sui-btn btn-xlarge btn-danger" type="submit">搜索</button>
                     </form>
                 </div>
             </div>

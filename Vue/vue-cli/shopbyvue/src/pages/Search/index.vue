@@ -14,15 +14,15 @@
                     <li v-if="$route.query.categoryName" class="with-x">
                         {{$route.query.categoryName}}<i @click="moveCategoryName">×</i>
                     </li>
-                    <!--  关键词内容 -->
+                    <!--  关键词添加内容 -->
                     <li v-if="$route.query.keyword" class="with-x">
                         {{$route.query.keyword}}<i @click="moveKeyword">×</i>
                     </li>
-                    <!--  品牌内容 -->
+                    <!--  品牌添加内容 -->
                     <li v-if="$route.query.trademark" class="with-x">
                         {{$route.query.trademark|trademark}}<i @click="moveTrademark">×</i>
                     </li>
-                    <!-- 属性内容显示 -->
+                    <!-- 属性添加内容显示 -->
                     <li v-for="(item,index) in $route.query.props" :key="index" class="with-x">
                         {{item.split(":")[1]}}<i @click="moveProps(item)">×</i>
                     </li>
@@ -35,23 +35,11 @@
                 <div class="sui-navbar">
                     <div class="navbar-inner filter">
                         <ul class="sui-nav">
-                            <li class="active">
-                                <a href="#">综合</a>
+                            <li @click.prevent="orderSearch(1)" :class="{active:type/1===1}">
+                                <a href="#">综合<i v-show="type==1" :class="upOrDown"></i></a>
                             </li>
-                            <li>
-                                <a href="#">销量</a>
-                            </li>
-                            <li>
-                                <a href="#">新品</a>
-                            </li>
-                            <li>
-                                <a href="#">评价</a>
-                            </li>
-                            <li>
-                                <a href="#">价格⬆</a>
-                            </li>
-                            <li>
-                                <a href="#">价格⬇</a>
+                            <li @click.prevent="orderSearch(2)" :class="{active:type/1===2}">
+                                <a href="#">价格<i v-show="type==2" :class="upOrDown"></i></a>
                             </li>
                         </ul>
                     </div>
@@ -84,23 +72,14 @@
                         </li>
                     </ul>
                 </div>
-                <div class="pagination">
-                    <button>上一页</button>
-                    <button>1</button>
-                    <span>···</span>
-
-                    <button>14</button>
-                    <button>15</button>
-                    <button class="active">16</button>
-                    <button>17</button>
-                    <button>18</button>
-
-                    <span>···</span>
-                    <button>21</button>
-                    <button>下一页</button>
-
-                    <span>共 103 条</span>
-                </div>
+                <!-- 分页 -->
+                <Pagination 
+                    :continue="5" 
+                    :total="searchResult.total" 
+                    :pageNo="searchResult.pageNo" 
+                    :pageSize="searchResult.pageSize" 
+                    @change-page-no="changePageNo">
+                </Pagination>
             </div>
             <!--hotsale-->
             <div class="clearfix hot-sale">
@@ -190,10 +169,18 @@
     </div>
 </template>
 <script>
-import {mapState} from "vuex";
-import SearchSelector from "@/pages/Search/SearchSelector"
+import {mapState } from "vuex";
+import SearchSelector from "@/pages/Search/SearchSelector";
 export default {
     name: "Search",
+    data(){
+        // 定义order属性值的type和flag
+        const [type,flag] = (this.$route.query.order || "1:desc").split(":");
+        return{
+            type,
+            flag
+        }
+    },
     // 使用侦听器
     watch:{
         "$route.query":{
@@ -207,25 +194,45 @@ export default {
         ...mapState("product", ["searchResult"]),
         // 判断隐藏面包屑的方法
         isSelector() {
-            // Object.values 返回由对象的属性值组成的数组，把对象的属性值进行过滤，过滤出 undefined的，如果length>0返回真
+            // Object.values 返回由对象的属性值组成的数组，把对象的属性值进行过滤，过滤出 undefined 的，如果length>0返回真
             // true 代表存在 有查询
             return Object.values(this.$route.query).filter(v => v).length > 0;
-        }
+        },
+        // 改变排序图标的方法 
+        upOrDown() {
+            return this.flag === "desc" ? "iconfont icon-paixu" : "iconfont icon-xiangshang"
+        },
     },
     mounted(){
         
     },
     components: { SearchSelector },
     methods:{
+        // 改变当前页码
+        changePageNo(pageNo){
+            // console.log("changePageNo",pageNo);
+            // 路由跳转到地址
+            this.$router.push({
+                path: "/search",
+                query: {
+                    ...this.$route.query,
+                    pageNo
+                }
+            })
+        },
+        // 移除分类名字
         moveCategoryName(){
             // category3Id=249&categoryName=台灯
             // 获取搜索的关键词
-            const { keyword } = this.$route.query;
+            const query = { ...this.$route.query };
+            // 删除分类信息
+            delete query.category3Id;
+            delete query.category2Id;
+            delete query.category1Id;
+            delete query.categoryName;
             this.$router.push({
                 path:"/search",
-                query:{
-                    keyword
-                }
+                query,
             })
         },
         moveKeyword(){
@@ -236,17 +243,20 @@ export default {
             // 路由到指定地址
             this.$router.push({
                 path: "/search",
-                query
+                query,
+                pageNo: 1,
             })
         },
+        // 删除商标信息
         moveTrademark(){
             const query = { ...this.$route.query };
-            // 删除query中的keyword属性
+            // 删除query中的trademark属性
             delete query.trademark;
             // 路由到指定地址
             this.$router.push({
                 path: "/search",
-                query
+                query,
+                pageNo:1,
             })
         },
         // 移除属性过滤
@@ -259,7 +269,32 @@ export default {
                     ...this.$route.query,
                     // 使用过滤器把props过滤后的拼接上
                     // 把不相等的返回流下来，相等的去除。
-                    props: this.$route.query.props.filter(value =>{ return value !== item})
+                    props: this.$route.query.props.filter(value =>{ return value !== item}),
+                    pageNo:1
+                }
+            })
+        },
+        // 排序搜索
+        orderSearch(type){
+            // 如果选中的类别与当前的类别相同，则改变排序方式
+            if(this.type === type){
+                // 当是降序排序，则改变为升序排序
+                this.flag = this.flag==="desc"?"asc":"desc";
+
+            }else{
+                // 如果排序类别不相同，则进行改变 type类型，并设置flag默认排序方式
+                this.type = type;
+                this.flag = "desc";
+            }
+            // 最后都要进行路由跳转
+            this.$router.push({
+                path: "/search",
+                query: {
+                    // 拼接上之前的query
+                    ...this.$route.query,
+                    // 拼接上order属性。
+                    order: this.type + ":" + this.flag,
+                    pageNo:1
                 }
             })
         }
@@ -516,47 +551,7 @@ h3 {
                 }
             }
 
-            .pagination {
-                text-align: center;
-
-                button {
-                    margin: 0 5px;
-                    background-color: #f4f4f5;
-                    color: gray;
-                    outline: none;
-                    border-radius: 2px;
-                    padding: 0 4px;
-                    vertical-align: top;
-                    display: inline-block;
-                    font-size: 13px;
-                    min-width: 35.5px;
-                    height: 28px;
-                    line-height: 28px;
-                    cursor: pointer;
-                    box-sizing: border-box;
-                    text-align: center;
-                    border: 0;
-
-                    &[disabled] {
-                        color: #c0c4cc;
-                        cursor: not-allowed;
-                    }
-
-                    &.active {
-                        cursor: not-allowed;
-                        background-color: #c81623;
-                        color: #fff;
-                    }
-                }
-
-                span {
-                    display: inline-block;
-                    line-height: 28px;
-                    font-size: 14px;
-                    color: gray;
-                    vertical-align: middle;
-                }
-            }
+            
         }
 
         .hot-sale {

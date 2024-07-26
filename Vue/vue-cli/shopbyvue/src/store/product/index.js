@@ -13,7 +13,14 @@ const state = {
     likeList:[],
     pageSum:0,
     // 搜索数据
-    searchResult:{},
+    searchResult:{
+        // 设置搜索数据的初始值，防止undefined报错
+        trademarkList:[],
+        pageNo:1,
+        pageSize:1,
+        total:1,
+        totalPages:10,
+    },
 }
 // 定义mutations
 const mutations = {
