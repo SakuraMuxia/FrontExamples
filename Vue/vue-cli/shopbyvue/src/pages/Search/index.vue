@@ -177,14 +177,23 @@ export default {
         // 定义order属性值的type和flag
         const [type,flag] = (this.$route.query.order || "1:desc").split(":");
         return{
-            type,
+            type:type/1,
             flag
         }
+    },
+    // 在摧毁组件前 清空搜索框的内容
+    beforeDestroy() {
+        this.$bus.$emit("clearKeyword");
     },
     // 使用侦听器
     watch:{
         "$route.query":{
             handler(query){
+                // 判断query的props属性是否是字符串，并转为数组
+                if(query.props && (typeof query.props === "string")){
+                    query.props = [query.props];
+                }
+                // 发送请求
                 this.$store.dispatch("product/postProductListAsync",query)
             },
             immediate:true
@@ -196,7 +205,24 @@ export default {
         isSelector() {
             // Object.values 返回由对象的属性值组成的数组，把对象的属性值进行过滤，过滤出 undefined 的，如果length>0返回真
             // true 代表存在 有查询
-            return Object.values(this.$route.query).filter(v => v).length > 0;
+            // 判断是否是空数组
+            // 浅拷贝一份：为了与watch侦听器区别开
+            const query = { ...this.$route.query };
+            // 删除pageNo属性
+            delete query.pageNo;
+            // 判断是否存在props，并且判断长度是否为0，为0则删除props属性
+            if (query.props){
+                if (query.props.length === 0)
+                    delete query.props;
+            }
+            // 把query对象的属性值转为数组
+            const arr = Object.values(query);
+            // 遍历数组，把有属性值的元素返回
+            const newArr = arr.filter(item => {
+                return item;
+            });
+            // 当数组中的长度为0时，返回false，隐藏框
+            return newArr.length>0;
         },
         // 改变排序图标的方法 
         upOrDown() {
@@ -212,67 +238,73 @@ export default {
         changePageNo(pageNo){
             // console.log("changePageNo",pageNo);
             // 路由跳转到地址
-            this.$router.push({
-                path: "/search",
-                query: {
-                    ...this.$route.query,
-                    pageNo
-                }
-            })
+            // this.$router.push({
+            //     path: "/search",
+            //     query: {
+            //         ...this.$route.query,
+            //         pageNo
+            //     }
+            // })
+            this.$router.gotoSearch({pageNo});
         },
         // 移除分类名字
         moveCategoryName(){
             // category3Id=249&categoryName=台灯
-            // 获取搜索的关键词
-            const query = { ...this.$route.query };
-            // 删除分类信息
-            delete query.category3Id;
-            delete query.category2Id;
-            delete query.category1Id;
-            delete query.categoryName;
-            this.$router.push({
-                path:"/search",
-                query,
+            this.$router.gotoSearch({
+                categoryName: undefined,
+                category3Id: undefined,
+                category2Id: undefined,
+                category1Id: undefined
             })
         },
+        // 移除关键字
         moveKeyword(){
             // 解构出把 query进行浅拷贝
-            const query = {...this.$route.query};
+            // const query = {...this.$route.query};
             // 删除query中的keyword属性
-            delete query.keyword;
+            // delete query.keyword;
             // 路由到指定地址
-            this.$router.push({
-                path: "/search",
-                query,
-                pageNo: 1,
-            })
+            // this.$router.push({
+            //     path: "/search",
+            //     query,
+            //     pageNo: 1,
+            // })
+            this.$router.gotoSearch({
+                keyword: undefined,
+            });
+            // 使用事件总线清空搜索框内的内容
+            this.$bus.$emit("clearKeyword");
         },
         // 删除商标信息
         moveTrademark(){
-            const query = { ...this.$route.query };
+            // const query = { ...this.$route.query };
             // 删除query中的trademark属性
-            delete query.trademark;
+            // delete query.trademark;
             // 路由到指定地址
-            this.$router.push({
-                path: "/search",
-                query,
-                pageNo:1,
-            })
+            // this.$router.push({
+            //     path: "/search",
+            //     query,
+            //     pageNo:1,
+            // })
+            this.$router.gotoSearch({
+                trademark: undefined,
+            });
         },
         // 移除属性过滤
         moveProps(item){
             // 跳转到指定路由
-            this.$router.push({
-                path: "/search",
-                query:{
-                    // 把之前的query拼接上
-                    ...this.$route.query,
-                    // 使用过滤器把props过滤后的拼接上
-                    // 把不相等的返回流下来，相等的去除。
-                    props: this.$route.query.props.filter(value =>{ return value !== item}),
-                    pageNo:1
-                }
-            })
+            // this.$router.push({
+            //     path: "/search",
+            //     query:{
+            //         // 把之前的query拼接上
+            //         ...this.$route.query,
+            //         // 使用过滤器把props过滤后的拼接上
+            //         // 把不相等的返回流下来，相等的去除。
+            //         props: this.$route.query.props.filter(value =>{ return value !== item}),
+            //         pageNo:1
+            //     }
+            // })
+            this.$router.gotoSearch({ props: this.$route.query.props.filter(value => { return value !== item }) });
         },
         // 排序搜索
         orderSearch(type){
@@ -287,16 +319,17 @@ export default {
                 this.flag = "desc";
             }
             // 最后都要进行路由跳转
-            this.$router.push({
-                path: "/search",
-                query: {
-                    // 拼接上之前的query
-                    ...this.$route.query,
-                    // 拼接上order属性。
-                    order: this.type + ":" + this.flag,
-                    pageNo:1
-                }
-            })
+            // this.$router.push({
+            //     path: "/search",
+            //     query: {
+            //         // 拼接上之前的query
+            //         ...this.$route.query,
+            //         // 拼接上order属性。
+            //         order: this.type + ":" + this.flag,
+            //         pageNo:1
+            //     }
+            // })
+            this.$router.gotoSearch({ order: this.type + ":" + this.flag, })
         }
     }
 }

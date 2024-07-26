@@ -52,7 +52,6 @@ export default {
         // 搜索跳转方法
         goSearch() {
             const keyword = this.$refs.keyword.value.trim();
-            console.log(keyword);
             // 判断关键字是否有值，
             if(keyword){
                 this.$router.push({
