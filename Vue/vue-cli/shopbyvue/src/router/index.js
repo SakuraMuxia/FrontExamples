@@ -6,6 +6,7 @@ import Home from '@/pages/Home';
 import Login from '@/pages/Login';
 import Register from '@/pages/Register';
 import Search from '@/pages/Search';
+import Details from '@/pages/Details';
 
 Vue.use(VueRouter);
 // 重写push,replace方法
@@ -45,12 +46,29 @@ const routes = [
             isTypeNav: true
         }
     },
+    // 搜索详情路由
+    {
+        path: "/detail/:id.html",
+        component: Details,
+        meta: {
+            isTypeNav: true,
+            ScrollToHeader:true,
+        }
+    }
 ]
 
 // 创建路由对象
 const router = new VueRouter({
     mode:"history",
     routes,
+    scrollBehavior(to, from) {
+        if (to.meta.ScrollToHeader) {
+            return {
+                x: 0,// 横向
+                y: 0// 纵向
+            }
+        }
+    }
 });
 
 // 导出

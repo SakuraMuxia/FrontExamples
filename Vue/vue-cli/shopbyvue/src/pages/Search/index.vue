@@ -50,7 +50,7 @@
                         <li  v-for="(item,index) in searchResult.goodsList" :key="index" class="yui3-u-1-5">
                             <div class="list-wrap">
                                 <div class="p-img">
-                                    <a href="item.html"  target="_blank"><img :src="item.defaultImg" /></a>
+                                    <router-link :to="'/detail/'+item.id+'.html'"><img :src="item.defaultImg" /></router-link>
                                 </div>
                                 <div class="price">
                                     <strong>
@@ -59,7 +59,8 @@
                                     </strong>
                                 </div>
                                 <div class="attr">
-                                    <a target="_blank" href=""  :title="item.title">{{item.title}}</a>
+                                    <router-link :to="'/detail/'+item.id+'.html'" :title="item.title" >{{item.title}}</router-link>
+                                    <!-- <a target="_blank" href=""  :title="item.title">{{item.title}}</a> -->
                                 </div>
                                 <div class="commit">
                                     <i class="command">已有<span>{{item.hotScore}}</span>人评价</i>

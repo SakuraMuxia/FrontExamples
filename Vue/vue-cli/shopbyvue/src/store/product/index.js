@@ -1,5 +1,5 @@
 // 导入api
-import { getBaseCategoryList, getFloorList, getRankList, getLikeList, postProductList } from '@/api/product';
+import { getBaseCategoryList, getFloorList, getRankList, getLikeList, postProductList, getProductInfoById } from '@/api/product';
 
 // 定义商品的数据状态
 const state = {
@@ -21,6 +21,14 @@ const state = {
         total:1,
         totalPages:10,
     },
+    // 商品信息
+    productInfo:{
+        // 商品详情
+        skuInfo: {
+            // 方式出现undefined 报错
+            skuImageList: []
+        }
+    }
 }
 // 定义mutations
 const mutations = {
@@ -48,6 +56,17 @@ const mutations = {
     SAVE_SEARCH_RESULT(state, result) {
         state.searchResult = result;
     },
+    // 保存商品信息
+    SAVE_PRODUCT_INFO(state,payload){
+        state.productInfo = payload;
+    },
+    // 修改productInfo商品信息中的缩略图skuImageList中的属性isDefault用于显示选中
+    SAVE_SKUIMAGE_DEFAULT(state,id){
+        // 1- 将之前的选中项移除，isDefault标记修改为0
+        state.productInfo.skuInfo.skuImageList.find(v => v.isDefault === "1").isDefault = "0";
+        // 2- 根据id,将isDefault修改为1
+        state.productInfo.skuInfo.skuImageList.find(v => v.id === id).isDefault = "1";
+    }
 }
 // 定义actions
 const actions = {
@@ -80,6 +99,13 @@ const actions = {
     async postProductListAsync({ commit }, body) {
         const { data } = await postProductList(body);
         commit("SAVE_SEARCH_RESULT", data);
+    },
+    // 使用api获取商品信息通过ID
+    async getProductInfoByIdAsync({commit},id){
+        // 从返回值中解构出数据
+        const {data} = await getProductInfoById(id);
+        // 提交
+        commit("SAVE_PRODUCT_INFO",data);
     }
 }
 // 暴漏数据，导出模块

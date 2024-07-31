@@ -25,11 +25,16 @@ const getLikeList = function(pageNo,pageSize){
 const postProductList = function(body){
     return sphRequest.post("/list",body);
 }
+// 根据商品ID获取商品详情
+const getProductInfoById = function (skuId){
+    return sphRequest.get(`/item/${skuId}`)
+}
 // 暴漏数据
 export { 
     getBaseCategoryList,
     getFloorList,
     getRankList,
     getLikeList,
-    postProductList
+    postProductList,
+    getProductInfoById
 }
