@@ -6,7 +6,7 @@
             <!-- 中间可滑动区域 使用swiper实现 第三方-->
             <swiper class="swiper" :options="swiperOption">
                 <swiper-slide v-for="item in skuImageList" :key="item.id" >
-                    <img @click="changeImg(item.id)" :src="item.imgUrl" />
+                    <img :class="{active:item.isDefault/1 === 1}" @click="changeImg(item.id)" :src="item.imgUrl" />
                 </swiper-slide>
             </swiper>
             <!--右按钮-->
@@ -73,6 +73,9 @@ export default {
         height: 50px;
         margin-right: 20px;
         cursor: pointer;
+        &.active{
+            border-color: red;
+        }
     }
     .swiper {
         width: 100%;
