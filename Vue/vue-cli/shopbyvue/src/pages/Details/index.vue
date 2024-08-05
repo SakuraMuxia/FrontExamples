@@ -57,6 +57,7 @@
                     </div>
                     <!-- 商品配置信息选择 -->
                     <div class="choose">
+
                         <div class="chooseArea">
                             <div class="choosed"></div>
                             <dl v-for="item in spuSaleAttrList" :key="item.id">
@@ -70,13 +71,16 @@
                             </dl>
                         </div>
                         <div class="cartWrap">
+                            <!-- 购物车数量的添加 -->
                             <div class="controls">
-                                <input autocomplete="off" value="1" class="itxt">
-                                <a href="###" class="plus">+</a>
-                                <a href="###" class="mins">-</a>
+                                <!-- 方式1：使用方法控制数量 -->
+                                <input @change="upBuyNumByLodash" autocomplete="off" class="itxt" :value="buyNum">
+                                <!-- 通过类名来判断是否是假发还是减法 -->
+                                <a href="###" :class="['plus',{disabled:buyNum===200}]" @click.prevent="changeBuyNum">+</a>
+                                <a href="###" :class="['mins',{disabled:buyNum===1}]" @click.prevent="changeBuyNum">-</a>
                             </div>
                             <div class="add">
-                                <a href="###" target="_blank">加入购物车</a>
+                                <a @click.prevent="addCart"  href="###" target="_blank">加入购物车</a>
                             </div>
                         </div>
                     </div>
@@ -412,15 +416,75 @@
     </div>
 </template>
 <script>
-import { mapState } from "vuex";
+import { mapState,mapMutations } from "vuex";
 import Zoom from "@/pages/Details/Zoom";
 import Thumbnail from "@/pages/Details/Thumbnail";
+import { goodsNumReg } from "@/utils/reg";
+import { debounce } from "lodash";
 
 export default {
     name:"Details",
     data(){
         return{
+            // 购买的数量
+            buyNum:1
+        }
+    },
+    methods:{
+        // 更新商品配置的方法
+        ...mapMutations("",[]),
+        // 更新购买的数量
+        upBuyNum(e){
+            // 获取e的值
+            const num = e.target.value.trim()/1;
+            // 如果输入的数值在正则表达式的范围内，则更新数据，否则使用旧的值
+            if (goodsNumReg.test(num)){
+                this.buyNum = num;
+            }else{
+                e.target.value = this.buyNum
+            }
+        },
+        // 更新购买的数量（原生防抖）防抖是多次触发执行最后一个，节流是多次触发执行第一个
+        upBuyNumByAntiShake(e){
+            // 如果有定时器，先清除以前定时器
+            if (this.timer){
+                clearTimeout(this.timer);
+            }
+            // 声明一个单次定时器,1秒延迟后执行回调函数
+            this.timer = setTimeout(()=>{
+                // 获取input输入框的数值
+                const num = e.target.value.trim() / 1;
+                if (goodsNumReg.test(num)) {
+                    this.buyNum = num;
+                } else {
+                    e.target.value = this.buyNum;
+                }
+            },1000)
+        },
+        // 使用第三方lodash实现防抖
+        upBuyNumByLodash: debounce(function (e) {
+            const num = e.target.value.trim() / 1;
+            if (goodsNumReg.test(num)) {
+                this.buyNum = num;
+            } else {
+                e.target.value = this.buyNum;
+            }
+        },1000),
 
+        // 加减法函数
+        changeBuyNum(e){
+            // 减法
+            if(e.target.classList.contains("mins")){
+                if(this.buyNum ===1 ) return;
+                this.buyNum--;
+            } else if (e.target.classList.contains("plus")) {
+                if (this.buyNum === 200) return;
+                this.buyNum++;
+            }
+        },
+        // 加入购物车
+        addCart(){
+            this.$router.push("/addCartSuccess");
         }
     },
     components:{

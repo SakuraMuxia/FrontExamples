@@ -25,13 +25,21 @@ const state = {
     productInfo:{
         // 商品详情
         skuInfo: {
-            // 方式出现undefined 报错
-            skuImageList: []
+            // 定义缩略图列表，防止出现undefined 报错
+            skuImageList: [],
+            // 定义商品属性列表，防止出现undefined 
+            spuSaleAttrList:[],
         }
     }
 }
 // 定义mutations
 const mutations = {
+    // 修改productInfo中的配置信息,参数是 商品的颜色ID和版本ID
+    UP_ATTR_LIST_BY_ID(state,{a1Id,a2Id}){
+        // 找到一级信息
+        const info1 = state.productInfo.spuSaleAttrList.find(v => v.id === a1Id);
+        console.log(info1);
+    },
     // 修改state中的首页分类列表
     UP_CATEGORY_LIST(state,categoryList){
         state.categoryList = categoryList
