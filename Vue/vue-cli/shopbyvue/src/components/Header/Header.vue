@@ -14,7 +14,7 @@
                     </div>
                     <div class="typeList">
                         <a>我的订单</a>
-                        <a>我的购物车</a>
+                        <router-link to="/cart">我的购物车</router-link>
                         <a>我的尚品汇</a>
                         <a>尚品汇会员</a>
                         <a>企业采购</a>

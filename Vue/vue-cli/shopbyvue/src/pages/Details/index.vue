@@ -66,6 +66,7 @@
                                     :class="{active:info.isChecked/1===1}"
                                     v-for="info in item.spuSaleAttrValueList"
                                     :key="info.id"
+                                    @click="$store.commit('product/UP_ATTR_LIST_BY_ID',{a1Id:item.id,a2Id:info.id})"
                                     >{{info.saleAttrValueName}}
                                 </dd>
                             </dl>
@@ -431,8 +432,28 @@ export default {
         }
     },
     methods:{
-        // 更新商品配置的方法
-        ...mapMutations("",[]),
+        // 加入购物车，并存储到localStore中
+        addCart() {
+            // 创建sessionStorage对象，并把对象转为json字符串
+            sessionStorage.setItem("addCartInfo", JSON.stringify({
+                // 商品的详情信息
+                ...this.skuInfo,
+                // 购买数量
+                buyNum: this.buyNum,
+                // 商品属性信息
+                attrList: this.spuSaleAttrList,
+                
+            }));
+            // 提交购物车的数据到后端，调用cart中的action中的postAddToCart
+            this.$store.dispatch("cart/postAddToCartAsync",{
+                // 商品的ID
+                skuId: this.$route.params.id,
+                // 商品的购买数量
+                skuNum: this.buyNum
+            })
+            // 跳转到加入购物车成功页面
+            this.$router.push("/addCartSuccess")
+        },
         // 更新购买的数量
         upBuyNum(e){
             // 获取e的值
@@ -482,10 +503,6 @@ export default {
                 this.buyNum++;
             }
         },
-        // 加入购物车
-        addCart(){
-            this.$router.push("/addCartSuccess");
-        }
     },
     components:{
         "Zoom":Zoom,
@@ -499,7 +516,7 @@ export default {
             },
             // 商品的详情配置
             spuSaleAttrList(state) {
-                return state.productInfo.spuSaleAttrList || {};
+                return state.productInfo.spuSaleAttrList || [];
             },
             // 商品的详情描述信息
             skuInfo(state) {

@@ -8,6 +8,7 @@ import Register from '@/pages/Register';
 import Search from '@/pages/Search';
 import Details from '@/pages/Details';
 import AddCartSuccess from '@/pages/AddCartSuccess';
+import Cart from "@/pages/Cart"
 
 Vue.use(VueRouter);
 // 重写push,replace方法
@@ -60,6 +61,14 @@ const routes = [
     {
         path: "/addCartSuccess",
         component: AddCartSuccess,
+    },
+    // 购物车页面
+    {
+        path: "/cart",
+        component: Cart,
+        meta: {
+            isTypeNav: true
+        }
     }
 ]
 

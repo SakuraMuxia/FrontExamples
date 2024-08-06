@@ -4,6 +4,7 @@ import Vuex from 'vuex';
 import product from "@/store/product/index.js";
 import adv from '@/store/adv/index';
 import todaysell from './todaysell';
+import cart from '@/store/cart/index';
 
 // 挂载
 Vue.use(Vuex);
@@ -12,7 +13,8 @@ const store = new Vuex.Store({
     modules:{
         product,
         adv,
-        todaysell
+        todaysell,
+        cart
     }
 });
 // 导出store对象

@@ -36,9 +36,20 @@ const state = {
 const mutations = {
     // 修改productInfo中的配置信息,参数是 商品的颜色ID和版本ID
     UP_ATTR_LIST_BY_ID(state,{a1Id,a2Id}){
-        // 找到一级信息
-        const info1 = state.productInfo.spuSaleAttrList.find(v => v.id === a1Id);
-        console.log(info1);
+        // 找到一级信息 颜色或者版本
+        const info = state.productInfo.spuSaleAttrList.find(v => v.id === a1Id);
+        
+        if (info){
+            // 找到二级中spuSaleAttrValueList的isChecked标记是1的
+            const spuSaleAttrValue1 = info.spuSaleAttrValueList.find(v=>v.isChecked === '1');
+            // 把之前的isChecked标记更改为0
+            spuSaleAttrValue1.isChecked = "0";
+            // // 更改二级中选中的spuSaleAttrValueList的isChecked标记
+            const spuSaleAttrValue2 = info.spuSaleAttrValueList.find(v=>v.id === a2Id);
+            // // 如果当前值为1，说明你点击的是已经选中的配置
+            if (spuSaleAttrValue2.isChecked === "1") return;
+            spuSaleAttrValue2.isChecked = "1";
+        }
     },
     // 修改state中的首页分类列表
     UP_CATEGORY_LIST(state,categoryList){

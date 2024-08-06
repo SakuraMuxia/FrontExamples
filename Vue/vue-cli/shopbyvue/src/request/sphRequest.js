@@ -1,6 +1,8 @@
 import axios from "axios";
 import nprogress from "nprogress";
 import "nprogress/nprogress.css";
+import { getUserTempId } from "@/utils/auth";
+
 // 创建一个实例
 const sphRequest = axios.create({
     baseURL: "/api",
@@ -9,6 +11,9 @@ const sphRequest = axios.create({
 // 请求拦截器
 sphRequest.interceptors.request.use(config => {
     nprogress.start();// 开启进度条
+    // 在请求投中配置uuid
+    config.headers.userTempId = getUserTempId()
+    // 返回请求配置项
     return config;
 });
 // 响应拦截器

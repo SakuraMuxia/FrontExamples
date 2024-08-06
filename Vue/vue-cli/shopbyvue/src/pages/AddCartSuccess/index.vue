@@ -8,15 +8,23 @@
                 </h3>
                 <div class="goods">
                     <div class="left-good">
-                        <div class="left-pic"><img src=""></div>
+                        <div class="left-pic">
+                            <img width="60" height="60" :src="addCartInfo.skuDefaultImg">
+                        </div>
                         <div class="right-info">
-                            <p class="title">美的（Midea)电饭煲WFZ5099IH IH电磁加热 1250W大火力 钛金釜5L电饭锅</p>
-                            <p class="attr">颜色：WFZ5099IH/5L钛金釜内胆 数量：1</p>
+                            <p class="title">{{addCartInfo.skuName}}</p>
+                            <!-- <p class="attr">颜色：WFZ5099IH/5L钛金釜内胆 数量：1</p> -->
+                            <p v-for="item in addCartInfo.attrList" :key="item.id" class="attr">
+                                {{item.saleAttrName}}:{{ item.spuSaleAttrValueList.find(v=>v.isChecked==='1').saleAttrValueName }}
+                            </p>
+                            <p class="attr">数量：{{addCartInfo.buyNum}}</p>
+                            <p class="attr">价格：{{addCartInfo.price}}</p>
                         </div>
                     </div>
                     <div class="right-gocart">
-                        <a href="#" class="sui-btn btn-xlarge">查看商品详情</a>
-                        <a href="cart.html" class="sui-btn btn-xlarge btn-danger " target="_blank">去购物车结算 &gt; </a>
+                        <a @click.prevent="$router.go(-1)" href="#" class="sui-btn btn-xlarge">查看商品详情</a>
+                        
+                        <router-link to="/cart" class="sui-btn btn-xlarge btn-danger ">去购物车结算 &gt; </router-link>
                     </div>
                 </div>
             </div>
@@ -25,7 +33,12 @@
 </template>
 <script>
 export default {
-    name: "AddCartSuccess"
+    name: "AddCartSuccess",
+    data(){
+        return{
+            addCartInfo: sessionStorage.getItem("addCartInfo") ? JSON.parse(sessionStorage.getItem("addCartInfo")):{}
+        }
+    }
 }
 </script>
 <style lang="less" scoped>

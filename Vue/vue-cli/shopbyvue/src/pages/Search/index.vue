@@ -66,7 +66,11 @@
                                     <i class="command">已有<span>{{item.hotScore}}</span>人评价</i>
                                 </div>
                                 <div class="operate">
-                                    <a href="success-cart.html" target="_blank" class="sui-btn btn-bordered btn-danger">加入购物车</a>
+                                    <a
+                                        @click.prevent="addCart(item.id)"
+                                        href="###"
+                                        target="_blank" 
+                                        class="sui-btn btn-bordered btn-danger">加入购物车</a>
                                     <a href="javascript:void(0);" class="sui-btn btn-bordered">收藏</a>
                                 </div>
                             </div>
@@ -202,6 +206,12 @@ export default {
     },
     computed:{
         ...mapState("product", ["searchResult"]),
+        ...mapState("product", {
+            // 商品的详情描述信息
+            skuInfo(state) {
+                return state.productInfo.skuInfo || {};
+            },
+        }),
         // 判断隐藏面包屑的方法
         isSelector() {
             // Object.values 返回由对象的属性值组成的数组，把对象的属性值进行过滤，过滤出 undefined 的，如果length>0返回真
@@ -229,12 +239,34 @@ export default {
         upOrDown() {
             return this.flag === "desc" ? "iconfont icon-paixu" : "iconfont icon-xiangshang"
         },
+        
     },
     mounted(){
         
     },
     components: { SearchSelector },
     methods:{
+        // 加入购物车，并存储到localStore中
+        addCart(id) {
+            // 创建sessionStorage对象，并把对象转为json字符串
+            sessionStorage.setItem("addCartInfo", JSON.stringify({
+                // 购买数量
+                buyNum: 1,
+                // 商品的详情信息
+                ...this.skuInfo,
+                // 商品属性信息
+                attrList: this.spuSaleAttrList,
+            }));
+            // 提交购物车的数据到后端，调用cart中的action中的postAddToCart
+            this.$store.dispatch("cart/postAddToCartAsync", {
+                // 商品的ID
+                skuId: id,
+                // 商品的购买数量
+                skuNum: 1
+            })
+            // 跳转到加入购物车成功页面
+            this.$router.push("/addCartSuccess")
+        },
         // 改变当前页码
         changePageNo(pageNo){
             // console.log("changePageNo",pageNo);
