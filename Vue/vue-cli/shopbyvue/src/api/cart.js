@@ -26,11 +26,18 @@ const deleteCartListBatch = (data) => {
     return sphRequest.post(`/cart/batchDeleteCart`, data)
 }
 
+// 批量勾选购物车的商品 /api/cart/batchCheckCart/{isChecked}  post
+// 参数：isChecked:是否选中，skuIdList，商品的列表信息
+const postBatchCheckCart = (isChecked, skuIdList) => {
+    return sphRequest.post(`/cart/batchCheckCart/${isChecked}`, skuIdList)
+}
+
 // 暴漏数据
 export {
     postAddToCart,
     getCartList,
     getCartIsCheckedById,
     deleteCartListById,
-    deleteCartListBatch
+    deleteCartListBatch,
+    postBatchCheckCart
 }

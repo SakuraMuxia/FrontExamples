@@ -36,8 +36,8 @@
                         </li>
                         <li class="cart-list-con5">
                             <a href="javascript:void(0)" 
-                                @click.prevent="item.skuNum>1?item.skuNum--:1"
-                                :class="['mins']">-</a>
+                                @click.prevent="upBuyNum(item.skuId,item.skuNum,-1)"
+                                :class="{'mins':true,'disabled':item.skuNum===1}">-</a>
                             <input 
                                 autocomplete="off" 
                                 type="text" 
@@ -46,8 +46,8 @@
                                 
                                 class="itxt">
                             <a href="javascript:void(0)" 
-                                @click.prevent="item.skuNum<200?item.skuNum++:200"
-                                :class="['plus']">+</a>
+                                @click.prevent="upBuyNum(item.skuId,item.skuNum,1)"
+                                :class="{'plus':true,'disabled':item.skuNum===200}">+</a>
                         </li>
                         <li class="cart-list-con6">
                             <span class="sum">{{(item.skuNum*item.skuPrice) | currency(2,"￥")}}</span>
@@ -64,7 +64,11 @@
             </div>
             <div class="cart-tool">
                 <div class="select-all">
-                    <input class="chooseAll" type="checkbox">
+                    <input 
+                        class="chooseAll"
+                        @change="$store.dispatch('cart/postBatchCheckCartAsync')" 
+                        :checked="getCartIsChecked"
+                        type="checkbox">
                     <span>全选</span>
                 </div>
                 <div class="option">
@@ -104,14 +108,34 @@ export default {
         }
     },
     methods:{
-        
+        // 购物车商品的加减
+        async upBuyNum(skuId,skuNum,flag){
+            // 判断边界问题
+            const num = skuNum + flag;
+            
+            if (num < 1 || num > 200){
+                return
+            }else{
+                // 调用异步请求
+                await this.$store.dispatch("cart/postAddToCartAsync", {
+                    skuId,
+                    // 根据后端的接口说明，每次都是在上一次的基础上进行添加和删除
+                    skuNum: flag
+                });
+                // 更新本地数据
+                await this.$store.commit("cart/UP_CART_SKU_NUM", { 
+                    skuId,
+                    num
+                })
+            }
+        },
     },
     mounted(){
         this.$store.dispatch("cart/getCartListAsync");
     },
     computed:{
         ...mapState("cart", ["cartList"]),
-        ...mapGetters("cart", ['getCountResult'])
+        ...mapGetters("cart", ['getCountResult','getCartIsChecked'])
     }
 }
 </script>
@@ -214,6 +238,10 @@ export default {
                         width: 6px;
                         text-align: center;
                         padding: 8px;
+                        &.disabled {
+                            color: #ccc;
+                            cursor: not-allowed
+                        }
                     }
 
                     input {
@@ -233,6 +261,10 @@ export default {
                         width: 6px;
                         text-align: center;
                         padding: 8px;
+                        &.disabled{
+                            color: #ccc;
+                            cursor:not-allowed
+                        }
                     }
                 }
 
