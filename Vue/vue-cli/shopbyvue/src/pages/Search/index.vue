@@ -182,7 +182,9 @@ export default {
         // 定义order属性值的type和flag
         const [type,flag] = (this.$route.query.order || "1:desc").split(":");
         return{
+            // 排序的类型
             type:type/1,
+            // 排序的标记
             flag
         }
     },
@@ -247,7 +249,9 @@ export default {
     components: { SearchSelector },
     methods:{
         // 加入购物车，并存储到localStore中
-        addCart(id) {
+        async addCart(skuId) {
+            // 获取商品的信息,发送获取商品详情的请求，这样页面的store中就会有商品的信息了
+            await this.$store.dispatch("product/getProductInfoByIdAsync", skuId);
             // 创建sessionStorage对象，并把对象转为json字符串
             sessionStorage.setItem("addCartInfo", JSON.stringify({
                 // 购买数量
@@ -260,7 +264,7 @@ export default {
             // 提交购物车的数据到后端，调用cart中的action中的postAddToCart
             this.$store.dispatch("cart/postAddToCartAsync", {
                 // 商品的ID
-                skuId: id,
+                skuId: skuId,
                 // 商品的购买数量
                 skuNum: 1
             })

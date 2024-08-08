@@ -11,7 +11,7 @@ const sphRequest = axios.create({
 // 请求拦截器
 sphRequest.interceptors.request.use(config => {
     nprogress.start();// 开启进度条
-    // 在请求投中配置uuid
+    // 在请求头中配置uuid
     config.headers.userTempId = getUserTempId()
     // 返回请求配置项
     return config;
@@ -22,7 +22,9 @@ sphRequest.interceptors.response.use(response => {
     return response.data;// 返回响应体
 },err=>{
     nprogress.done();// 结束进度条
-    alert(err);//提示错误信息
+    //提示错误信息
+    alert(err);
+
     return new Promise(() => { });//中断Promise
 })
 // 暴漏数据

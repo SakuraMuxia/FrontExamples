@@ -36,17 +36,17 @@
                         </li>
                         <li class="cart-list-con5">
                             <a href="javascript:void(0)" 
-                                @click.prevent="upBuyNum(item.skuId,item.skuNum,-1)"
+                                @click.prevent="upBuyNumByOrificing(item.skuId,item.skuNum,-1)"
                                 :class="{'mins':true,'disabled':item.skuNum===1}">-</a>
                             <input 
                                 autocomplete="off" 
                                 type="text" 
                                 :value="item.skuNum" 
                                 minnum="1" 
-                                
+                                @change="inputBuyNum($event,item.skuId,item.skuNum)"
                                 class="itxt">
                             <a href="javascript:void(0)" 
-                                @click.prevent="upBuyNum(item.skuId,item.skuNum,1)"
+                                @click.prevent="upBuyNumByOrificing(item.skuId,item.skuNum,1)"
                                 :class="{'plus':true,'disabled':item.skuNum===200}">+</a>
                         </li>
                         <li class="cart-list-con6">
@@ -98,17 +98,19 @@
 </template>
 <script>
 import { mapGetters, mapState } from 'vuex';
-
+import { goodsNumReg } from '@/utils/reg';
+import { debounce } from "lodash";
 
 export default {
     name:"Cart",
     data(){
         return{
-            buyNum:1
+            buyNum:1,
+            isReaday:true,
         }
     },
     methods:{
-        // 购物车商品的加减
+        // 购物车商品的加减(未使用节流)
         async upBuyNum(skuId,skuNum,flag){
             // 判断边界问题
             const num = skuNum + flag;
@@ -121,14 +123,85 @@ export default {
                     skuId,
                     // 根据后端的接口说明，每次都是在上一次的基础上进行添加和删除
                     skuNum: flag
-                });
+                })
                 // 更新本地数据
-                await this.$store.commit("cart/UP_CART_SKU_NUM", { 
+                this.$store.commit("cart/UP_CART_SKU_NUM", { 
                     skuId,
                     num
                 })
             }
         },
+        // 购物车商品的加减(使用节流)
+        async upBuyNumByOrificing(skuId, skuNum, flag){
+            // 技能未冷却，返回
+            if (!this.isReaday){
+                return;
+            }
+            // 判断边界问题
+            const num = skuNum + flag;
+            // 触发技能，技能冷却
+            this.isReaday = false;
+            if (num < 1 || num > 200) {
+                return
+            } else {
+                // 调用异步请求
+                await this.$store.dispatch("cart/postAddToCartAsync", {
+                    skuId,
+                    // 根据后端的接口说明，每次都是在上一次的基础上进行添加和删除
+                    skuNum: flag
+                })
+                // 更新本地数据
+                this.$store.commit("cart/UP_CART_SKU_NUM", {
+                    skuId,
+                    num
+                })
+            }
+            // 冷却结束
+            this.isReaday = true;
+        },
+        // 输入框修改商品的数量(未使用防抖)
+        async changeBuyNum(e,skuId,skuNum){
+            // 获取输入的数字
+            const buyNum = e.target.value.trim()/1;
+            // 使用正则判断是否合法
+            if (goodsNumReg.test(buyNum)){
+                console.log(buyNum);
+                // 调用异步请求
+                await this.$store.dispatch("cart/postAddToCartAsync", {
+                    skuId,
+                    // 根据后端的接口说明，每次都是在上一次的基础上进行添加和删除
+                    skuNum: buyNum-skuNum,
+                });
+                // 刷新页面数据
+                this.$store.commit("cart/UP_CART_SKU_NUM", {
+                    skuId,
+                    num:buyNum
+                })
+            }
+        },
+        // 输入框修改商品的数量(使用debounce防抖)
+        inputBuyNum: debounce(async function (e, skuId, skuNum){
+            // 获取输入的数字
+            const buyNum = e.target.value.trim() / 1;
+            // skuNum:是修改前的数据
+            if (goodsNumReg.test(buyNum)) {
+                console.log(buyNum);
+                // 调用异步请求
+                await this.$store.dispatch("cart/postAddToCartAsync", {
+                    skuId,
+                    // 根据后端的接口说明，每次都是在上一次的基础上进行添加和删除
+                    skuNum: buyNum - skuNum,
+                });
+                // 刷新页面数据
+                this.$store.commit("cart/UP_CART_SKU_NUM", {
+                    skuId,
+                    num: buyNum
+                })
+            }else{
+                // 如果不符合正则表达式，把输入框的内容更改为原来的数值
+                e.target.value = skuNum;
+            }
+        },1000)
     },
     mounted(){
         this.$store.dispatch("cart/getCartListAsync");
