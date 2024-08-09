@@ -1,7 +1,7 @@
 import axios from "axios";
 import nprogress from "nprogress";
 import "nprogress/nprogress.css";
-import { getUserTempId } from "@/utils/auth";
+import { getToken, getUserTempId } from "@/utils/auth";
 
 // 创建一个实例
 const sphRequest = axios.create({
@@ -12,7 +12,12 @@ const sphRequest = axios.create({
 sphRequest.interceptors.request.use(config => {
     nprogress.start();// 开启进度条
     // 在请求头中配置uuid
-    config.headers.userTempId = getUserTempId()
+    config.headers.userTempId = getUserTempId();
+    // 在请求头中配置token
+    const token = getToken();
+    if (token){
+        config.headers.token = token;
+    }
     // 返回请求配置项
     return config;
 });

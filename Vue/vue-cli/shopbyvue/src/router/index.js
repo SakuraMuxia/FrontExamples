@@ -9,6 +9,10 @@ import Search from '@/pages/Search';
 import Details from '@/pages/Details';
 import AddCartSuccess from '@/pages/AddCartSuccess';
 import Cart from "@/pages/Cart"
+// 导入getToken对象
+import { getToken } from '@/utils/auth';
+// 导入store对象
+import store from '@/store';
 
 Vue.use(VueRouter);
 // 重写push,replace方法
@@ -83,8 +87,19 @@ const router = new VueRouter({
                 y: 0// 纵向
             }
         }
-    }
+    },
+    
 });
+// 创建路由前守卫
+router.beforeEach(async (to, from, next) => {
+    // 当存在token但个人信息数据不存在时，即刷新了界面
+    if(getToken() && !store.state.user.userInfo){
+        // 调用异步请求
+        await store.dispatch("user/getUserInfoAsync");
+    }
+    // 放行
+    next();
+})
 
 // 导出
 export default router;
