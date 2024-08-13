@@ -2,6 +2,11 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import enVueRouter from '@/utils/pushReWrite';
 import '@/utils/gotoSearch';
+// 导入getToken对象
+import { getToken } from '@/utils/auth';
+// 导入store对象
+import store from '@/store';
+
 import Home from '@/pages/Home';
 import Login from '@/pages/Login';
 import Register from '@/pages/Register';
@@ -9,10 +14,7 @@ import Search from '@/pages/Search';
 import Details from '@/pages/Details';
 import AddCartSuccess from '@/pages/AddCartSuccess';
 import Cart from "@/pages/Cart"
-// 导入getToken对象
-import { getToken } from '@/utils/auth';
-// 导入store对象
-import store from '@/store';
+import Trade from "@/pages/Trade"
 
 Vue.use(VueRouter);
 // 重写push,replace方法
@@ -21,13 +23,16 @@ enVueRouter("replace");
 
 // 定义路由
 const routes = [
+    // 首页路由
     {
         path:'/',
         component:Home,
         meta:{
+            // 是否使用导航
             isTypeNav:true,
         }
     },
+    // 登陆路由
     {
         path: '/login',
         component: Login,
@@ -36,6 +41,7 @@ const routes = [
             isHideFooterList:true,
         }
     },
+    // 注册路由
     {
         path: '/register',
         component: Register,
@@ -44,6 +50,7 @@ const routes = [
             isHideFooterList: true,
         }
     },
+    // 搜索路由
     {
         path: '/search',
         component: Search,
@@ -57,7 +64,9 @@ const routes = [
         path: "/detail/:id.html",
         component: Details,
         meta: {
+            // 是否使用导航
             isTypeNav: true,
+            // 是否滑动到底部
             ScrollToHeader:true,
         }
     },
@@ -66,14 +75,24 @@ const routes = [
         path: "/addCartSuccess",
         component: AddCartSuccess,
     },
-    // 购物车页面
+    // 购物车路由
     {
         path: "/cart",
         component: Cart,
         meta: {
-            isTypeNav: true
+            // 是否使用导航
+            isTypeNav: true,
+            isAuth: true
         }
-    }
+    },
+    // 交易结算路由
+    {
+        path: "/trade",
+        component: Trade,
+        meta: {
+            isAuth: true
+        }
+    },
 ]
 
 // 创建路由对象
@@ -92,12 +111,28 @@ const router = new VueRouter({
 });
 // 创建路由前守卫
 router.beforeEach(async (to, from, next) => {
-    // 当存在token但个人信息数据不存在时，即刷新了界面
+    // 判断个人信息是否存在:当存在token但个人信息数据不存在时，即刷新了界面
     if(getToken() && !store.state.user.userInfo){
         // 调用异步请求
         await store.dispatch("user/getUserInfoAsync");
     }
-    // 放行
+    // 判断路由是否需要登陆认证
+    if(to.meta.isAuth){
+        // 判断是否存在token
+        if(getToken()){
+            next();
+        }else{
+            next({
+                // 跳转到登陆页面
+                path:"/login",
+                // 把目的地址拼接到query中
+                query:{
+                    cb:to.path,
+                }
+            });
+        }
+    }
+    // 默认放行
     next();
 })
 

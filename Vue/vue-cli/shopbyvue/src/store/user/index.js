@@ -4,6 +4,8 @@ import { Message } from "element-ui";
 // 导入路由对象
 import router from "@/router";
 import { saveToken } from "@/utils/auth";
+// 导入清空token工具类
+import { rmToken } from "@/utils/auth"
 
 const state = {
     // 用户列表
@@ -18,6 +20,17 @@ const mutations = {
     // 把个人用户信息保存到store中
     SAVE_USER_INFO(state, userInfo) {
         state.userInfo = userInfo;
+    },
+
+    // 退出登陆清空store数据
+    OUT_LOG(){
+        // 把userInfo数据清空
+        state.userInfo = null;
+        // 调用清除token工具类
+        rmToken();
+        // 路由跳转到登陆界面
+        router.push("/login");
+
     }
 }
 
@@ -47,8 +60,15 @@ const actions = {
             Message.success("恭喜您，登陆成功！");
             // 存储token到localstorage
             saveToken(data.token);
-            // 跳转至首页
-            router.push("/");
+            // 跳转至未登录前的页面
+            // 判断是否存在cb
+            const { cb } = router.history.current.query;
+            // 如果存在cb跳转cb，否则跳转到首页
+            if (cb){
+                router.push(cb);
+            }else{
+                router.push("/");
+            }
         }else{
             Message.error("账号或密码错误！");
         }

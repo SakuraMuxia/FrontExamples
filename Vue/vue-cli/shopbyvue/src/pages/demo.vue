@@ -1,6 +1,6 @@
 <template lang="">
-    <div>
-        
+    <div class="sumbtn">
+        <router-link class="sum-btn" to="/Trade">结算</router-link>
     </div>
 </template>
 <script>

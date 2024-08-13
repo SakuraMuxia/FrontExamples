@@ -5,8 +5,11 @@
             <div class="top">
                 <div class="container">
                     <div class="loginList">
-                        <p>尚品汇欢迎您！</p>
-                        <p>
+                        <p v-if="userInfo">
+                            <span>尚品汇欢迎您！{{userInfo.nickName}} </span>
+                            <a  @click.prevent="OUT_LOG" herf="" class="register">退出登陆</a>
+                        </p>
+                        <p v-else>
                             <span>请</span>
                             <router-link to="/login">登陆</router-link>
                             <router-link to="/register" class="register" >免费注册</router-link>
@@ -45,6 +48,7 @@
 </template>
 <script>
 import TypeNav from "@/components/Header/TypeNav";
+import { mapState , mapMutations} from "vuex";
 export default {
     name:"Header",
     components: { TypeNav },
@@ -62,7 +66,8 @@ export default {
                     }
                 })
             }
-        }
+        },
+        ...mapMutations("user", ["OUT_LOG"])
     },
     mounted(){
         // 判断查询字符串中是否有keyword,如果有将其值设置为搜索框的内容。
@@ -71,6 +76,9 @@ export default {
         this.$bus.$on("clearKeyword", () => {
             this.$refs.keyword.value = null;
         })
+    },
+    computed:{
+        ...mapState("user", ["userInfo"]),
     }
 
 }

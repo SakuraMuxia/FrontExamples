@@ -21,10 +21,22 @@ const getUserInfo = () => {
     return sphRequest.get('/user/passport/auth/getUserInfo');
 }
 
+// 退出登陆
+const getLogout = () => {
+    return sphRequest.get('/user/passport/logout');
+}
+
+// 获取用户的地址信息：获取用户地址信息 /user/userAddress/auth/findUserAddressList
+const getUserAddressList = () => {
+    return sphRequest.get('/user/userAddress/auth/findUserAddressList');
+}
+
 // 暴漏数据
 export {
     postRegister,
     getSendCode,
     postLogin,
-    getUserInfo
+    getUserInfo,
+    getLogout,
+    getUserAddressList
 }
