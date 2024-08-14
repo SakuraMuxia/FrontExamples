@@ -4,38 +4,28 @@
             <!-- 买卖 -->
             <h3 class="title">填写并核对订单信息</h3>
             <div class="content">
+
                 <h5 class="receive">收件人信息</h5>
-                <div class="address clearFix">
-                    <span class="username selected">张三</span>
+                <div
+                    v-for="item in $store.state.user.addressList"
+                    :key="item.id"
+                    @click="CHANGE_ADDRESS_DEFAULT_BY_ID(item.id)" 
+                    class="address clearFix">
+                    <span :class="'username'+(item.isDefault==='1'?' selected':'')">{{item.consignee}}</span>
                     <p>
-                        <span class="s1">北京市昌平区宏福科技园综合楼6层</span>
-                        <span class="s2">15010658793</span>
-                        <span class="s3">默认地址</span>
+                        <span class="s1">{{item.fullAddress}}</span>
+                        <span class="s2">{{item.phoneNum}}</span>
+                        <span v-show="item.isDefault==='1'" class="s3">默认地址</span>
                     </p>
                 </div>
-                <div class="address clearFix">
-                    <span class="username selected">李四</span>
-                    <p>
-                        <span class="s1">北京市昌平区宏福科技园综合楼6层</span>
-                        <span class="s2">13590909098</span>
-                        <span class="s3">默认地址</span>
-                    </p>
-                </div>
-                <div class="address clearFix">
-                    <span class="username selected">王五</span>
-                    <p>
-                        <span class="s1">北京市昌平区宏福科技园综合楼6层</span>
-                        <span class="s2">18012340987</span>
-                        <span class="s3">默认地址</span>
-                    </p>
-                </div>
+                
                 <div class="line"></div>
                 <h5 class="pay">支付方式</h5>
                 <div class="address clearFix">
                     <span class="username selected">在线支付</span>
                     <span class="username" style="margin-left:5px;">货到付款</span>
-
                 </div>
+
                 <div class="line"></div>
                 <h5 class="pay">送货清单</h5>
                 <div class="way">
@@ -45,42 +35,32 @@
                         <p>配送时间：预计8月10日（周三）09:00-15:00送达</p>
                     </div>
                 </div>
+
                 <div class="detail">
                     <h5>商品清单</h5>
-                    <ul class="list clearFix">
+                    <ul 
+                        v-for="(item,index) in tradeInfo.detailArrayList"
+                        :key=index
+                        class="list clearFix">
                         <li>
-                            <img src="./images/goods.png" alt="">
+                            <img width="82" :src="item.imgUrl" alt="">
                         </li>
                         <li>
                             <p>
-                                Apple iPhone 6s (A1700) 64G 玫瑰金色 移动联通电信4G手机硅胶透明防摔软壳 本色系列</p>
+                                {{item.skuName}}</p>
                             <h4>7天无理由退货</h4>
                         </li>
                         <li>
-                            <h3>￥5399.00</h3>
+                            <h3>{{item.orderPrice|currency(2,"￥")}}</h3>
                         </li>
-                        <li>X1</li>
-                        <li>有货</li>
-                    </ul>
-                    <ul class="list clearFix">
-                        <li>
-                            <img src="./images/goods.png" alt="">
-                        </li>
-                        <li>
-                            <p>
-                                Apple iPhone 6s (A1700) 64G 玫瑰金色 移动联通电信4G手机硅胶透明防摔软壳 本色系列</p>
-                            <h4>7天无理由退货</h4>
-                        </li>
-                        <li>
-                            <h3>￥5399.00</h3>
-                        </li>
-                        <li>X1</li>
+                        <li>X{{item.skuNum}}</li>
                         <li>有货</li>
                     </ul>
                 </div>
                 <div class="bbs">
                     <h5>买家留言：</h5>
                     <textarea placeholder="建议留言前先与商家沟通确认" class="remarks-cont"></textarea>
+
                 </div>
                 <div class="line"></div>
                 <div class="bill">
@@ -92,8 +72,8 @@
             <div class="money clearFix">
                 <ul>
                     <li>
-                        <b><i>1</i>件商品，总商品金额</b>
-                        <span>¥5399.00</span>
+                        <b><i>{{tradeInfo.totalNum}}</i>件商品，总商品金额</b>
+                        <span>{{tradeInfo.totalAmount| currency(2,"￥")}}</span>
                     </li>
                     <li>
                         <b>返现：</b>
@@ -106,24 +86,40 @@
                 </ul>
             </div>
             <div class="trade">
-                <div class="price">应付金额:<span>¥5399.00</span></div>
+                <div class="price">应付金额:<span>{{tradeInfo.totalAmount| currency(2,"￥")}}</span></div>
                 <div class="receiveInfo">
                     寄送至:
-                    <span>北京市昌平区宏福科技园综合楼6层</span>
-                    收货人：<span >张三</span>
-                    <span>15010658793</span>
+                    <span>{{addressDefault.userAddress}}</span>
+                    收货人：<span >{{addressDefault.consignee}}</span>
+                    <span>{{addressDefault.phoneNum}}</span>
                 </div>
             </div>
             <div class="sub clearFix">
                 <a href="##" class="subBtn">提交订单</a>
+
             </div>
         </div>
     </div>
 </template>
 <script>
+import { mapGetters, mapMutations, mapState } from 'vuex';
+
 export default {
     name: "Trade",
-
+    computed:{
+        // 获取用户的默认地址
+        ...mapGetters("user", ["addressDefault"]),
+        ...mapState("trade", ["tradeInfo"])
+    },
+    methods:{
+        ...mapMutations("user", ["CHANGE_ADDRESS_DEFAULT_BY_ID"])
+    },
+    async mounted(){
+        // 发送获取用户交易异步请求
+        await this.$store.dispatch("trade/getTradeListAsync");
+        // 发送获取用户地址异步请求
+        await this.$store.dispatch("user/findUserAddressListAsync");
+    }
 }
 </script>
 <style lang="less" scoped>

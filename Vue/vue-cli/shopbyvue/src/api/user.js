@@ -21,13 +21,18 @@ const getUserInfo = () => {
     return sphRequest.get('/user/passport/auth/getUserInfo');
 }
 
+// 获取用户交易信息：
+const getTradeList = () => {
+    return sphRequest.get("/order/auth/trade");
+}
+
 // 退出登陆
 const getLogout = () => {
     return sphRequest.get('/user/passport/logout');
 }
 
 // 获取用户的地址信息：获取用户地址信息 /user/userAddress/auth/findUserAddressList
-const getUserAddressList = () => {
+const findUserAddressList = () => {
     return sphRequest.get('/user/userAddress/auth/findUserAddressList');
 }
 
@@ -38,5 +43,5 @@ export {
     postLogin,
     getUserInfo,
     getLogout,
-    getUserAddressList
+    findUserAddressList
 }

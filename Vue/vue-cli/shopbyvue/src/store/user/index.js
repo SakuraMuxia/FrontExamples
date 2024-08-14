@@ -1,4 +1,5 @@
-import { getSendCode, postRegister, postLogin,getUserInfo } from "@/api/user"
+import { getSendCode, postRegister, postLogin, getUserInfo, findUserAddressList } from "@/api/user"
+
 // 导入element中的Message对象
 import { Message } from "element-ui";
 // 导入路由对象
@@ -12,11 +13,35 @@ const state = {
     userList: [],
     // 用户信息
     userInfo:null,
-}
-const getters = {
+    // 用户地址信息
+    addressList:[],
 
 }
+const getters = {
+    // 用户地址信息计算属性
+    addressDefault(state){
+        // 返回地址信息中默认是1的元素
+        return state.addressList.find(v => v.isDefault === '1') || {}
+    }
+}
 const mutations = {
+    // 根据ID更改默认地址
+    CHANGE_ADDRESS_DEFAULT_BY_ID(state, id){
+        // 先将之前选中的移除,将当前选中的增加上样式
+        state.addressList = state.addressList.map(
+            item=>{
+                if (item.id === id) item.isDefault = '1';
+                else item.isDefault = '0';
+                return item;
+            }
+        )
+    },
+    
+    // 保存用户地址信息
+    SAVE_ADDRESS_LIST(state,payload){
+        state.addressList = payload;
+    },
+
     // 把个人用户信息保存到store中
     SAVE_USER_INFO(state, userInfo) {
         state.userInfo = userInfo;
@@ -35,13 +60,18 @@ const mutations = {
 }
 
 const actions = {
+    
+    // 发送用户地址异步信息请求 账号密码：13700000000 111111
+    async findUserAddressListAsync({commit}){
+        const {data} = await findUserAddressList();
+        commit("SAVE_ADDRESS_LIST",data);
+    },
     // 发送注册用户的异步请求
     async postRegisterAsync(content,data){
         // 获取响应数据
         const resData = await postRegister(data);
         // 把响应数据返回
         return resData;
-        
     },
     // 发送验证码的异步请求
     async getSendCodeAsync(content,phone){
