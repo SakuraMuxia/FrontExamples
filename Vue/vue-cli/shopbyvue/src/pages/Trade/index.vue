@@ -59,8 +59,7 @@
                 </div>
                 <div class="bbs">
                     <h5>买家留言：</h5>
-                    <textarea placeholder="建议留言前先与商家沟通确认" class="remarks-cont"></textarea>
-
+                    <textarea v-model.trim="orderComment" placeholder="建议留言前先与商家沟通确认" class="remarks-cont"></textarea>
                 </div>
                 <div class="line"></div>
                 <div class="bill">
@@ -73,7 +72,7 @@
                 <ul>
                     <li>
                         <b><i>{{tradeInfo.totalNum}}</i>件商品，总商品金额</b>
-                        <span>{{tradeInfo.totalAmount| currency(2,"￥")}}</span>
+                        <span>{{tradeInfo.totalAmount/1|currency(2,"￥")}}</span>
                     </li>
                     <li>
                         <b>返现：</b>
@@ -86,7 +85,7 @@
                 </ul>
             </div>
             <div class="trade">
-                <div class="price">应付金额:<span>{{tradeInfo.totalAmount| currency(2,"￥")}}</span></div>
+                <div class="price">应付金额:<span>{{tradeInfo.totalAmount/1|currency(2,"￥")}}</span></div>
                 <div class="receiveInfo">
                     寄送至:
                     <span>{{addressDefault.userAddress}}</span>
@@ -94,9 +93,9 @@
                     <span>{{addressDefault.phoneNum}}</span>
                 </div>
             </div>
+            <!-- 提交订单 -->
             <div class="sub clearFix">
-                <a href="##" class="subBtn">提交订单</a>
-
+                <a @click.prevent="submitOrder" href="##" class="subBtn">提交订单</a>
             </div>
         </div>
     </div>
@@ -106,13 +105,45 @@ import { mapGetters, mapMutations, mapState } from 'vuex';
 
 export default {
     name: "Trade",
+    data(){
+        return{
+            orderComment:'',
+        }
+    },
     computed:{
         // 获取用户的默认地址
         ...mapGetters("user", ["addressDefault"]),
         ...mapState("trade", ["tradeInfo"])
     },
     methods:{
-        ...mapMutations("user", ["CHANGE_ADDRESS_DEFAULT_BY_ID"])
+        ...mapMutations("user", ["CHANGE_ADDRESS_DEFAULT_BY_ID"]),
+        // 提交订单
+        async submitOrder(){
+            
+            // 从默认地址中解构出 名字 手机号 地址
+            const { consignee, phoneNum: consigneeTel, fullAddress: deliveryAddress } = this.addressDefault;
+            // 获取买家留言
+            const { orderComment } = this;
+            // 发送异步提交请求
+            await this.$store.dispatch("trade/postSubmitOrderAsync",{
+                // 订单编号
+                tradeNo: this.tradeInfo.tradeNo,
+                body: {
+                    // 收件人姓名
+                    consignee,
+                    // 收件人电话
+                    consigneeTel,
+                    // 收件地址
+                    deliveryAddress,
+                    // 支付方式
+                    paymentWay: "ONLINE",
+                    // 订单备注
+                    orderComment,
+                    // 存储多个商品对象的数组
+                    orderDetailList:this.tradeInfo.detailArrayList
+                }
+            })
+        }
     },
     async mounted(){
         // 发送获取用户交易异步请求
