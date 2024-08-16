@@ -83,6 +83,7 @@ export default {
                 })
                 // 点击后 分类页隐藏
                 this.isShowCategory = false;
+                
             }
         },
         // 快速获取action中的方法，并映射为this

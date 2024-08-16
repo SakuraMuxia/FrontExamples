@@ -4,7 +4,6 @@
             <!-- 买卖 -->
             <h3 class="title">填写并核对订单信息</h3>
             <div class="content">
-
                 <h5 class="receive">收件人信息</h5>
                 <div
                     v-for="item in $store.state.user.addressList"
@@ -125,7 +124,7 @@ export default {
             // 获取买家留言
             const { orderComment } = this;
             // 发送异步提交请求
-            await this.$store.dispatch("trade/postSubmitOrderAsync",{
+            const result = await this.$store.dispatch("trade/postSubmitOrderAsync",{
                 // 订单编号
                 tradeNo: this.tradeInfo.tradeNo,
                 body: {
@@ -143,6 +142,8 @@ export default {
                     orderDetailList:this.tradeInfo.detailArrayList
                 }
             })
+            // 跳转到支付界面，并把订单号传过去
+            this.$router.push("/pay/" + result.data + ".html")
         }
     },
     async mounted(){

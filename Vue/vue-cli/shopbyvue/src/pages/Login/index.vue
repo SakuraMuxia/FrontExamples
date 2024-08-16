@@ -8,14 +8,18 @@
                         <form @submit.prevent="login">
                             <div class="input-text clearFix">
                                 <i></i>
-                                <input type="text" name="phone" placeholder="手机号">
-                                <!-- <span class="error-msg">错误提示信息</span> -->
+                                <input 
+                                    v-validate="{required:true,phone_rule:true}"
+                                    type="text" name="phone" placeholder="手机号">
+                                <span class="error-msg">{{errors.first("phone")}}</span>
                             </div>
 
                             <div class="input-text clearFix">
                                 <i class="pwd"></i>
-                                <input type="text" name="password" placeholder="请输入密码">
-                                <!-- <span class="error-msg">错误提示信息</span> -->
+                                <input
+                                    v-validate="{required:true,pwd_rule:true}"
+                                    type="text" name="password" placeholder="请输入密码">
+                                <span class="error-msg">{{errors.first("password")}}</span>
                             </div>
 
                             <button class="btn">登&nbsp;&nbsp;录</button>
@@ -31,25 +35,30 @@
 </template>
 
 <script>
+import { Message } from 'element-ui';
+
 
 export default {
     name: "Login",
     methods: {
         // 登陆的方法
         async login(e){
+            // 所有的规则全部满足为true,有一个不满足为false
+            const result = await this.$validator.validateAll();
             // 获取输入框中的数值
             const phone = e.target.phone.value.trim();
             const password = e.target.password.value.trim();
+            
             // 验证是否为空
-            if (!phone || !password) {
-                this.$message.error("手机号与密码不允许为空");
-                return;
+            if (result) {
+                // 调用异步请求
+                await this.$store.dispatch('user/postLoginAsync', {
+                    phone,
+                    password
+                })
+            } else if (!phone || !password){
+                Message.warning("用户名或密码不能为空")
             }
-            // 调用异步请求
-            await this.$store.dispatch('user/postLoginAsync',{
-                phone,
-                password
-            })
         }
     },
     mounted() {

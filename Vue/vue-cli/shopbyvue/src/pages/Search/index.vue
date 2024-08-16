@@ -50,7 +50,7 @@
                         <li  v-for="(item,index) in searchResult.goodsList" :key="index" class="yui3-u-1-5">
                             <div class="list-wrap">
                                 <div class="p-img">
-                                    <router-link :to="'/detail/'+item.id+'.html'"><img :src="item.defaultImg" /></router-link>
+                                    <router-link :to="'/detail/'+item.id+'.html'"><img v-lazy="item.defaultImg" :src="item.defaultImg" /></router-link>
                                 </div>
                                 <div class="price">
                                     <strong>

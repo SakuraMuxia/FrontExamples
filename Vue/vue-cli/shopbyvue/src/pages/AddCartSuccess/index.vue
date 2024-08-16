@@ -38,6 +38,10 @@ export default {
         return{
             addCartInfo: sessionStorage.getItem("addCartInfo") ? JSON.parse(sessionStorage.getItem("addCartInfo")):{}
         }
+    },
+    beforeRouteEnter(to, from, next){
+        if (from.meta.isGoaddCartSuccess) next();
+        else next("/")
     }
 }
 </script>

@@ -1,20 +1,21 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import enVueRouter from '@/utils/pushReWrite';
-import '@/utils/gotoSearch';
-// 导入getToken对象
-import { getToken } from '@/utils/auth';
 // 导入store对象
 import store from '@/store';
+// 导入getToken对象
+import { getToken } from '@/utils/auth';
 
-import Home from '@/pages/Home';
-import Login from '@/pages/Login';
-import Register from '@/pages/Register';
-import Search from '@/pages/Search';
-import Details from '@/pages/Details';
-import AddCartSuccess from '@/pages/AddCartSuccess';
-import Cart from "@/pages/Cart"
-import Trade from "@/pages/Trade"
+import Home from "@/pages/Home";
+import Login from "@/pages/Login";
+import Register from "@/pages/Register";
+import Search from "@/pages/Search";
+import Details from "@/pages/Details";
+import AddCartSuccess from "@/pages/AddCartSuccess";
+import Cart from "@/pages/Cart";
+import Trade from "@/pages/Trade";
+import Pay from "@/pages/Pay";
+import PaySuccess from "@/pages/PaySuccess";
 
 Vue.use(VueRouter);
 // 重写push,replace方法
@@ -27,6 +28,7 @@ const routes = [
     {
         path:'/',
         component:Home,
+        name:"home",
         meta:{
             // 是否使用导航
             isTypeNav:true,
@@ -53,24 +55,29 @@ const routes = [
     // 搜索路由
     {
         path: '/search',
+        name:"search",
         component: Search,
         meta: {
             // 是否使用导航
-            isTypeNav: true
+            isTypeNav: true,
+            isGoaddCartSuccess: true
         }
     },
     // 搜索详情路由
     {
         path: "/detail/:id.html",
         component: Details,
+        name: "detail",
         meta: {
             // 是否使用导航
             isTypeNav: true,
             // 是否滑动到底部
             ScrollToHeader:true,
+            // 是否可以进入加入购物车成功页面
+            isGoaddCartSuccess: true
         }
     },
-    // 加入购物车的路由
+    // 成功加入购物车的路由
     {
         path: "/addCartSuccess",
         component: AddCartSuccess,
@@ -82,7 +89,8 @@ const routes = [
         meta: {
             // 是否使用导航
             isTypeNav: true,
-            isAuth: true
+            isAuth: true,
+            
         }
     },
     // 交易结算路由
@@ -90,9 +98,19 @@ const routes = [
         path: "/trade",
         component: Trade,
         meta: {
-            isAuth: true
-        }
+            isAuth: true,
+        },
     },
+    // 支付页面路由
+    {
+        path: "/pay/:orderId.html",
+        component: Pay,
+    },
+    // 支付成功页面
+    {
+        path: "/paySuccess",
+        component: PaySuccess,
+    }
 ]
 
 // 创建路由对象

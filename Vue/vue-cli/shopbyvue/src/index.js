@@ -17,13 +17,27 @@ import "@/assets/iconfont/iconfont.css";
 
 // 导入element-ui
 import ElementUI from 'element-ui';
+import { Button, Message, MessageBox, Row } from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
-
-
+// 导入图片懒加载
+import VueLazyLoad from "vue-lazyload";
+import loading from "@/assets/images/loading.gif"
+// 导入自定义方法
+import '@/utils/gotoSearch';
+// 导入表单验证
+import '@/utils/validate'
 // 忽略vue提示
 Vue.use(ElementUI);
 Vue.config.productionTip = false;
+// 图片懒加载
+Vue.use(VueLazyLoad, {
+    // 图片未加载前给予呈现的图片
+    loading
+})
 Vue.use(filters);
+Vue.prototype.$msgbox = MessageBox;
+Vue.prototype.$alert = MessageBox.alert;
+Vue.prototype.$message = Message;
 
 new Vue({
     store,

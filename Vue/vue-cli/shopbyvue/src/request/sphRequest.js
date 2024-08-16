@@ -28,6 +28,7 @@ sphRequest.interceptors.request.use(config => {
 sphRequest.interceptors.response.use(response => {
     // 结束进度条
     nprogress.done();
+
     // 处理token异常
     if (response.data.code === 208){
         // 清空token,跳转到登陆页面
@@ -35,13 +36,14 @@ sphRequest.interceptors.response.use(response => {
         // 提示
         Message.warning("身份已过期，请重新登陆")
     }
+    
     // 返回响应体
     return response.data;
 },err=>{
     // 结束进度条
     nprogress.done();
     //提示错误信息
-    alert(err);
+    Message.error(err)
     //中断Promise
     return new Promise(() => { });
 })
