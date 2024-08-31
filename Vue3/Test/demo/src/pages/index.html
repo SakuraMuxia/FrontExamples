@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3></h3>
+    <p></p>
+    <button>点我</button>
+</body>
+<script>
+    
+    const btn = document.querySelector("button");
+    const p = document.querySelector("p");
+    const h3 = document.querySelector("h3");
+
+    // 创建一个函数叫做reactive返回一个Proxy类型的对象
+    function reactive(value){
+        return new Proxy(value, {
+            get(target, key) {
+                return target[key];
+            },
+            set(target, key, newValue) {
+                target[key] = p.innerText = newValue;
+            }
+        })
+    }
+    // 创建一个Qua对应RefImpl的构造函数
+    const Qua = function (value) {
+        if(typeof value === 'object'){
+            // 在实例上增加一个value属性，类型是一个对象类型的Proxy
+            this.value = reactive(value); 
+            console.log(this) // 这里的this指向 Qua的实例 qua
+        }else{
+            // 使用defineProperty函数对Qua的实例进行拦截,同时在实例上增加一个"value"属性,属性值是Qua类型的实例
+            // let _value = value
+            let obj = Object.defineProperty(this, "value", {
+                get() {
+                    return value;
+                },
+                set(newValue) {
+                    // 更新视图
+                    value = h3.innerText = newValue;
+                }
+            })
+            
+        }
+    }
+    // 创建一个qua函数对应ref函数
+    const qua = function (value) {
+        return new Qua(value);
+    }
+    // 创建一个qua对象对应ref对象
+    const count = qua(666);
+    let han = qua({
+        age:18,
+        userName:"yousa"
+    })
+    // 修改传入ref的参数
+    btn.onclick = function () {
+        count.value++;
+        // 输出han对象
+        console.log(han) // 这里的han是一个Qua的实例
+        console.log(count) // 这里的han是一个Qua的实例
+        console.log(han.value) // 这里的han.value是一个对象类型的Proxy
+        console.log(count.value) // 这里的count.value是一个基本数据类型 667
+        // 更改han
+        han.value.age += 1;
+        // 更改han的value属性为一个对象
+        han.value = {
+            userName: "Hanser",
+            age: 23,
+        }
+        console.log(han.value); // 这里的han.value是一个一般的对象，不是一个Proxy对象了
+    }
+    // 输出值
+    h3.innerText = count.value;
+    p.innerText = han.value.age;
+</script>
+</html>
