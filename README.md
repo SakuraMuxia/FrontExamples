@@ -1,1 +1,1 @@
-这是一个前端小案例仓库
+​:rabbit: This is a practice and functional testing repository for front-end projects(old)
